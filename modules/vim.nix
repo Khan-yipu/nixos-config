@@ -5,6 +5,8 @@
   home.packages = with pkgs; [
     verible
     universal-ctags
+    metals
+    haskell-language-server
   ];
 
   programs.nixvim = {
@@ -100,6 +102,17 @@
               "args" = ["--background-index"];
               "rootPatterns" = ["compile_commands.json" ".vim/" ".git/" ".hg/"];
               "filetypes" = ["c" "cpp" "objc" "objcpp"];
+            };
+            "metals" = {
+                "command" = "metals";
+                "filetypes" = ["scala" "sbt"];
+                "rootPatterns" = ["build.sbt" "build.sc" "build.mill" ".git"];
+            };
+            "haskell-language-server" = {
+                "command" = "haskell-language-server-wrapper";
+                "args" = ["--lsp"];
+                "filetypes" = ["haskell" "lhaskell"];
+                "rootPatterns" = ["*.cabal" "stack.yaml" "cabal.project" "package.yaml" "hie.yaml"];
             };
           };
           "suggest.noselect" = true;

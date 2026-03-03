@@ -119,8 +119,8 @@
   # Enable fish
   programs.fish.enable = true; 
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # Install microsoft-edge
+  # programs.firefox.enable = true;
 
   # Install fonts
   fonts.packages = with pkgs; [
@@ -147,7 +147,21 @@
     qqmusic
     xwayland
     xwayland-satellite
+    microsoft-edge
   ];
+
+  # Environment Variables
+  environment.variables = {
+    # Force Electron apps to use Wayland
+    NIXOS_OZONE_WL = "1";
+    
+    # Input Method environment variables
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

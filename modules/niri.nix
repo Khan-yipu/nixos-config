@@ -11,8 +11,8 @@
     libnotify         # 通知发送工具
   ];
 
-  # 壁纸设置
-  home.file.".config/niri/wallpaper.jpg".source = ../assets/wallpaper.jpg;
+  # 壁纸设置 (用户自行设置 ~/.config/niri/wallpaper.jpg)
+  # home.file.".config/niri/wallpaper.jpg".source = ../assets/wallpaper.jpg;
 
   # Noctalia Shell 配置
   home.file.".config/noctalia/settings.json".text = ''
