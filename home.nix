@@ -103,7 +103,7 @@
   # 启用用户级 Nix 垃圾回收
   nix.gc = {
     automatic = true;
-    frequency = "weekly";
+    dates = "weekly";
     options = "--delete-older-than 30d";
   };
 
