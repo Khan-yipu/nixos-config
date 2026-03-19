@@ -97,32 +97,35 @@
         cd $argv[1]
       '';
       
-      # Nix 相关函数
+      # 包装 Just 命令以用于 Nix 配置
+      nix-just = ''
+        just --justfile ~/.nixconfigs/Justfile --working-directory ~/.nixconfigs $argv
+      '';
+      
+      # Nix 相关函数 (使用 Justfile)
       hmswitch = ''
-        home-manager switch --flake ~/.nixconfigs#cake $argv
+        nix-just hm-switch
       '';
 
       hmswitchb = ''
-        home-manager switch -b backup --flake ~/.nixconfigs#cake $argv
+        nix-just hm-switch-backup
       '';
       
       hmupdate = ''
-        nix flake update --flake ~/.nixconfigs
-        and home-manager switch --flake ~/.nixconfigs#cake $argv
+        nix-just hm-update
       '';
 
       # NixOS 专用更新函数
       nosswitch = ''
-        sudo nixos-rebuild switch --flake ~/.nixconfigs#nixos $argv
+        nix-just os-switch $argv
       '';
       
       nosupdate = ''
-        nix flake update --flake ~/.nixconfigs
-        and sudo nixos-rebuild switch --flake ~/.nixconfigs#nixos $argv
+        nix-just os-update $argv
       '';
 
       hmnews = ''
-        home-manager news --flake ~/.nixconfigs#cake
+        nix-just hm-news
       '';
       
       # fastfetch 相关函数

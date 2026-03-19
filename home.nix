@@ -86,7 +86,26 @@
     
     # Node.js (for CoC)
     nodejs
+    
+    # 命令运行器
+    just
+    
+    # 临时环境工具
+    comma
   ];
+
+  # 启用 nix-index 以支持 command-not-found
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  # 启用用户级 Nix 垃圾回收
+  nix.gc = {
+    automatic = true;
+    frequency = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # 环境变量由 Nixvim 的 defaultEditor 选项自动设置
   
