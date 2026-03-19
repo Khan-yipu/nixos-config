@@ -13,14 +13,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, nix-index-database, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
