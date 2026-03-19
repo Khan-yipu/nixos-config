@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # 用户信息
@@ -13,6 +13,7 @@
 
   # 导入模块化配置
   imports = [
+    inputs.nix-index-database.hmModules.nix-index
     ./modules/fish.nix
     ./modules/starship.nix
     ./modules/fastfetch.nix   # 系统信息显示
@@ -89,10 +90,10 @@
     
     # 命令运行器
     just
-    
-    # 临时环境工具
-    comma
   ];
+
+  # 启用 nix-index-database 提供的预编译索引，防止 wsl OOM
+  programs.nix-index-database.comma.enable = true;
 
   # 启用 nix-index 以支持 command-not-found
   programs.nix-index = {
