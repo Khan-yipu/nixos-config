@@ -61,14 +61,6 @@
       la = "eza -la --icons";
       tree = "eza --tree --icons";
       
-      # Git 别名
-      g = "git";
-      gs = "git status";
-      ga = "git add";
-      gc = "git commit";
-      gp = "git push";
-      gl = "git log --oneline --graph";
-      
       # 其他工具
       cat = "bat";
       find = "fd";
