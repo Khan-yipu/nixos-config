@@ -60,6 +60,7 @@
     bat
     eza  # exa 已更名为 eza
     gnumake  # GNU Make 构建工具
+    yazi
     
     # 格式化工具
     nixpkgs-fmt  # Nix 代码格式化
