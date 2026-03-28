@@ -103,7 +103,7 @@
             section = "terminal",
             cmd = image_cmd,
             height = image_height,
-            padding = 0,
+            padding = { 3, 0 },
           },
           { pane = 2, section = "header", padding = 0 },
           { pane = 2, icon = " ", title = "Keymaps", section = "keys", gap = 1, indent = 2, padding = { 1, 0 } },
