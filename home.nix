@@ -144,6 +144,7 @@
     # Git 基础配置（可以根据需要调整）
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     settings = {
       user.name = "cake";
       user.email = "zhaocake@foxmail.com";

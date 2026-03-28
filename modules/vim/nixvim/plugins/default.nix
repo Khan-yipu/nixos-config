@@ -7,5 +7,6 @@
     ./navigation
     ./editing
     ./quality
+    ./ui
   ];
 }

@@ -23,6 +23,30 @@
     { mode = "n"; key = "]d"; action = "<cmd>lua vim.diagnostic.goto_next()<CR>"; options = { silent = true; }; }
     { mode = "n"; key = "<leader>xx"; action = "<cmd>Trouble diagnostics toggle<CR>"; options = { silent = true; }; }
 
+    # Noice / 消息历史
+    { mode = "n"; key = "<leader>nn"; action = "<cmd>Noice history<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>nl"; action = "<cmd>Noice last<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>nd"; action = "<cmd>Noice dismiss<CR>"; options = { silent = true; }; }
+
+    # UI 快捷开关
+    { mode = "n"; key = "<leader>ux"; action = "<cmd>Noice<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>us"; action = "<cmd>lua local ok,snacks = pcall(require, 'snacks'); if ok and snacks.picker then snacks.picker.files() end<CR>"; options = { silent = true; }; }
+
+    # Flash 快速跳转
+    { mode = "n"; key = "s"; action = "<cmd>lua require('flash').jump()<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "S"; action = "<cmd>lua require('flash').treesitter()<CR>"; options = { silent = true; }; }
+
+    # 主题切换
+    { mode = "n"; key = "<leader>tf"; action = "<cmd>colorscheme everforest<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>tc"; action = "<cmd>colorscheme catppuccin<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>tt"; action = "<cmd>colorscheme tokyonight<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>tk"; action = "<cmd>colorscheme kanagawa<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>tg"; action = "<cmd>colorscheme gruvbox<CR>"; options = { silent = true; }; }
+
+    # AI 快捷键
+    { mode = "n"; key = "<leader>aa"; action = "<cmd>CodeCompanionActions<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>ac"; action = "<cmd>CodeCompanionChat<CR>"; options = { silent = true; }; }
+
     # 格式化
     { mode = "n"; key = "<leader>lf"; action = "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>"; options = { silent = true; }; }
   ];

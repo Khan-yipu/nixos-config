@@ -1,36 +1,48 @@
 {
   programs.nixvim.extraConfigLua = ''
-    require("nvim-treesitter.configs").setup({
-      highlight = { enable = true },
-      indent = { enable = true },
-    })
+    local ok_ts, ts = pcall(require, "nvim-treesitter")
+    if ok_ts and ts.setup then
+      ts.setup({
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end
 
-    require("gitsigns").setup({})
+    local ok_gitsigns, gitsigns = pcall(require, "gitsigns")
+    if ok_gitsigns then
+      gitsigns.setup({})
+    end
 
-    require("conform").setup({
-      formatters_by_ft = {
-        nix = { "nixpkgs_fmt" },
-        c = { "clang_format" },
-        cpp = { "clang_format" },
-        rust = { "rustfmt" },
-      },
-      format_on_save = {
-        timeout_ms = 500,
-        lsp_fallback = true,
-      },
-    })
+    local ok_conform, conform = pcall(require, "conform")
+    if ok_conform then
+      conform.setup({
+        formatters_by_ft = {
+          nix = { "nixpkgs_fmt" },
+          c = { "clang_format" },
+          cpp = { "clang_format" },
+          rust = { "rustfmt" },
+        },
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
+      })
+    end
 
-    require("lint").linters_by_ft = {
-      c = { "clangtidy" },
-      cpp = { "clangtidy" },
-      nix = { "statix" },
-      python = { "ruff" },
-    }
+    local ok_lint, lint = pcall(require, "lint")
+    if ok_lint then
+      lint.linters_by_ft = {
+        c = { "clangtidy" },
+        cpp = { "clangtidy" },
+        nix = { "statix" },
+        python = { "ruff" },
+      }
 
-    vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
+      vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
+        callback = function()
+          lint.try_lint()
+        end,
+      })
+    end
   '';
 }
