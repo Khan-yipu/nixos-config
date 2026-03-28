@@ -1,6 +1,7 @@
 {
   imports = [
     ./plugins.nix
-    ./config.nix
+    ./shared.nix
+    ./servers
   ];
 }

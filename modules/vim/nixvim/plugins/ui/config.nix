@@ -7,6 +7,9 @@
         background_colour = "#1f2329",
         timeout = 2500,
         render = "wrapped-compact",
+        stages = "fade_in_slide_out",
+        top_down = false,
+        fps = 60,
       })
     end
 
@@ -14,21 +17,48 @@
     if ok_noice then
       noice.setup({
         lsp = {
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+          },
           progress = { enabled = true },
           signature = { enabled = true },
           hover = { enabled = true },
         },
-        messages = { enabled = true },
+        messages = {
+          enabled = true,
+          view = "notify",
+          view_warn = "notify",
+          view_error = "notify",
+        },
         cmdline = {
           enabled = true,
           view = "cmdline_popup",
+          format = {
+            cmdline = { icon = "" },
+            search_down = { icon = " " },
+            search_up = { icon = " " },
+            filter = { icon = "$" },
+            lua = { icon = "" },
+            help = { icon = "" },
+          },
         },
         popupmenu = {
           enabled = true,
           backend = "nui",
         },
+        routes = {
+          {
+            filter = {
+              event = "msg_show",
+              find = "written",
+            },
+            opts = { skip = true },
+          },
+        },
         presets = {
           command_palette = true,
+          bottom_search = false,
           long_message_to_split = true,
           lsp_doc_border = true,
         },
@@ -53,6 +83,7 @@
       snacks.setup({
         input = { enabled = true },
         notifier = { enabled = true },
+        picker = { enabled = true },
         quickfile = { enabled = true },
         statuscolumn = { enabled = true },
         words = { enabled = true },

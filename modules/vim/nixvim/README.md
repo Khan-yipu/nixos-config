@@ -7,9 +7,10 @@ This directory contains a fully modular Nixvim setup split by capability.
 - `default.nix`: top-level Nixvim entry and module imports.
 - `opts.nix`, `globals.nix`, `colorscheme.nix`: baseline editor behavior and theme defaults.
 - `keymaps.nix`: unified keybinding layer.
+- `TROUBLESHOOTING.md`: common failure patterns and recovery steps.
 - `plugins/`: feature modules.
   - `ai/`: CodeCompanion, Copilot, render-markdown.
-  - `lsp/`: native LSP (Neovim 0.11 API).
+  - `lsp/`: native LSP (Neovim 0.11 API), split into `shared.nix` and `servers/`.
   - `completion/`: cmp + snippets.
   - `navigation/`: Telescope, Neo-tree, Trouble.
   - `editing/`: autopairs, comments, surround.
@@ -20,6 +21,7 @@ This directory contains a fully modular Nixvim setup split by capability.
 
 - LSP
   - Native `vim.lsp.config` + `vim.lsp.enable` pipeline.
+  - Shared capabilities and per-server modular setup.
   - Servers configured: `clangd`, `rust_analyzer`, `hls`, `verible`, `metals`.
 - Completion
   - `nvim-cmp` + `cmp-nvim-lsp` + `luasnip` + `friendly-snippets`.
@@ -28,11 +30,11 @@ This directory contains a fully modular Nixvim setup split by capability.
   - Neo-tree explorer.
   - Trouble diagnostics panel.
 - UI
-  - Noice commandline popup and message routing.
+  - Noice commandline popup, markdown rendering override, and message routing.
   - Notify as the default notification backend.
   - Dressing for improved input/select prompts.
   - Flash for fast in-buffer jumps.
-  - Snacks utility modules (input/notifier/quickfile/statuscolumn/words).
+  - Snacks utility modules (input/notifier/picker/quickfile/statuscolumn/words).
 - AI
   - CodeCompanion using Copilot adapter.
   - Render Markdown support for markdown and codecompanion buffers.
