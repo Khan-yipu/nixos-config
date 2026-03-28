@@ -131,12 +131,23 @@ Model switching methods:
 - `:CCSetCodexModel <model>`
 - `:CCSetWataruuModel <model>`
 
+Chat window layout/sizing methods:
+
+- `:CCSetChatWidthCols <cols>`: use fixed right-side column width.
+- `:CCSetChatWidthRatio <0-1>`: use right-side width ratio (switches off fixed cols).
+
 Examples:
 
 - `:CCSetWataruuModel gpt-4o`
 - `:CCSetWataruuModel gpt-4o-mini`
 - `:CCSetWataruuModel gpt-5.4`
 - `:CCSetCodexModel gpt-5.3-codex`
+
+Layout defaults:
+
+- Chat window layout: `vertical`
+- Chat window position: `right`
+- Width strategy: fixed cols first (`58`), else ratio (`0.38`)
 
 ## Dashboard
 

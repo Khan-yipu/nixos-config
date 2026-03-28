@@ -33,6 +33,16 @@
     { mode = "n"; key = "<leader>us"; action = "<cmd>lua local ok,snacks = pcall(require, 'snacks'); if ok and snacks.picker then snacks.picker.files() end<CR>"; options = { silent = true; desc = "Snacks Files"; }; }
     { mode = "n"; key = "<leader>ud"; action = "<cmd>Dashboard<CR>"; options = { silent = true; desc = "Open Dashboard"; }; }
 
+    # 窗口管理
+    { mode = "n"; key = "<leader>wh"; action = "<C-w>h"; options = { silent = true; desc = "Window Left"; }; }
+    { mode = "n"; key = "<leader>wj"; action = "<C-w>j"; options = { silent = true; desc = "Window Down"; }; }
+    { mode = "n"; key = "<leader>wk"; action = "<C-w>k"; options = { silent = true; desc = "Window Up"; }; }
+    { mode = "n"; key = "<leader>wl"; action = "<C-w>l"; options = { silent = true; desc = "Window Right"; }; }
+    { mode = "n"; key = "<leader>wv"; action = "<cmd>vsplit<CR>"; options = { silent = true; desc = "Split Vertical"; }; }
+    { mode = "n"; key = "<leader>ws"; action = "<cmd>split<CR>"; options = { silent = true; desc = "Split Horizontal"; }; }
+    { mode = "n"; key = "<leader>wq"; action = "<cmd>close<CR>"; options = { silent = true; desc = "Close Window"; }; }
+    { mode = "n"; key = "<leader>wo"; action = "<cmd>only<CR>"; options = { silent = true; desc = "Only Window"; }; }
+
     # Flash 快速跳转
     { mode = "n"; key = "s"; action = "<cmd>lua require('flash').jump()<CR>"; options = { silent = true; desc = "Flash Jump"; }; }
     { mode = "n"; key = "S"; action = "<cmd>lua require('flash').treesitter()<CR>"; options = { silent = true; desc = "Flash Treesitter"; }; }
