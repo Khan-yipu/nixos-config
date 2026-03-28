@@ -46,6 +46,10 @@ Leader key is space.
 - `a` AI
   - `<leader>aa`: CodeCompanion actions.
   - `<leader>ac`: CodeCompanion chat.
+  - `<leader>a1`: switch chat adapter to Copilot.
+  - `<leader>a2`: switch chat adapter to Codex.
+  - `<leader>a3`: switch chat adapter to Wataruu API.
+  - `<leader>as`: show current chat adapter.
 - `e` Explorer
   - `<leader>e`: toggle Neo-tree.
 - `f` Find
@@ -99,6 +103,30 @@ Fast switch keymaps:
 CodeCompanion is paired with `render-markdown-nvim` to improve markdown display for AI responses. The renderer is initialized with:
 
 - `file_types = { "markdown", "codecompanion" }`
+
+## CodeCompanion Adapter Switching
+
+This setup supports three chat adapters:
+
+- `copilot`
+- `codex`
+- `wataruu` (`https://api.wataruu.me/v1`)
+
+Switch methods:
+
+- Keymaps: `<leader>a1`, `<leader>a2`, `<leader>a3`
+- Commands: `:CCUseCopilot`, `:CCUseCodex`, `:CCUseWataruu`
+- Query current adapter: `<leader>as` or `:CCShowAdapter`
+
+Note:
+
+- Inline and cmd interactions stay on Copilot for stability.
+- Chat interaction follows the selected adapter.
+
+Security recommendation:
+
+- `WATARUU_API_KEY` is currently configured via Home Manager session variables.
+- For safer secret handling, move it to a private secrets manager and inject through env at login.
 
 ## Next Plugins To Consider
 

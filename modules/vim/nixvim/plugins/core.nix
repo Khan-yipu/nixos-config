@@ -4,7 +4,6 @@
     airline = {
       enable = true;
       settings = {
-        theme = "everforest";
         powerline_fonts = 1;
       };
     };
@@ -33,6 +32,10 @@
 
         "<leader>aa" = "Actions";
         "<leader>ac" = "Chat";
+        "<leader>a1" = "Use Copilot";
+        "<leader>a2" = "Use Codex";
+        "<leader>a3" = "Use Wataruu";
+        "<leader>as" = "Adapter Status";
         "<leader>ff" = "Files";
         "<leader>fg" = "Grep";
         "<leader>fb" = "Buffers";

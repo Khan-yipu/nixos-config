@@ -46,6 +46,10 @@
     # AI 快捷键
     { mode = "n"; key = "<leader>aa"; action = "<cmd>CodeCompanionActions<CR>"; options = { silent = true; }; }
     { mode = "n"; key = "<leader>ac"; action = "<cmd>CodeCompanionChat<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>a1"; action = "<cmd>CCUseCopilot<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>a2"; action = "<cmd>CCUseCodex<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>a3"; action = "<cmd>CCUseWataruu<CR>"; options = { silent = true; }; }
+    { mode = "n"; key = "<leader>as"; action = "<cmd>CCShowAdapter<CR>"; options = { silent = true; }; }
 
     # 格式化
     { mode = "n"; key = "<leader>lf"; action = "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>"; options = { silent = true; }; }

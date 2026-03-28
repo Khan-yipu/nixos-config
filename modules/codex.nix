@@ -1,6 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
+  home.sessionVariables = {
+    WATARUU_API_KEY = "sk-BOIfaNR9CVuERB57c";
+  };
+
   # Codex configuration
   home.file.".codex/config.toml".text = ''
     model_provider = "zeabur"
