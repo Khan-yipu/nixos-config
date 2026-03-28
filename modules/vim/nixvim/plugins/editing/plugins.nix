@@ -2,6 +2,8 @@
 
 {
   programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
-    vim-airline-themes
+    nvim-autopairs
+    comment-nvim
+    nvim-surround
   ];
 }

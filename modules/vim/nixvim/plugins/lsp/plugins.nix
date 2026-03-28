@@ -2,6 +2,6 @@
 
 {
   programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
-    vim-airline-themes
+    nvim-lspconfig
   ];
 }

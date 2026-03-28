@@ -2,6 +2,9 @@
 
 {
   programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
-    vim-airline-themes
+    nvim-treesitter
+    gitsigns-nvim
+    conform-nvim
+    nvim-lint
   ];
 }

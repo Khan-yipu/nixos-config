@@ -7,5 +7,7 @@
     universal-ctags
     metals
     haskell-language-server
+    statix
+    ruff
   ];
 }
