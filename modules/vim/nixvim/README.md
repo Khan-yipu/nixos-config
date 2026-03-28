@@ -85,7 +85,15 @@ Leader key is space.
 
 ## Theme Switching
 
-Default theme is Everforest with `background = "medium"`.
+Startup theme is randomly selected from:
+
+- `everforest`
+- `catppuccin`
+- `tokyonight`
+- `kanagawa`
+- `gruvbox`
+
+If random selection fails for any reason, fallback is `everforest` (`background = "medium"`).
 
 Switch at runtime:
 
@@ -156,6 +164,23 @@ Dashboard is enabled with image preview using:
 - plugin: `dashboard-nvim`
 - renderer: `chafa`
 - image: `~/.nixconfigs/assets/asuka.jpg`
+
+Rendering strategy:
+
+- Color mode uses dashboard's top-level `preview` with:
+  - `chafa -f symbols --symbols vhalf --size 72x18 --colors full`
+- This is rendered inside dashboard's terminal preview window (`termopen`).
+- Fallback mode renders plain text into `header` if preview prerequisites are missing.
+
+Fallback behavior:
+
+- If rendering fails or prerequisites are missing, a chunky ASCII `ZHAO CAKE` banner is shown.
+- Dashboard still loads normally with a fallback footer message.
+
+Why some setups look different:
+
+- Many showcased Neovim dashboards are not `dashboard-nvim`; common alternatives are `alpha-nvim`, `snacks.dashboard`, or setups with `image.nvim`.
+- `dashboard-nvim` currently does not ship a first-class graphics-protocol pipeline (kitty/sixel/ueberzug) and depends on terminal preview behavior.
 
 Open dashboard:
 
