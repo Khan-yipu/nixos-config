@@ -2,7 +2,6 @@
 
 {
   programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
-    dashboard-nvim
     snacks-nvim
     flash-nvim
     noice-nvim

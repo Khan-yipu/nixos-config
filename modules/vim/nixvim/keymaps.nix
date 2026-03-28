@@ -31,7 +31,7 @@
     # UI 快捷开关
     { mode = "n"; key = "<leader>ux"; action = "<cmd>Noice<CR>"; options = { silent = true; desc = "Open Noice"; }; }
     { mode = "n"; key = "<leader>us"; action = "<cmd>lua local ok,snacks = pcall(require, 'snacks'); if ok and snacks.picker then snacks.picker.files() end<CR>"; options = { silent = true; desc = "Snacks Files"; }; }
-    { mode = "n"; key = "<leader>ud"; action = "<cmd>Dashboard<CR>"; options = { silent = true; desc = "Open Dashboard"; }; }
+    { mode = "n"; key = "<leader>ud"; action = "<cmd>lua local ok,snacks = pcall(require, 'snacks'); if ok and snacks.dashboard then snacks.dashboard.open() end<CR>"; options = { silent = true; desc = "Open Dashboard"; }; }
 
     # 窗口管理
     { mode = "n"; key = "<leader>wh"; action = "<C-w>h"; options = { silent = true; desc = "Window Left"; }; }

@@ -161,16 +161,16 @@ Layout defaults:
 
 Dashboard is enabled with image preview using:
 
-- plugin: `dashboard-nvim`
-- renderer: `chafa`
+- plugin: `snacks.nvim` (`dashboard` module)
+- renderer: terminal section command with `chafa`
 - image: `~/.nixconfigs/assets/asuka.jpg`
 
 Rendering strategy:
 
-- Color mode uses dashboard's top-level `preview` with:
-  - `chafa -f symbols --symbols vhalf --size 72x18 --colors full`
-- This is rendered inside dashboard's terminal preview window (`termopen`).
-- Fallback mode renders plain text into `header` if preview prerequisites are missing.
+- Color mode uses Snacks dashboard `terminal` section with:
+  - `chafa -f symbols --symbols vhalf --size 112x34 --colors full --color-space rgb`
+- This provides higher visual resolution than the previous dashboard setup.
+- Fallback mode keeps dashboard usable with a `ZHAO CAKE`-style textual header when image prerequisites are missing.
 
 Fallback behavior:
 
@@ -179,8 +179,8 @@ Fallback behavior:
 
 Why some setups look different:
 
-- Many showcased Neovim dashboards are not `dashboard-nvim`; common alternatives are `alpha-nvim`, `snacks.dashboard`, or setups with `image.nvim`.
-- `dashboard-nvim` currently does not ship a first-class graphics-protocol pipeline (kitty/sixel/ueberzug) and depends on terminal preview behavior.
+- Many showcased Neovim dashboards are `snacks.dashboard`, `alpha-nvim`, or setups with `image.nvim`.
+- Different dashboard plugins use different rendering paths, so image quality and color behavior can vary.
 
 Open dashboard:
 

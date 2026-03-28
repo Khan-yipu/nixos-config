@@ -80,6 +80,47 @@
 
     local ok_snacks, snacks = pcall(require, "snacks")
     if ok_snacks then
+      local image_path = vim.fn.expand("~/.nixconfigs/assets/asuka.jpg")
+      local can_render_image = vim.fn.executable("chafa") == 1 and vim.fn.filereadable(image_path) == 1
+      local dashboard_sections
+
+      -- Keep the image inside the left pane by scaling to current editor size.
+      local total_cols = vim.o.columns
+      local total_lines = vim.o.lines
+      local image_width = math.max(44, math.floor(total_cols * 0.42) - 2)
+      local image_height = math.max(22, math.floor(total_lines * 0.64) - 2)
+      local image_cmd = string.format(
+        "chafa -f symbols --symbols block --size %dx%d --colors full --color-space rgb --dither ordered %s",
+        image_width,
+        image_height,
+        vim.fn.shellescape(image_path)
+      )
+
+      if can_render_image then
+        dashboard_sections = {
+          {
+            pane = 1,
+            section = "terminal",
+            cmd = image_cmd,
+            height = image_height,
+            padding = 0,
+          },
+          { pane = 2, section = "header", padding = 0 },
+          { pane = 2, icon = " ", title = "Keymaps", section = "keys", gap = 1, indent = 2, padding = { 1, 0 } },
+          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", limit = 7, indent = 2, padding = { 1, 0 } },
+          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = { 1, 0 } },
+          { pane = 2, text = "Nixvim dashboard ready.", align = "center", padding = 0 },
+        }
+      else
+        dashboard_sections = {
+          { section = "header", padding = 0 },
+          { icon = " ", title = "Keymaps", section = "keys", gap = 1, indent = 2, padding = { 1, 0 } },
+          { icon = " ", title = "Recent Files", section = "recent_files", limit = 7, indent = 2, padding = { 1, 0 } },
+          { icon = " ", title = "Projects", section = "projects", indent = 2, padding = { 1, 0 } },
+          { text = "Nixvim dashboard ready.", align = "center", padding = 0 },
+        }
+      end
+
       snacks.setup({
         input = { enabled = true },
         notifier = { enabled = true },
@@ -87,6 +128,27 @@
         quickfile = { enabled = true },
         statuscolumn = { enabled = true },
         words = { enabled = true },
+        dashboard = {
+          enabled = true,
+          sections = dashboard_sections,
+          preset = {
+            header = [[
+ ██████╗  █████╗ ██╗  ██╗███████╗
+██╔════╝ ██╔══██╗██║ ██╔╝██╔════╝
+██║      ███████║█████╔╝ █████╗  
+██║      ██╔══██║██╔═██╗ ██╔══╝  
+╚██████╗ ██║  ██║██║  ██╗███████╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+]],
+            keys = {
+              { icon = " ", key = "f", desc = "Find File", action = ":Telescope find_files" },
+              { icon = "󰱼 ", key = "g", desc = "Live Grep", action = ":Telescope live_grep" },
+              { icon = "󰈙 ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
+              { icon = " ", key = "c", desc = "CodeCompanion Chat", action = ":CodeCompanionChat" },
+              { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+            },
+          },
+        },
       })
     end
   '';
