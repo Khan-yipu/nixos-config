@@ -70,6 +70,7 @@ Leader key is space.
 - `u` UI
   - `<leader>ux`: open Noice.
   - `<leader>us`: Snacks file picker.
+  - `<leader>ud`: open Dashboard.
 - `t` Theme
   - `<leader>tf`: everforest.
   - `<leader>tc`: catppuccin.
@@ -112,11 +113,43 @@ This setup supports three chat adapters:
 - `codex`
 - `wataruu` (`https://api.wataruu.me/v1`)
 
+Default models:
+
+- copilot: `gpt-4.1`
+- codex: `gpt-5.3-codex`
+- wataruu: `gpt-5.4`
+
 Switch methods:
 
 - Keymaps: `<leader>a1`, `<leader>a2`, `<leader>a3`
 - Commands: `:CCUseCopilot`, `:CCUseCodex`, `:CCUseWataruu`
 - Query current adapter: `<leader>as` or `:CCShowAdapter`
+
+Model switching methods:
+
+- `:CCSetCopilotModel <model>`
+- `:CCSetCodexModel <model>`
+- `:CCSetWataruuModel <model>`
+
+Examples:
+
+- `:CCSetWataruuModel gpt-4o`
+- `:CCSetWataruuModel gpt-4o-mini`
+- `:CCSetWataruuModel gpt-5.4`
+- `:CCSetCodexModel gpt-5.3-codex`
+
+## Dashboard
+
+Dashboard is enabled with image preview using:
+
+- plugin: `dashboard-nvim`
+- renderer: `chafa`
+- image: `~/.nixconfigs/assets/asuka.jpg`
+
+Open dashboard:
+
+- `:Dashboard`
+- `<leader>ud`
 
 Note:
 

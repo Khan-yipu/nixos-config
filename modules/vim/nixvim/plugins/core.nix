@@ -45,6 +45,7 @@
         "<leader>nd" = "Dismiss";
         "<leader>ux" = "Noice";
         "<leader>us" = "Snacks Picker";
+        "<leader>ud" = "Dashboard";
         "<leader>tf" = "Everforest";
         "<leader>tc" = "Catppuccin";
         "<leader>tt" = "Tokyo Night";

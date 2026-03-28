@@ -9,5 +9,6 @@
     haskell-language-server
     statix
     ruff
+    chafa
   ];
 }
