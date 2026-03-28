@@ -17,7 +17,7 @@
     ./modules/starship.nix
     ./modules/fastfetch.nix   # 系统信息显示
     ./modules/tmux.nix        # 终端复用器
-    ./modules/vim.nix         # Vim 配置 (Nixvim)
+    ./modules/vim             # Vim 配置 (Nixvim)
     ./modules/uv.nix          # uv 配置 (Python)
     ./modules/codex.nix       # Codex 配置
     ./modules/niri.nix        # Niri + Noctalia 配置
