@@ -32,18 +32,21 @@ Fixes:
 - Ensure `noice-nvim`, `nui-nvim`, and `nvim-notify` are installed.
 - Rebuild and restart Neovim fully.
 
-## 3. render-markdown not active in CodeCompanion
+## 3. OpenCode not responding
 
 Symptoms:
-- Markdown output in chat is plain text.
+- `<leader>aa` / `<leader>ac` does nothing.
+- `:checkhealth opencode` shows server or config issues.
 
 Checks:
-- `:lua print(pcall(require, "render-markdown"))`
-- Confirm chat buffer filetype is `codecompanion` or `markdown`.
+- Run `:checkhealth opencode`.
+- Run `opencode --version` in terminal.
+- Verify config exists at `~/.config/opencode/opencode.jsonc`.
 
 Fixes:
-- Ensure `render-markdown-nvim` is present in plugin list.
-- Confirm renderer setup runs before `codecompanion.setup`.
+- Ensure `opencode` is installed via Home Manager.
+- Ensure `WATARUU_API_KEY` is set in session variables.
+- Confirm provider config uses `https://api.wataruu.me/v1`.
 
 ## 4. Theme command fails
 

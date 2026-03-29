@@ -20,6 +20,7 @@
     ./modules/vim             # Vim 配置 (Nixvim)
     ./modules/uv.nix          # uv 配置 (Python)
     ./modules/codex.nix       # Codex 配置
+    ./modules/opencode.nix    # OpenCode 配置
     ./modules/niri.nix        # Niri + Noctalia 配置
     
     # 所有开发环境已移至 devShells/ 目录，使用 direnv 按需激活
