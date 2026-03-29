@@ -93,10 +93,7 @@
       })
     end
 
-    local ok_lazygit, lazygit = pcall(require, "lazygit")
-    if ok_lazygit then
-      lazygit.setup({})
-    end
+    -- lazygit.nvim primarily exposes :LazyGit command; no setup() is required.
 
     vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { silent = true, desc = "Terminal Normal Mode" })
     vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { silent = true, desc = "Window Left" })
@@ -124,7 +121,6 @@
 
       if can_render_image then
         dashboard_sections = {
-          { pane = 2, section = "startup", enabled = false },
           {
             pane = 1,
             section = "terminal",
@@ -140,7 +136,6 @@
         }
       else
         dashboard_sections = {
-          { section = "startup", enabled = false },
           { section = "header", padding = 0 },
           { icon = " ", title = "Keymaps", section = "keys", gap = 1, indent = 2, padding = { 1, 0 } },
           { icon = " ", title = "Recent Files", section = "recent_files", limit = 7, indent = 2, padding = { 1, 0 } },
