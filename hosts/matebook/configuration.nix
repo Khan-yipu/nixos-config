@@ -11,11 +11,16 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub = {
+	enable = true;
+	device = "nodev";
+	efiSupport = true;
+	useOSProber = true;
+  };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "matebook"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -43,6 +48,17 @@
     LC_TIME = "zh_CN.UTF-8";
   };
 
+  # Configure Fcitx5 Input Method
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      qt6Packages.fcitx5-chinese-addons
+      fcitx5-nord
+    ];
+  };
+
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
@@ -68,21 +84,10 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
+  # Enable sound with Pulseaudio.
+  services.pulseaudio.enable = true;
   security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+  services.pipewire.enable = false;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -112,8 +117,19 @@
   # Enable fish
   programs.fish.enable = true; 
 
-  # Install firefox.
-  programs.firefox.enable = true;
+  # Install microsoft-edge
+  # programs.firefox.enable = true;
+
+  # Install fonts
+  fonts.packages = with pkgs; [
+    maple-mono.CN
+    maple-mono.NF
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.fira-code
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -121,10 +137,29 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    clash-verge-rev
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    vscode
+    flclash
+    remmina
+    cherry-studio
+    qq
+    qqmusic
+    xwayland
+    xwayland-satellite
+    microsoft-edge
   ];
+
+  # Environment Variables
+  environment.variables = {
+    # Force Electron apps to use Wayland
+    NIXOS_OZONE_WL = "1";
+    
+    # Input Method environment variables
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

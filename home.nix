@@ -17,7 +17,7 @@
     ./modules/starship.nix
     ./modules/fastfetch.nix   # 系统信息显示
     ./modules/tmux.nix        # 终端复用器
-    ./modules/vim.nix         # Vim 配置 (Nixvim)
+    ./modules/vim             # Vim 配置 (Nixvim)
     ./modules/uv.nix          # uv 配置 (Python)
     ./modules/codex.nix       # Codex 配置
     ./modules/niri.nix        # Niri + Noctalia 配置
@@ -60,6 +60,7 @@
     bat
     eza  # exa 已更名为 eza
     gnumake  # GNU Make 构建工具
+    yazi
     
     # 格式化工具
     nixpkgs-fmt  # Nix 代码格式化
@@ -86,7 +87,17 @@
     
     # Node.js (for CoC)
     nodejs
+    
+    # 命令运行器
+    just
   ];
+
+  # 启用用户级 Nix 垃圾回收
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # 环境变量由 Nixvim 的 defaultEditor 选项自动设置
   
@@ -133,6 +144,7 @@
     # Git 基础配置（可以根据需要调整）
   programs.git = {
     enable = true;
+    signing.format = "openpgp";
     settings = {
       user.name = "cake";
       user.email = "zhaocake@foxmail.com";
