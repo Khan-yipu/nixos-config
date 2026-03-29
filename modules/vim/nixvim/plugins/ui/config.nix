@@ -124,6 +124,7 @@
 
       if can_render_image then
         dashboard_sections = {
+          { pane = 2, section = "startup", enabled = false },
           {
             pane = 1,
             section = "terminal",
@@ -139,6 +140,7 @@
         }
       else
         dashboard_sections = {
+          { section = "startup", enabled = false },
           { section = "header", padding = 0 },
           { icon = " ", title = "Keymaps", section = "keys", gap = 1, indent = 2, padding = { 1, 0 } },
           { icon = " ", title = "Recent Files", section = "recent_files", limit = 7, indent = 2, padding = { 1, 0 } },
