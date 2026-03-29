@@ -3,6 +3,8 @@
     vim.g.codecompanion_chat_adapter = vim.g.codecompanion_chat_adapter or "copilot"
     vim.g.codecompanion_copilot_model = vim.g.codecompanion_copilot_model or "gpt-5.3-codex"
     vim.g.codecompanion_codex_model = vim.g.codecompanion_codex_model or "gpt-5.3-codex"
+    vim.g.codecompanion_chat_width_cols = vim.g.codecompanion_chat_width_cols or 58
+    vim.g.codecompanion_chat_width_ratio = vim.g.codecompanion_chat_width_ratio or 0.38
 
     require("copilot").setup({
       panel = { enabled = false },
@@ -10,6 +12,16 @@
     })
 
     local function setup_codecompanion(adapter_name)
+      local function get_chat_width()
+        local cols = tonumber(vim.g.codecompanion_chat_width_cols)
+        if cols ~= nil and cols > 0 then
+          return cols
+        end
+
+        local ratio = tonumber(vim.g.codecompanion_chat_width_ratio) or 0.38
+        return math.max(40, math.floor(vim.o.columns * ratio))
+      end
+
       local chat_adapter
       if adapter_name == "copilot" then
         chat_adapter = { name = "copilot", model = vim.g.codecompanion_copilot_model }
@@ -47,6 +59,22 @@
           },
           cmd = {
             adapter = "copilot",
+          },
+        },
+        display = {
+          chat = {
+            window = {
+              layout = "vertical",
+              full_height = true,
+              position = "right",
+              width = get_chat_width(),
+              border = "single",
+              opts = {
+                breakindent = true,
+                linebreak = true,
+                wrap = true,
+              },
+            },
           },
         },
       })
