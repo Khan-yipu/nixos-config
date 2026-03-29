@@ -1,6 +1,7 @@
 {
   imports = [
-    ./opencode.nix
+    ./codecompanion.nix
+    ./codecompanion-config.nix
     ./render-markdown.nix
   ];
 }

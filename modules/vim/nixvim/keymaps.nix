@@ -55,10 +55,12 @@
     { mode = "n"; key = "<leader>tg"; action = "<cmd>colorscheme gruvbox<CR>"; options = { silent = true; desc = "Theme Gruvbox"; }; }
 
     # AI 快捷键
-    { mode = "n"; key = "<leader>aa"; action = "<cmd>lua local ok,op = pcall(require, 'opencode'); if ok then op.ask('@this: ', { submit = true }) end<CR>"; options = { silent = true; desc = "OpenCode Ask"; }; }
-    { mode = "n"; key = "<leader>ac"; action = "<cmd>lua local ok,op = pcall(require, 'opencode'); if ok then op.toggle() end<CR>"; options = { silent = true; desc = "OpenCode Toggle"; }; }
-    { mode = "n"; key = "<leader>ax"; action = "<cmd>lua local ok,op = pcall(require, 'opencode'); if ok then op.select() end<CR>"; options = { silent = true; desc = "OpenCode Select"; }; }
-    { mode = "n"; key = "<leader>as"; action = "<cmd>lua local ok,op = pcall(require, 'opencode'); if ok then op.command('session.new') end<CR>"; options = { silent = true; desc = "OpenCode New Session"; }; }
+    { mode = "n"; key = "<leader>aa"; action = "<cmd>CodeCompanionActions<CR>"; options = { silent = true; desc = "CodeCompanion Actions"; }; }
+    { mode = "n"; key = "<leader>ac"; action = "<cmd>CodeCompanionChat<CR>"; options = { silent = true; desc = "CodeCompanion Chat"; }; }
+    { mode = "n"; key = "<leader>a1"; action = "<cmd>CCUseCopilot<CR>"; options = { silent = true; desc = "Use Copilot"; }; }
+    { mode = "n"; key = "<leader>a2"; action = "<cmd>CCUseCodex<CR>"; options = { silent = true; desc = "Use Codex"; }; }
+    { mode = "n"; key = "<leader>a4"; action = "<cmd>CCUseOpenCode<CR>"; options = { silent = true; desc = "Use OpenCode"; }; }
+    { mode = "n"; key = "<leader>as"; action = "<cmd>CCShowAdapter<CR>"; options = { silent = true; desc = "Show Adapter"; }; }
 
     # 格式化
     { mode = "n"; key = "<leader>lf"; action = "<cmd>lua require('conform').format({ async = true, lsp_fallback = true })<CR>"; options = { silent = true; desc = "Format Buffer"; }; }

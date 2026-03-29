@@ -31,10 +31,12 @@
         "<leader>w" = { name = "+window"; };
         "<leader>x" = { name = "+problems"; };
 
-        "<leader>aa" = "Ask";
-        "<leader>ac" = "Toggle";
-        "<leader>ax" = "Select";
-        "<leader>as" = "New Session";
+        "<leader>aa" = "Actions";
+        "<leader>ac" = "Chat";
+        "<leader>a1" = "Use Copilot";
+        "<leader>a2" = "Use Codex";
+        "<leader>a4" = "Use OpenCode";
+        "<leader>as" = "Show Adapter";
         "<leader>ff" = "Files";
         "<leader>fg" = "Grep";
         "<leader>fb" = "Buffers";
@@ -75,10 +77,12 @@
         { "<leader>w", group = "Window", mode = "n" },
         { "<leader>x", group = "Problems", mode = "n" },
 
-        { "<leader>aa", desc = "OpenCode Ask", mode = "n" },
-        { "<leader>ac", desc = "OpenCode Toggle", mode = "n" },
-        { "<leader>ax", desc = "OpenCode Select", mode = "n" },
-        { "<leader>as", desc = "OpenCode New Session", mode = "n" },
+        { "<leader>aa", desc = "CodeCompanion Actions", mode = "n" },
+        { "<leader>ac", desc = "CodeCompanion Chat", mode = "n" },
+        { "<leader>a1", desc = "Use Copilot", mode = "n" },
+        { "<leader>a2", desc = "Use Codex", mode = "n" },
+        { "<leader>a4", desc = "Use OpenCode", mode = "n" },
+        { "<leader>as", desc = "Show Adapter", mode = "n" },
 
         { "<leader>ff", desc = "Find Files", mode = "n" },
         { "<leader>fg", desc = "Live Grep", mode = "n" },

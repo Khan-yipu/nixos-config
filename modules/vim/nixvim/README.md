@@ -9,7 +9,7 @@ This directory contains a fully modular Nixvim setup split by capability.
 - `keymaps.nix`: unified keybinding layer.
 - `TROUBLESHOOTING.md`: common failure patterns and recovery steps.
 - `plugins/`: feature modules.
-  - `ai/`: opencode.nvim, render-markdown.
+  - `ai/`: codecompanion, opencode ACP adapter, render-markdown.
   - `lsp/`: native LSP (Neovim 0.11 API), split into `shared.nix` and `servers/`.
   - `completion/`: cmp + snippets.
   - `navigation/`: Telescope, Neo-tree, Trouble.
@@ -36,7 +36,8 @@ This directory contains a fully modular Nixvim setup split by capability.
   - Flash for fast in-buffer jumps.
   - Snacks utility modules (input/notifier/picker/quickfile/statuscolumn/words).
 - AI
-  - opencode.nvim integration for in-editor AI ask/select/toggle workflows.
+  - CodeCompanion integration for actions/chat workflows.
+  - OpenCode available as a CodeCompanion ACP adapter.
   - Render Markdown support for markdown buffers.
 
 ## Keymap Cheatsheet
@@ -44,10 +45,12 @@ This directory contains a fully modular Nixvim setup split by capability.
 Leader key is space.
 
 - `a` AI
-  - `<leader>aa`: OpenCode ask (`@this` context).
-  - `<leader>ac`: OpenCode toggle panel.
-  - `<leader>ax`: OpenCode action selector.
-  - `<leader>as`: OpenCode new session.
+  - `<leader>aa`: CodeCompanion actions.
+  - `<leader>ac`: CodeCompanion chat.
+  - `<leader>a1`: use Copilot adapter.
+  - `<leader>a2`: use Codex adapter.
+  - `<leader>a4`: use OpenCode ACP adapter.
+  - `<leader>as`: show current adapter.
 - `e` Explorer
   - `<leader>e`: toggle Neo-tree.
 - `f` Find
@@ -105,9 +108,9 @@ Fast switch keymaps:
 
 - `<leader>tf`, `<leader>tc`, `<leader>tt`, `<leader>tk`, `<leader>tg`
 
-## OpenCode Integration
+## CodeCompanion + OpenCode
 
-Neovim uses `opencode.nvim` as the AI plugin. The OpenCode CLI/provider defaults are configured in Home Manager via `modules/opencode.nix`.
+Neovim uses `codecompanion.nvim` as the AI plugin. OpenCode is available as an ACP adapter, and OpenCode CLI/provider defaults are configured in Home Manager via `modules/opencode.nix`.
 
 Default backend:
 
@@ -121,7 +124,7 @@ Config path:
 
 Health check:
 
-- Run `:checkhealth opencode` after switching configs.
+- Run `:checkhealth codecompanion` and `:checkhealth opencode` after switching configs.
 
 ## Dashboard
 

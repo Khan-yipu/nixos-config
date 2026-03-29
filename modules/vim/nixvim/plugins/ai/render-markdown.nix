@@ -9,7 +9,7 @@
     local ok_render_markdown, render_markdown = pcall(require, "render-markdown")
     if ok_render_markdown then
       render_markdown.setup({
-        file_types = { "markdown" },
+        file_types = { "markdown", "codecompanion" },
       })
     end
   '';

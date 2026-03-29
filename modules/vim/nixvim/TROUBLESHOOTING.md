@@ -32,21 +32,22 @@ Fixes:
 - Ensure `noice-nvim`, `nui-nvim`, and `nvim-notify` are installed.
 - Rebuild and restart Neovim fully.
 
-## 3. OpenCode not responding
+## 3. CodeCompanion / OpenCode adapter not responding
 
 Symptoms:
 - `<leader>aa` / `<leader>ac` does nothing.
-- `:checkhealth opencode` shows server or config issues.
+- `CCUseOpenCode` works but chat has no response.
 
 Checks:
+- Run `:checkhealth codecompanion`.
 - Run `:checkhealth opencode`.
 - Run `opencode --version` in terminal.
 - Verify config exists at `~/.config/opencode/opencode.jsonc`.
 
 Fixes:
-- Ensure `opencode` is installed via Home Manager.
-- Ensure `WATARUU_API_KEY` is set in session variables.
-- Confirm provider config uses `https://api.wataruu.me/v1`.
+- Ensure `codecompanion.nvim`, `copilot.lua`, and `opencode` are installed.
+- Switch adapter with `:CCUseCopilot` or `:CCUseOpenCode` and retry.
+- Confirm OpenCode provider config is valid in `~/.config/opencode/opencode.jsonc`.
 
 ## 4. Theme command fails
 

@@ -144,7 +144,7 @@
               { icon = " ", key = "f", desc = "Find File", action = ":Telescope find_files" },
               { icon = "󰱼 ", key = "g", desc = "Live Grep", action = ":Telescope live_grep" },
               { icon = "󰈙 ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-              { icon = " ", key = "c", desc = "OpenCode Toggle", action = ":lua local ok,op = pcall(require, 'opencode'); if ok then op.toggle() end" },
+              { icon = " ", key = "c", desc = "CodeCompanion Chat", action = ":CodeCompanionChat" },
               { icon = " ", key = "q", desc = "Quit", action = ":qa" },
             },
           },
