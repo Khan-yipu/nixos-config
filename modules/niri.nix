@@ -167,17 +167,29 @@
       // 窗口管理
       Mod+Q { close-window; }
 
-      // 焦点移动
+      // 焦点移动 (Vim 风格)
       Mod+H { focus-column-left; }
       Mod+L { focus-column-right; }
       Mod+J { focus-window-down; }
       Mod+K { focus-window-up; }
 
-      // 窗口移动
+      // 焦点移动 (方向键 - 主流风格)
+      Mod+Left  { focus-column-left; }
+      Mod+Right { focus-column-right; }
+      Mod+Down  { focus-window-down; }
+      Mod+Up    { focus-window-up; }
+
+      // 窗口移动 (Vim 风格)
       Mod+Shift+H { move-column-left; }
       Mod+Shift+L { move-column-right; }
       Mod+Shift+J { move-window-down; }
       Mod+Shift+K { move-window-up; }
+      
+      // 窗口移动 (方向键 - 主流风格)
+      Mod+Shift+Left  { move-column-left; }
+      Mod+Shift+Right { move-column-right; }
+      Mod+Shift+Down  { move-window-down; }
+      Mod+Shift+Up    { move-window-up; }
 
       // 窗口大小调整
       Mod+Minus { set-column-width "-10%"; }
