@@ -16,7 +16,8 @@
     ./modules/fish.nix
     ./modules/starship.nix
     ./modules/fastfetch.nix   # 系统信息显示
-    ./modules/tmux.nix        # 终端复用器
+    ./modules/tmux.nix        # 终端复用器（保留）
+    ./modules/zellij.nix      # 终端复用器（新增）
     ./modules/vim             # Vim 配置 (Nixvim)
     ./modules/uv.nix          # uv 配置 (Python)
     ./modules/codex.nix       # Codex 配置
