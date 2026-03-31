@@ -62,9 +62,12 @@
           use-dialog-box nil
           visible-bell nil)
 
-    ;; Font setup: prefer Nerd Font for symbols and mixed pitch for Org prose.
-    (when (find-font (font-spec :name "JetBrainsMono Nerd Font"))
-      (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-12"))
+    ;; Font setup: prefer Maple Mono NF CN in WSL; fallback to JetBrains Mono Nerd Font.
+    (cond
+     ((find-font (font-spec :name "Maple Mono NF CN"))
+      (set-face-attribute 'default nil :font "Maple Mono NF CN-12"))
+     ((find-font (font-spec :name "JetBrainsMono Nerd Font"))
+      (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font-12")))
     (when (find-font (font-spec :name "Noto Sans CJK SC"))
       (set-face-attribute 'variable-pitch nil :font "Noto Sans CJK SC-13"))
 

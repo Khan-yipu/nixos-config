@@ -70,6 +70,9 @@
     
     # Markdown 工具
     glow  # Markdown 预览工具
+
+    # 字体
+    maple-mono."NF-CN"  # Maple Mono Nerd Font Chinese
     
     # 编程语言和构建工具
     # Rust
