@@ -5,9 +5,10 @@
     enable = true;
 
     # Shell 集成
-    enableFishIntegration = true;
+    enableFishIntegration = false;
 
     # 如果已存在会话则自动附加
-    attachExistingSession = true;
+    attachExistingSession = false;
   };
 }
+
