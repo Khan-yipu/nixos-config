@@ -32,18 +32,22 @@ Fixes:
 - Ensure `noice-nvim`, `nui-nvim`, and `nvim-notify` are installed.
 - Rebuild and restart Neovim fully.
 
-## 3. render-markdown not active in CodeCompanion
+## 3. CodeCompanion / OpenCode adapter not responding
 
 Symptoms:
-- Markdown output in chat is plain text.
+- `<leader>aa` / `<leader>ac` does nothing.
+- `CCUseOpenCode` works but chat has no response.
 
 Checks:
-- `:lua print(pcall(require, "render-markdown"))`
-- Confirm chat buffer filetype is `codecompanion` or `markdown`.
+- Run `:checkhealth codecompanion`.
+- Run `:checkhealth opencode`.
+- Run `opencode --version` in terminal.
+- Verify config exists at `~/.config/opencode/opencode.jsonc`.
 
 Fixes:
-- Ensure `render-markdown-nvim` is present in plugin list.
-- Confirm renderer setup runs before `codecompanion.setup`.
+- Ensure `codecompanion.nvim`, `copilot.lua`, and `opencode` are installed.
+- Switch adapter with `:CCUseCopilot` or `:CCUseOpenCode` and retry.
+- Confirm OpenCode provider config is valid in `~/.config/opencode/opencode.jsonc`.
 
 ## 4. Theme command fails
 

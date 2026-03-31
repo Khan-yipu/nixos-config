@@ -4,6 +4,8 @@
   programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
     snacks-nvim
     flash-nvim
+    toggleterm-nvim
+    lazygit-nvim
     noice-nvim
     nvim-notify
     nui-nvim

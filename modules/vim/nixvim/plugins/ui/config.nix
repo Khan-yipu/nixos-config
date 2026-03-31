@@ -78,6 +78,29 @@
       flash.setup({})
     end
 
+    local ok_toggleterm, toggleterm = pcall(require, "toggleterm")
+    if ok_toggleterm then
+      toggleterm.setup({
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        persist_mode = true,
+        direction = "float",
+        shade_terminals = true,
+        float_opts = {
+          border = "curved",
+        },
+      })
+    end
+
+    -- lazygit.nvim primarily exposes :LazyGit command; no setup() is required.
+
+    vim.keymap.set("t", "<Esc><Esc>", [[<C-\><C-n>]], { silent = true, desc = "Terminal Normal Mode" })
+    vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], { silent = true, desc = "Window Left" })
+    vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], { silent = true, desc = "Window Down" })
+    vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], { silent = true, desc = "Window Up" })
+    vim.keymap.set("t", "<C-l>", [[<Cmd>wincmd l<CR>]], { silent = true, desc = "Window Right" })
+
     local ok_snacks, snacks = pcall(require, "snacks")
     if ok_snacks then
       local image_path = vim.fn.expand("~/.nixconfigs/assets/asuka.jpg")

@@ -13,6 +13,43 @@
       gitsigns.setup({})
     end
 
+    local ok_ibl, ibl = pcall(require, "ibl")
+    if ok_ibl then
+      ibl.setup({
+        indent = {
+          char = "│",
+          tab_char = "│",
+        },
+        scope = {
+          enabled = true,
+          show_start = false,
+          show_end = false,
+        },
+        exclude = {
+          filetypes = {
+            "help",
+            "dashboard",
+            "neo-tree",
+            "Trouble",
+            "lazy",
+          },
+          buftypes = { "terminal", "nofile", "quickfix", "prompt" },
+        },
+      })
+    end
+
+    local ok_todo, todo_comments = pcall(require, "todo-comments")
+    if ok_todo then
+      todo_comments.setup({})
+    end
+
+    local ok_persistence, persistence = pcall(require, "persistence")
+    if ok_persistence then
+      persistence.setup({
+        options = { "buffers", "curdir", "tabpages", "winsize", "help", "globals" },
+      })
+    end
+
     local ok_conform, conform = pcall(require, "conform")
     if ok_conform then
       conform.setup({

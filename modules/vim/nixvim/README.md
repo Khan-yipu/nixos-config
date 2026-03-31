@@ -9,7 +9,7 @@ This directory contains a fully modular Nixvim setup split by capability.
 - `keymaps.nix`: unified keybinding layer.
 - `TROUBLESHOOTING.md`: common failure patterns and recovery steps.
 - `plugins/`: feature modules.
-  - `ai/`: CodeCompanion, Copilot, render-markdown.
+  - `ai/`: codecompanion, opencode ACP adapter, render-markdown.
   - `lsp/`: native LSP (Neovim 0.11 API), split into `shared.nix` and `servers/`.
   - `completion/`: cmp + snippets.
   - `navigation/`: Telescope, Neo-tree, Trouble.
@@ -36,8 +36,9 @@ This directory contains a fully modular Nixvim setup split by capability.
   - Flash for fast in-buffer jumps.
   - Snacks utility modules (input/notifier/picker/quickfile/statuscolumn/words).
 - AI
-  - CodeCompanion using Copilot adapter.
-  - Render Markdown support for markdown and codecompanion buffers.
+  - CodeCompanion integration for actions/chat workflows.
+  - OpenCode available as a CodeCompanion ACP adapter.
+  - Render Markdown support for markdown buffers.
 
 ## Keymap Cheatsheet
 
@@ -46,10 +47,10 @@ Leader key is space.
 - `a` AI
   - `<leader>aa`: CodeCompanion actions.
   - `<leader>ac`: CodeCompanion chat.
-  - `<leader>a1`: switch chat adapter to Copilot.
-  - `<leader>a2`: switch chat adapter to Codex.
-  - `<leader>a3`: switch chat adapter to Wataruu API.
-  - `<leader>as`: show current chat adapter.
+  - `<leader>a1`: use Copilot adapter.
+  - `<leader>a2`: use Codex adapter.
+  - `<leader>a4`: use OpenCode ACP adapter.
+  - `<leader>as`: show current adapter.
 - `e` Explorer
   - `<leader>e`: toggle Neo-tree.
 - `f` Find
@@ -107,55 +108,23 @@ Fast switch keymaps:
 
 - `<leader>tf`, `<leader>tc`, `<leader>tt`, `<leader>tk`, `<leader>tg`
 
-## CodeCompanion Markdown Rendering
+## CodeCompanion + OpenCode
 
-CodeCompanion is paired with `render-markdown-nvim` to improve markdown display for AI responses. The renderer is initialized with:
+Neovim uses `codecompanion.nvim` as the AI plugin. OpenCode is available as an ACP adapter, and OpenCode CLI/provider defaults are configured in Home Manager via `modules/opencode.nix`.
 
-- `file_types = { "markdown", "codecompanion" }`
+Default backend:
 
-## CodeCompanion Adapter Switching
+- provider id: `wataruu`
+- base URL: `https://api.wataruu.me/v1`
+- default model: `wataruu/gpt-5.4`
 
-This setup supports three chat adapters:
+Config path:
 
-- `copilot`
-- `codex`
-- `wataruu` (`https://api.wataruu.me/v1`)
+- `~/.config/opencode/opencode.jsonc`
 
-Default models:
+Health check:
 
-- copilot: `gpt-4.1`
-- codex: `gpt-5.3-codex`
-- wataruu: `gpt-5.4`
-
-Switch methods:
-
-- Keymaps: `<leader>a1`, `<leader>a2`, `<leader>a3`
-- Commands: `:CCUseCopilot`, `:CCUseCodex`, `:CCUseWataruu`
-- Query current adapter: `<leader>as` or `:CCShowAdapter`
-
-Model switching methods:
-
-- `:CCSetCopilotModel <model>`
-- `:CCSetCodexModel <model>`
-- `:CCSetWataruuModel <model>`
-
-Chat window layout/sizing methods:
-
-- `:CCSetChatWidthCols <cols>`: use fixed right-side column width.
-- `:CCSetChatWidthRatio <0-1>`: use right-side width ratio (switches off fixed cols).
-
-Examples:
-
-- `:CCSetWataruuModel gpt-4o`
-- `:CCSetWataruuModel gpt-4o-mini`
-- `:CCSetWataruuModel gpt-5.4`
-- `:CCSetCodexModel gpt-5.3-codex`
-
-Layout defaults:
-
-- Chat window layout: `vertical`
-- Chat window position: `right`
-- Width strategy: fixed cols first (`58`), else ratio (`0.38`)
+- Run `:checkhealth codecompanion` and `:checkhealth opencode` after switching configs.
 
 ## Dashboard
 
@@ -189,8 +158,7 @@ Open dashboard:
 
 Note:
 
-- Inline and cmd interactions stay on Copilot for stability.
-- Chat interaction follows the selected adapter.
+- OpenCode provider/model selection is managed by OpenCode config and credentials.
 
 Security recommendation:
 
