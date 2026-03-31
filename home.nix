@@ -15,6 +15,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/starship.nix
+    ./modules/emacs.nix      # Emacs + Org-mode 配置
     ./modules/fastfetch.nix   # 系统信息显示
     ./modules/tmux.nix        # 终端复用器（保留）
     ./modules/zellij.nix      # 终端复用器（新增）
