@@ -15,15 +15,20 @@
 
     local ok_ibl, ibl = pcall(require, "ibl")
     if ok_ibl then
+      vim.api.nvim_set_hl(0, "IblIndent", { fg = "#3b4261", nocombine = true })
+      vim.api.nvim_set_hl(0, "IblScope", { fg = "#7aa2f7", nocombine = true })
+
       ibl.setup({
         indent = {
           char = "│",
           tab_char = "│",
+          highlight = { "IblIndent" },
         },
         scope = {
           enabled = true,
           show_start = false,
           show_end = false,
+          highlight = { "IblScope" },
         },
         exclude = {
           filetypes = {

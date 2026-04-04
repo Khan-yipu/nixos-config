@@ -16,6 +16,9 @@ nix.conf
 .metals/
 .vscode/
 
+# nvim AI
+memories/
+
 # Nix 临时文件
 .direnv/
 flake.lock
