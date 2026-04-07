@@ -12,7 +12,7 @@
   imports = [
     ./modules/fish.nix
     ./modules/starship.nix
-    ./modules/emacs.nix # Emacs + Org-mode 配置
+    # ./modules/emacs.nix # Emacs + Org-mode 配置
     ./modules/fastfetch.nix # 系统信息显示
     ./modules/tmux.nix # 终端复用器（保留）
     ./modules/zellij.nix # 终端复用器（新增）
@@ -20,8 +20,7 @@
     ./modules/uv.nix # uv 配置 (Python)
     ./modules/codex.nix # Codex 配置
     ./modules/opencode.nix # OpenCode 配置
-    ./modules/niri.nix # Niri + Noctalia 配置
-    ./modules/neovide.nix # Neovide 配置
+    # ./modules/niri.nix # Niri + Noctalia 配置
 
     # 所有开发环境已移至 devShells/ 目录，使用 direnv 按需激活
     # 使用 nix-init 命令快速创建项目
