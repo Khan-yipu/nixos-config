@@ -1,8 +1,9 @@
 # Nix 配置文件模板
-# 将此文件复制为 nix.conf 并填入您的 GitHub token
+# 复制为 nix.conf 并填入您的 GitHub token
 # 命令: cp nix.conf.example nix.conf
 # 然后软链接到: ~/.config/nix/nix.conf
 # 命令: mkdir -p ~/.config/nix && ln -sf ~/.nixconfigs/nix.conf ~/.config/nix/nix.conf
+# 建议设置权限: chmod 600 ~/.nixconfigs/nix.conf
 
 # 启用 Flakes 和新的 nix 命令
 experimental-features = nix-command flakes
@@ -35,4 +36,4 @@ warn-dirty = false
 # 3. 勾选 "repo" 权限（或者只勾选 "public_repo" 如果只访问公共仓库）
 # 4. 生成 token 并复制
 # 5. 取消下面这行的注释并填入您的 token
-# access-tokens = github.com=ghp_YOUR_TOKEN_HERE
+# access-tokens = github.com=github_pat_xxx

@@ -28,72 +28,73 @@
   ];
 
   # 基础包安装
-  home.packages = with pkgs; [
-    # 基础工具
-    git
-    curl
-    wget
-    tree
-    htop
-    btop
-    unzip
-    zip
-    fzf # 模糊查找工具
-    fastfetch # 系统信息显示工具
-    openssh # SSH 客户端
-    less # 分页器（git log 等命令需要）
-    inetutils # ifconfig, hostname, ping 等网络工具
-    wl-clipboard # Wayland 剪贴板工具
-    xclip # X11 剪贴板工具
+  home.packages =
+    with pkgs;
+    [
+      # 基础工具
+      git
+      curl
+      wget
+      tree
+      htop
+      btop
+      unzip
+      zip
+      fzf # 模糊查找工具
+      fastfetch # 系统信息显示工具
+      openssh # SSH 客户端
+      less # 分页器（git log 等命令需要）
+      inetutils # ifconfig, hostname, ping 等网络工具
+      wl-clipboard # Wayland 剪贴板工具
+      xclip # X11 剪贴板工具
 
-    # WSL 增强工具
-    wslu # wslview 等工具 (调用 Windows 浏览器)
-    dos2unix # 转换 Windows/Linux 换行符
+      # WSL 常用工具
+      dos2unix # 转换 Windows/Linux 换行符
 
-    # 效率工具
-    jq # JSON 处理
-    ncdu # 磁盘占用分析
+      # 效率工具
+      jq # JSON 处理
+      ncdu # 磁盘占用分析
 
-    # 开发工具
-    ripgrep
-    fd
-    bat
-    eza # exa 已更名为 eza
-    gnumake # GNU Make 构建工具
-    yazi
+      # 开发工具
+      ripgrep
+      fd
+      bat
+      eza # exa 已更名为 eza
+      gnumake # GNU Make 构建工具
+      yazi
 
-    # 格式化工具
-    nixpkgs-fmt # Nix 代码格式化
+      # 格式化工具
+      nixpkgs-fmt # Nix 代码格式化
 
-    # Markdown 工具
-    glow # Markdown 预览工具
+      # Markdown 工具
+      glow # Markdown 预览工具
 
-    # 字体
-    maple-mono."NF-CN" # Maple Mono Nerd Font Chinese
+      # 字体
+      maple-mono."NF-CN" # Maple Mono Nerd Font Chinese
 
-    # 编程语言和构建工具
-    # Rust
-    cargo
-    rustc
-    rust-analyzer
-    rustfmt
-    clippy
+      # 编程语言和构建工具
+      # Rust
+      cargo
+      rustc
+      rust-analyzer
+      rustfmt
+      clippy
 
-    # C/C++
-    gcc
-    clang-tools # 包含 clangd
-    cmake
+      # C/C++
+      gcc
+      clang-tools # 包含 clangd
+      cmake
 
-    # Python
-    # python3
-    uv
+      # Python
+      # python3
+      uv
 
-    # Node.js (for CoC)
-    nodejs
+      # Node.js (for CoC)
+      nodejs
 
-    # 命令运行器
-    just
-  ];
+      # 命令运行器
+      just
+    ];
 
   # 启用用户级 Nix 垃圾回收
   nix.gc = {
