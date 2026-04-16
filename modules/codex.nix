@@ -14,7 +14,7 @@
       "$schema": "https://json.schemastore.org/claude-code-settings.json",
       "apiKeyHelper": "cat ~/.config/ai-secrets/anthropic_api_key",
       "env": {
-        "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super/v1"
+        "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super"
       }
     }
   '';

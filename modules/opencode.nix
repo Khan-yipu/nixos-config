@@ -14,7 +14,7 @@
           "npm": "@ai-sdk/anthropic",
           "name": "NewCLI Anthropic",
           "options": {
-            "baseURL": "https://code.newcli.com/claude/super/v1",
+            "baseURL": "https://code.newcli.com/claude/super",
             "apiKey": "{file:~/.config/ai-secrets/anthropic_api_key}"
           },
           "models": {
