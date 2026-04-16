@@ -1,13 +1,41 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.sessionVariables = {
-    WATARUU_API_KEY = "sk-BOIfaNR9CVuERB57c";
-  };
+  # Install AI CLIs directly from nixpkgs (no manual npm -g needed).
+  home.packages = with pkgs; [
+    codex
+    claude-code
+  ];
+
+  # Claude Code defaults: use Anthropic-compatible gateway URL.
+  # API key is loaded from a local file outside this repo.
+  home.file.".claude/settings.json".text = ''
+    {
+      "$schema": "https://json.schemastore.org/claude-code-settings.json",
+      "apiKeyHelper": "cat ~/.config/ai-secrets/anthropic_api_key",
+      "env": {
+        "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super/v1"
+      }
+    }
+  '';
+
+  # Keep secret material out of Git-tracked Nix files.
+  home.file.".config/ai-secrets/README.md".text = ''
+    # AI Secrets (local only)
+
+    Put your Anthropic API key in:
+
+    ~/.config/ai-secrets/anthropic_api_key
+
+    Suggested permissions:
+
+    chmod 700 ~/.config/ai-secrets
+    chmod 600 ~/.config/ai-secrets/anthropic_api_key
+  '';
 
   # Codex configuration
   home.file.".codex/config.toml".text = ''
-    model_provider = "zeabur"
+    model_provider = "chatanywhere"
     model = "gpt-5.3-codex"
     model_reasoning_effort = "high"
     disable_response_storage = true
@@ -16,11 +44,6 @@
     [model_providers.chatanywhere]
     name = "chatanywhere"
     base_url = "https://api.chatanywhere.tech/v1"
-    wire_api = "responses"
-
-    [model_providers.zeabur]
-    name = "zeabur"
-    base_url = "https://mycli6.zeabur.app/v1"
     wire_api = "responses"
   '';
 

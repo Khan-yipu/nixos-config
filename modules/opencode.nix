@@ -10,15 +10,16 @@
     {
       "$schema": "https://opencode.ai/config.json",
       "provider": {
-        "wataruu": {
-          "npm": "@ai-sdk/openai-compatible",
-          "name": "Wataruu",
+        "newcli-anthropic": {
+          "npm": "@ai-sdk/anthropic",
+          "name": "NewCLI Anthropic",
           "options": {
-            "baseURL": "https://api.wataruu.me/v1",
+            "baseURL": "https://code.newcli.com/claude/super/v1",
+            "apiKey": "{file:~/.config/ai-secrets/anthropic_api_key}"
           },
           "models": {
-            "gpt-5.4": {
-              "name": "GPT-5.4"
+            "claude-sonnet-4-6": {
+              "name": "Claude Sonnet 4.6 (NewCLI)"
             }
           }
         },
