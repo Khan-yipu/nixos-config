@@ -28,10 +28,15 @@
 
     ~/.config/ai-secrets/anthropic_api_key
 
+    Put your ChatAnywhere API key in:
+
+    ~/.config/ai-secrets/chatanywhere_api_key
+
     Suggested permissions:
 
     chmod 700 ~/.config/ai-secrets
     chmod 600 ~/.config/ai-secrets/anthropic_api_key
+    chmod 600 ~/.config/ai-secrets/chatanywhere_api_key
   '';
 
   # Codex configuration
@@ -46,6 +51,7 @@
     name = "chatanywhere"
     base_url = "https://api.chatanywhere.tech/v1"
     wire_api = "responses"
+    env_key = "CHATANYWHERE_API_KEY"
   '';
 
   # Configure npm to use local prefix
@@ -58,6 +64,10 @@
   programs.fish.loginShellInit = lib.mkAfter ''
     if test -d "${config.home.homeDirectory}/.npm-global/bin"
       fish_add_path --append "${config.home.homeDirectory}/.npm-global/bin"
+    end
+
+    if test -f "${config.home.homeDirectory}/.config/ai-secrets/chatanywhere_api_key"
+      set -gx CHATANYWHERE_API_KEY (cat "${config.home.homeDirectory}/.config/ai-secrets/chatanywhere_api_key")
     end
   '';
 
@@ -77,15 +87,9 @@
     '';
 
     claude-deepseek = ''
-      if not command -q jq
-        echo "jq is required to read ~/.codex/auth.json"
-        return 1
-      end
-
-      set -l deepseek_key (jq -r '.model_providers.chatanywhere.api_key // .providers.chatanywhere.api_key // .chatanywhere.api_key // empty' ~/.codex/auth.json 2>/dev/null)
+      set -l deepseek_key (cat ~/.config/ai-secrets/chatanywhere_api_key 2>/dev/null)
       if test -z "$deepseek_key"
-        echo "Missing chatanywhere key in ~/.codex/auth.json"
-        echo "Supported paths: .model_providers.chatanywhere.api_key / .providers.chatanywhere.api_key / .chatanywhere.api_key"
+        echo "Missing key: ~/.config/ai-secrets/chatanywhere_api_key"
         return 1
       end
 
