@@ -13,9 +13,11 @@
     {
       "$schema": "https://json.schemastore.org/claude-code-settings.json",
       "model": "claude-sonnet-4-6",
-      "apiKeyHelper": "cat ~/.config/ai-secrets/anthropic_api_key",
       "env": {
-        "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super"
+        "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super",
+        "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+        "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+        "CLAUDE_CODE_DISABLE_TERMINAL_TITLE": "1"
       }
     }
   '';
@@ -42,7 +44,7 @@
   # Codex configuration
   home.file.".codex/config.toml".text = ''
     model_provider = "chatanywhere"
-    model = "gpt-5.3-codex"
+    model = "gpt-5.3-codex-ca"
     model_reasoning_effort = "high"
     disable_response_storage = true
     preferred_auth_method = "apikey"
@@ -62,6 +64,10 @@
 
   # Add npm global bin to PATH
   programs.fish.loginShellInit = lib.mkAfter ''
+    if test -f "${config.home.homeDirectory}/.config/ai-secrets/anthropic_api_key"
+      set -gx ANTHROPIC_AUTH_TOKEN (cat "${config.home.homeDirectory}/.config/ai-secrets/anthropic_api_key")
+    end
+
     if test -d "${config.home.homeDirectory}/.npm-global/bin"
       fish_add_path --append "${config.home.homeDirectory}/.npm-global/bin"
     end
@@ -71,32 +77,19 @@
     end
   '';
 
-  # Quick Claude Code provider/model switching helpers.
+  # Quick Claude Code ChatAnywhere helper.
   programs.fish.functions = {
-    claude-sonnet = ''
-      set -l anthropic_key (cat ~/.config/ai-secrets/anthropic_api_key 2>/dev/null)
-      if test -z "$anthropic_key"
-        echo "Missing key: ~/.config/ai-secrets/anthropic_api_key"
-        return 1
-      end
-
-      env \
-        ANTHROPIC_BASE_URL="https://code.newcli.com/claude/super" \
-        ANTHROPIC_AUTH_TOKEN="$anthropic_key" \
-        claude --model "claude-sonnet-4-6" $argv
-    '';
-
-    claude-deepseek = ''
-      set -l deepseek_key (cat ~/.config/ai-secrets/chatanywhere_api_key 2>/dev/null)
-      if test -z "$deepseek_key"
+    claude-ca = ''
+      set -l chatanywhere_key (cat ~/.config/ai-secrets/chatanywhere_api_key 2>/dev/null | string trim)
+      if test -z "$chatanywhere_key"
         echo "Missing key: ~/.config/ai-secrets/chatanywhere_api_key"
         return 1
       end
 
       env \
         ANTHROPIC_BASE_URL="https://api.chatanywhere.tech" \
-        ANTHROPIC_AUTH_TOKEN="$deepseek_key" \
-        claude --model "deepseek-v3.2" $argv
+        ANTHROPIC_AUTH_TOKEN="$chatanywhere_key" \
+        claude $argv
     '';
   };
 }
