@@ -12,6 +12,7 @@
   home.file.".claude/settings.json".text = ''
     {
       "$schema": "https://json.schemastore.org/claude-code-settings.json",
+      "model": "claude-sonnet-4-6",
       "apiKeyHelper": "cat ~/.config/ai-secrets/anthropic_api_key",
       "env": {
         "ANTHROPIC_BASE_URL": "https://code.newcli.com/claude/super"
@@ -59,4 +60,39 @@
       fish_add_path --append "${config.home.homeDirectory}/.npm-global/bin"
     end
   '';
+
+  # Quick Claude Code provider/model switching helpers.
+  programs.fish.functions = {
+    claude-sonnet = ''
+      set -l anthropic_key (cat ~/.config/ai-secrets/anthropic_api_key 2>/dev/null)
+      if test -z "$anthropic_key"
+        echo "Missing key: ~/.config/ai-secrets/anthropic_api_key"
+        return 1
+      end
+
+      env \
+        ANTHROPIC_BASE_URL="https://code.newcli.com/claude/super" \
+        ANTHROPIC_AUTH_TOKEN="$anthropic_key" \
+        claude --model "claude-sonnet-4-6" $argv
+    '';
+
+    claude-deepseek = ''
+      if not command -q jq
+        echo "jq is required to read ~/.codex/auth.json"
+        return 1
+      end
+
+      set -l deepseek_key (jq -r '.model_providers.chatanywhere.api_key // .providers.chatanywhere.api_key // .chatanywhere.api_key // empty' ~/.codex/auth.json 2>/dev/null)
+      if test -z "$deepseek_key"
+        echo "Missing chatanywhere key in ~/.codex/auth.json"
+        echo "Supported paths: .model_providers.chatanywhere.api_key / .providers.chatanywhere.api_key / .chatanywhere.api_key"
+        return 1
+      end
+
+      env \
+        ANTHROPIC_BASE_URL="https://api.chatanywhere.tech" \
+        ANTHROPIC_AUTH_TOKEN="$deepseek_key" \
+        claude --model "deepseek-v3.2" $argv
+    '';
+  };
 }
