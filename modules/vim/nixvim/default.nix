@@ -12,7 +12,6 @@
     ./opts.nix
     ./globals.nix
     ./colorscheme.nix
-    ./hotpot.nix
     ./plugins
     ./extra-plugins.nix
     ./keymaps.nix

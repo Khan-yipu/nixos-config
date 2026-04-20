@@ -19,6 +19,7 @@
     ./modules/vim # Vim 配置 (Nixvim)
     ./modules/uv.nix # uv 配置 (Python)
     ./modules/aiassistant.nix # AI 助手统一配置（Claude Code/Codex/OpenCode）
+    ./modules/fvim.nix # 独立 Fennel/Hotpot Neovim
     # ./modules/niri.nix # Niri + Noctalia 配置
 
     # 所有开发环境已移至 devShells/ 目录，使用 direnv 按需激活
@@ -104,12 +105,6 @@
   };
 
   # 环境变量由 Nixvim 的 defaultEditor 选项自动设置
-
-  # 用户级环境变量
-  home.sessionVariables = {
-    # Hotpot 外部 Fennel 配置仓库（不受 Home Manager 重写）
-    NVIM_FNL_REPO = "$HOME/.local/share/nvim-fnl";
-  };
 
   # 统一 programs 配置，避免 repeated assignments 警告
   programs = {
