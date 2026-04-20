@@ -3,7 +3,7 @@
 {
   # Dedicated external Fennel repo path for fvim only.
   home.sessionVariables = {
-    FVIM_FNL_REPO = "$HOME/.local/share/fvim-fnl";
+    FVIM_FNL_REPO = "$HOME/WorkSpace/fvim-fnl";
   };
 
   # Add a standalone Neovim launcher using an isolated appname.
@@ -21,7 +21,7 @@
   xdg.configFile."fvim/init.lua".text = ''
     vim.g.mapleader = " "
 
-    local fnl_repo = vim.env.FVIM_FNL_REPO or vim.fn.expand("~/.local/share/fvim-fnl")
+    local fnl_repo = vim.env.FVIM_FNL_REPO or vim.fn.expand("~/WorkSpace/fvim-fnl")
     if vim.fn.isdirectory(fnl_repo) == 1 then
       vim.opt.rtp:prepend(fnl_repo)
     end
@@ -29,7 +29,7 @@
     local ok_hotpot, hotpot = pcall(require, "hotpot")
     if ok_hotpot then
       hotpot.setup({})
-      pcall(require, "cake.config")
+      pcall(require, "config")
     end
   '';
 }
