@@ -10,15 +10,16 @@
     {
       "$schema": "https://opencode.ai/config.json",
       "provider": {
-        "wataruu": {
-          "npm": "@ai-sdk/openai-compatible",
-          "name": "Wataruu",
+        "newcli-anthropic": {
+          "npm": "@ai-sdk/anthropic",
+          "name": "NewCLI Anthropic",
           "options": {
-            "baseURL": "https://api.wataruu.me/v1",
+            "baseURL": "https://code.newcli.com/claude/super",
+            "apiKey": "{file:~/.config/ai-secrets/anthropic_api_key}"
           },
           "models": {
-            "gpt-5.4": {
-              "name": "GPT-5.4"
+            "claude-sonnet-4-6": {
+              "name": "Claude Sonnet 4.6 (NewCLI)"
             }
           }
         },
@@ -33,10 +34,26 @@
               "name": "GPT-5.3-Codex"
             }
           }
+        },
+        "siliconflow": {
+          "npm": "@ai-sdk/openai-compatible",
+          "name": "SiliconFlow",
+          "options": {
+            "baseURL": "https://api.siliconflow.cn/v1",
+            "apiKey": "{file:~/.config/ai-secrets/siliconflow_api_key}"
+          },
+          "models": {
+            "Pro/zai-org/GLM-5.1": {
+              "name": "GLM-5.1 (SiliconFlow)"
+            },
+            "deepseek-v3.2": {
+              "name": "DeepSeek V3.2"
+            }
+          }
         }
       },
-      "model": "github-copilot/gpt-5.3-codex",
-      "small_model": "github-copilot/gpt-5.3-codex"
+      "model": "siliconflow/Pro/zai-org/GLM-5.1",
+      "small_model": "siliconflow/Pro/zai-org/GLM-5.1"
     }
   '';
 }

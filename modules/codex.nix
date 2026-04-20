@@ -1,14 +1,15 @@
 { config, pkgs, lib, ... }:
 
 {
-  home.sessionVariables = {
-    WATARUU_API_KEY = "sk-BOIfaNR9CVuERB57c";
-  };
+  # Install AI CLIs directly from nixpkgs (no manual npm -g needed).
+  home.packages = with pkgs; [
+    codex
+  ];
 
   # Codex configuration
   home.file.".codex/config.toml".text = ''
-    model_provider = "zeabur"
-    model = "gpt-5.3-codex"
+    model_provider = "chatanywhere"
+    model = "gpt-5.3-codex-ca"
     model_reasoning_effort = "high"
     disable_response_storage = true
     preferred_auth_method = "apikey"
@@ -17,11 +18,7 @@
     name = "chatanywhere"
     base_url = "https://api.chatanywhere.tech/v1"
     wire_api = "responses"
-
-    [model_providers.zeabur]
-    name = "zeabur"
-    base_url = "https://mycli6.zeabur.app/v1"
-    wire_api = "responses"
+    env_key = "CHATANYWHERE_API_KEY"
   '';
 
   # Configure npm to use local prefix

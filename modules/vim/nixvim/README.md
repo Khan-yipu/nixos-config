@@ -114,9 +114,8 @@ Neovim uses `codecompanion.nvim` as the AI plugin. OpenCode is available as an A
 
 Default backend:
 
-- provider id: `wataruu`
-- base URL: `https://api.wataruu.me/v1`
-- default model: `wataruu/gpt-5.4`
+- configured in `~/.config/opencode/opencode.jsonc`
+- current default model: `github-copilot/gpt-5.3-codex`
 
 Config path:
 
@@ -162,8 +161,8 @@ Note:
 
 Security recommendation:
 
-- `WATARUU_API_KEY` is currently configured via Home Manager session variables.
-- For safer secret handling, move it to a private secrets manager and inject through env at login.
+- If any provider needs API keys, avoid writing plaintext keys into tracked Nix files.
+- Current setup reads Anthropic API key from `~/.config/ai-secrets/anthropic_api_key` (local file, not Git-tracked).
 
 ## Next Plugins To Consider
 
