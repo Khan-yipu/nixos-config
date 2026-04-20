@@ -28,9 +28,7 @@
 
     local ok_hotpot, hotpot = pcall(require, "hotpot")
     if ok_hotpot then
-      hotpot.setup({
-        provide_require_fennel = true,
-      })
+      hotpot.setup({})
       pcall(require, "cake.config")
     end
   '';
