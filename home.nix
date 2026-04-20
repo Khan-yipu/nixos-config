@@ -105,6 +105,12 @@
 
   # 环境变量由 Nixvim 的 defaultEditor 选项自动设置
 
+  # 用户级环境变量
+  home.sessionVariables = {
+    # Hotpot 外部 Fennel 配置仓库（不受 Home Manager 重写）
+    NVIM_FNL_REPO = "$HOME/.local/share/nvim-fnl";
+  };
+
   # 统一 programs 配置，避免 repeated assignments 警告
   programs = {
     # 启用 home-manager 管理
