@@ -19,6 +19,7 @@
     ./modules/vim # Vim 配置 (Nixvim)
     ./modules/uv.nix # uv 配置 (Python)
     ./modules/aiassistant.nix # AI 助手统一配置（Claude Code/Codex/OpenCode）
+    ./modules/fvim.nix # 独立 Fennel/Hotpot Neovim
     # ./modules/niri.nix # Niri + Noctalia 配置
 
     # 所有开发环境已移至 devShells/ 目录，使用 direnv 按需激活
