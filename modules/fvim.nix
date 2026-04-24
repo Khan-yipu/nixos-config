@@ -26,6 +26,12 @@
           local ok_sync, sync_err = ctx.sync({
             ["force?"] = true,
             ["atomic?"] = true,
+            compilerOptions = {
+              macroPath = {},
+              correlate = true,
+              useMetadata = true,
+              ["assert-expression?"] = false
+            }
           })
           if not ok_sync then
             vim.notify("Hotpot sync failed: " .. tostring(sync_err), vim.log.levels.WARN)
