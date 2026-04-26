@@ -100,11 +100,11 @@ chsh -s $(which fish)
 
 ## 🔒 密钥管理 (agenix)
 
-本仓库使用 [agenix](https://github.com/ryantm/agenix) 加密管理所有 API 密钥，密钥文件以 `.age` 格式存储在 `secrets/` 目录，可安全提交至 Git。
+本仓库使用 [agenix](https://github.com/ryantm/agenix) + [age](https://github.com/FiloSottile/age) 加密管理所有 API 密钥，密钥文件以 `.age` 格式存储在 `secrets/` 目录，可安全提交至 Git。
 
-- **加密**: 使用本机 SSH ed25519 公钥（经 `ssh-to-age` 转换为 age 公钥）
-- **解密**: `home-manager switch` 时 agenix 自动读取 `~/.ssh/id_ed25519` 解密到 `~/.config/ai-secrets/`
-- **多机器**: 支持将新机器的公钥添加为 recipient，或直接复制 SSH 私钥
+- **加密**: 使用 age 专用公钥（独立于 SSH 密钥）
+- **解密**: `home-manager switch` 时 agenix 自动读取 `~/.config/sops/age/keys.txt` 解密到 `~/.config/ai-secrets/`
+- **多机器**: 只需将 age 私钥复制到新机器即可
 
 详细文档见 [secrets/README.md](secrets/README.md)。
 
@@ -115,7 +115,7 @@ chsh -s $(which fish)
 nix run github:ryantm/agenix -- -e secrets/anthropic_api_key.age
 
 # 手动解密
-nix run nixpkgs#age -- --decrypt -i ~/.ssh/id_ed25519 secrets/anthropic_api_key.age
+age --decrypt -i ~/.config/sops/age/keys.txt secrets/anthropic_api_key.age
 ```
 
 ## 🤖 AI 助手配置
@@ -164,13 +164,13 @@ cd ~/.nixconfigs && ./fix-permissions.sh
 
 ### agenix 解密失败
 
-确保 `~/.ssh/id_ed25519` 存在且权限正确（600）。如果更换了 SSH 密钥，需用新公钥重新加密所有 `.age` 文件：
+确保 `~/.config/sops/age/keys.txt` 存在且权限正确（600）。如果更换了 age 密钥，需用新公钥重新加密所有 `.age` 文件：
 
 ```bash
-NEW_PUB=$(nix run nixpkgs#ssh-to-age -- < ~/.ssh/id_ed25519.pub)
+AGE_PUB=$(age-keygen -y ~/.config/sops/age/keys.txt)
 for f in secrets/*.age; do
-  plaintext=$(nix run nixpkgs#age -- --decrypt -i ~/.ssh/id_ed25519 "$f")
-  echo "$plaintext" | nix run nixpkgs#age -- --encrypt -r "$NEW_PUB" -o "$f"
+  plaintext=$(age --decrypt -i ~/.config/sops/age/keys.txt "$f")
+  echo "$plaintext" | age --encrypt -r "$AGE_PUB" -o "$f"
 done
 ```
 
