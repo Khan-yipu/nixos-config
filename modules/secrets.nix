@@ -1,6 +1,10 @@
 { config, self, ... }:
 
 {
+  age.identityPaths = [
+    "${config.home.homeDirectory}/.config/sops/age/keys.txt"
+  ];
+
   age.secrets = {
     anthropic_api_key = {
       file = "${self}/secrets/anthropic_api_key.age";
