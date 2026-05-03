@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    opencode
-  ];
+  home = {
+    packages = with pkgs; [
+      opencode
+    ];
 
-  # OpenCode default provider/model configuration.
-  home.file.".config/opencode/opencode.jsonc".text = ''
+    # OpenCode default provider/model configuration with oh-my-openagent plugin.
+    file.".config/opencode/opencode.jsonc".text = ''
     {
       "$schema": "https://opencode.ai/config.json",
+      "plugin": ["oh-my-openagent"],
       "provider": {
         "newcli-anthropic": {
           "npm": "@ai-sdk/anthropic",
@@ -20,6 +22,25 @@
           "models": {
             "claude-sonnet-4-6": {
               "name": "Claude Sonnet 4.6 (NewCLI)"
+            },
+            "claude-opus-4-6": {
+              "name": "Claude Opus 4.6 (NewCLI)"
+            }
+          }
+        },
+        "deepseek": {
+          "npm": "@ai-sdk/openai-compatible",
+          "name": "DeepSeek",
+          "options": {
+            "baseURL": "https://api.deepseek.com",
+            "apiKey": "{file:~/.config/ai-secrets/deepseek_api_key}"
+          },
+          "models": {
+            "deepseek-v4-pro": {
+              "name": "DeepSeek V4 Pro"
+            },
+            "deepseek-v4-flash": {
+              "name": "DeepSeek V4 Flash"
             }
           }
         },
@@ -45,15 +66,106 @@
           "models": {
             "Pro/zai-org/GLM-5.1": {
               "name": "GLM-5.1 (SiliconFlow)"
-            },
-            "deepseek-v3.2": {
-              "name": "DeepSeek V3.2"
+            }
+          }
+        },
+        "ark": {
+          "npm": "@ai-sdk/openai-compatible",
+          "name": "Ark (Volcengine)",
+          "options": {
+            "baseURL": "https://ark.cn-beijing.volces.com/api/coding/v3",
+            "apiKey": "{file:~/.config/ai-secrets/ark_api_key}"
+          },
+          "models": {
+            "glm-5.1": {
+              "name": "GLM-5.1 (Ark)"
             }
           }
         }
       },
-      "model": "siliconflow/Pro/zai-org/GLM-5.1",
-      "small_model": "siliconflow/Pro/zai-org/GLM-5.1"
+      "model": "deepseek/deepseek-v4-pro",
+      "small_model": "deepseek/deepseek-v4-flash"
     }
   '';
+
+    file.".config/opencode/oh-my-openagent.json".text = ''
+    {
+      "agents": {
+        "sisyphus": {
+          "model": "newcli-anthropic/claude-opus-4-6",
+          "fallback_models": [
+            "newcli-anthropic/claude-sonnet-4-6",
+            "deepseek/deepseek-v4-pro",
+            "ark/glm-5.1",
+            "siliconflow/Pro/zai-org/GLM-5.1"
+          ]
+        },
+        "metis": {
+          "model": "newcli-anthropic/claude-opus-4-6",
+          "fallback_models": [
+            "newcli-anthropic/claude-sonnet-4-6",
+            "deepseek/deepseek-v4-pro"
+          ]
+        },
+        "prometheus": {
+          "model": "newcli-anthropic/claude-opus-4-6",
+          "fallback_models": [
+            "newcli-anthropic/claude-sonnet-4-6",
+            "deepseek/deepseek-v4-pro"
+          ]
+        },
+        "atlas": {
+          "model": "newcli-anthropic/claude-opus-4-6",
+          "fallback_models": [
+            "newcli-anthropic/claude-sonnet-4-6",
+            "deepseek/deepseek-v4-pro",
+            "siliconflow/Pro/zai-org/GLM-5.1"
+          ]
+        },
+        "oracle": {
+          "model": "deepseek/deepseek-v4-pro",
+          "fallback_models": [
+            "newcli-anthropic/claude-opus-4-6",
+            "newcli-anthropic/claude-sonnet-4-6",
+            "chatanywhere/gpt-5.3-codex-ca"
+          ]
+        },
+        "hephaestus": {
+          "model": "deepseek/deepseek-v4-pro",
+          "fallback_models": [
+            "chatanywhere/gpt-5.3-codex-ca",
+            "newcli-anthropic/claude-opus-4-6"
+          ]
+        },
+        "momus": {
+          "model": "deepseek/deepseek-v4-pro",
+          "fallback_models": [
+            "newcli-anthropic/claude-opus-4-6",
+            "newcli-anthropic/claude-sonnet-4-6",
+            "chatanywhere/gpt-5.3-codex-ca"
+          ]
+        },
+        "explore": {
+          "model": "deepseek/deepseek-v4-flash",
+          "fallback_models": [
+            "deepseek/deepseek-v4-pro"
+          ]
+        },
+        "librarian": {
+          "model": "deepseek/deepseek-v4-flash",
+          "fallback_models": [
+            "deepseek/deepseek-v4-pro"
+          ]
+        },
+        "multimodal-looker": {
+          "model": "ark/glm-5.1",
+          "fallback_models": [
+            "siliconflow/Pro/zai-org/GLM-5.1"
+          ]
+        }
+      }
+    }
+  '';
+
+  };
 }

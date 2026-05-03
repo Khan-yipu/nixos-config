@@ -13,9 +13,14 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, agenix, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
@@ -34,11 +39,12 @@
           pkgs = mkPkgs system;
           
           modules = [
+            agenix.homeManagerModules.default
             ./home.nix
             nixvim.homeModules.nixvim
           ];
           
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs self; };
         };
       };
 
@@ -64,13 +70,14 @@
               # 复用根目录下的 home.nix
               home-manager.users.cake = {
                 imports = [
+                  agenix.homeManagerModules.default
                   ./home.nix
                   nixvim.homeModules.nixvim
                 ];
               };
 
               # 传递 inputs 给 home.nix
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = { inherit inputs self; };
             }
           ];
         };
@@ -96,13 +103,14 @@
               # 复用根目录下的 home.nix
               home-manager.users.cake = {
                 imports = [
+                  agenix.homeManagerModules.default
                   ./home.nix
                   nixvim.homeModules.nixvim
                 ];
               };
 
               # 传递 inputs 给 home.nix
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = { inherit inputs self; };
             }
           ];
         };

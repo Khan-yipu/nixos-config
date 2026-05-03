@@ -10,6 +10,7 @@
 
   # 导入模块化配置
   imports = [
+    ./modules/secrets.nix
     ./modules/fish.nix
     ./modules/starship.nix
     # ./modules/emacs.nix # Emacs + Org-mode 配置
