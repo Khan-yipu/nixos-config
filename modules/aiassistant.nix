@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./claudecode.nix
-    ./codex.nix
+    # ./claudecode.nix
+    # ./codex.nix
     ./opencode.nix
   ];
 
