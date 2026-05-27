@@ -1,0 +1,13 @@
+binds {
+    Mod+Ctrl+R  hotkey-overlay-title="随机壁纸"          { spawn "waypaper" "--random"; }
+    Mod+C hotkey-overlay-title="打开剪切板"      repeat=false    { spawn "vicinae" "vicinae://extensions/vicinae/clipboard/history"; }
+    Mod+D hotkey-overlay-title="打开搜索"        repeat=false    { spawn "vicinae" "toggle"; }
+
+    Mod+Alt+L   hotkey-overlay-title="锁屏" repeat=false { spawn "gtklock"; }
+
+    XF86AudioRaiseVolume  allow-when-locked=true  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+    XF86AudioLowerVolume  allow-when-locked=true  { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+
+    XF86MonBrightnessUp   allow-when-locked=true  { spawn "brightnessctl" "set" "5%+"; }
+    XF86MonBrightnessDown allow-when-locked=true  { spawn "brightnessctl" "set" "5%-"; }
+}
