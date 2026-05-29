@@ -150,6 +150,10 @@
   # Enable the GNOME Desktop Environment.
   # services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
+  security.pam.services = {
+    gtklock.enable = true;
+  };
+
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
@@ -221,6 +225,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+
+  environment.variables = {
+    EDITOR = "vim";
+    VISUAL = "zed";
+  };
+
   environment.systemPackages = with pkgs; [
     flclash 
     qq
@@ -246,15 +256,20 @@
     pciutils
 
     git 
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     micro
-    neovim
     vscode
 
+    python3
     uv 
     nodejs
     claude-code
     mcp-nixos
+
+
+    # Sublime Merge and Sublime Text
+    # sublime4
+    sublime-merge 
   ];
 
   programs.clash-verge = {
@@ -335,6 +350,12 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = [ "mihomo" ];
+    checkReversePath = "loose"; # or set to be false
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

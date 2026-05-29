@@ -25,4 +25,13 @@ memories/
 
 # Nix 临时文件
 .direnv/
-flake.lock
+
+# flake.lock
+./flake.lock.bak
+flake.lock1.bak
+flake.lock2.bak
+flake.lock3.bak
+
+.git.bak-ZhaoCake/
+
+.claude/

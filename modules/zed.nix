@@ -108,8 +108,10 @@
       auto_update = false;
       autosave = "on_focus_change";
       base_keymap = "VSCode";
-      buffer_font_size = lib.mkForce 14;
+      buffer_font_size = lib.mkForce 18;
+      font_family = "Iosevka";
       buffer_font_weight = 400.0;
+      buffer_font_family = "Iosevka";
 
       collaboration_panel = {
         button = false;
@@ -133,8 +135,14 @@
         dock = "left";
       };
 
+      theme = {
+        mode = "dark";
+        light = "One Light";
+        dark = "Gruvbox Dark Hard";
+      };
+
       icon_theme = lib.mkForce "Catppuccin Frappé";
-      ui_font_size = lib.mkForce 15;
+      ui_font_size = lib.mkForce 22;
       ui_font_weight = 500.0;
       unnecessary_code_fade = 0.7;
       vim_mode = false;

@@ -30,6 +30,8 @@
       enableFishIntegration = true;
     };
     settings = {
+      dynamic_background_opacity = true;
+      background_opacity = "0.5";
       cursor_shape = "beam";
       background_blur = 10;
       cursor_trail = 1;

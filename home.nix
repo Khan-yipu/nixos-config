@@ -18,21 +18,24 @@
     ./modules/fastfetch.nix # 系统信息显示
     ./modules/tmux.nix # 终端复用器（保留）
     ./modules/zellij.nix # 终端复用器（新增）
-    # ./modules/vim # Vim 配置 (Nixvim)
+    # ./modules/vim-ZhaoCake # Vim 配置 (Nixvim)
     ./modules/uv.nix # uv 配置 (Python)
     ./modules/aiassistant.nix # AI 助手统一配置（Claude Code/Codex/OpenCode）
-    ./modules/fvim.nix # 独立 Fennel/Hotpot Neovim
+    # ./modules/fvim-ZhaoCake.nix # 独立 Fennel/Hotpot Neovim
     ./modules/helix.nix # 独立 Fennel/Hotpot Neovim
     ./modules/zed.nix
+    ./modules/nvim/default.nix
+    ./modules/vim/default.nix
     ./modules/kitty.nix
     ./modules/foot.nix
-    # ./modules/niri.nix # Niri + Noctalia 配置
+    # ./modules/niri-ZhaoCake.nix # Niri + Noctalia 配置
 
     # 模块化配置分类
     # ./modules/Entertain  # 暂时禁用
     ./modules/Essentials
     ./modules/Utility
     ./modules/Desktop
+    ./scripts/default.nix
 
     # 所有开发环境已移至 devShells/ 目录，使用 direnv 按需激活
     # 使用 nix-init 命令快速创建项目
@@ -59,6 +62,8 @@
       inetutils # ifconfig, hostname, ping 等网络工具
       wl-clipboard # Wayland 剪贴板工具
       xclip # X11 剪贴板工具
+      gtklock # Wayland 锁屏工具
+      baobab # GNOME Disk Usage Analyzer
 
       # WSL 常用工具
       dos2unix # 转换 Windows/Linux 换行符

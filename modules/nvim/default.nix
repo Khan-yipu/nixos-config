@@ -1,6 +1,6 @@
 { config, pkgs, ... }: let 
   # nvim config directory
-  nvimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/nvim";
+  nvimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/nvim/dotfiles";
 in
 {
   home.packages = with pkgs; [

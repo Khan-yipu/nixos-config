@@ -9,20 +9,20 @@ default:
 
 # 应用 Home Manager 配置
 hm-switch:
-	home-manager switch --flake .#cake
+	home-manager switch --flake .#khanixos
 
 # 备份并应用 Home Manager 配置
 hm-switch-backup:
-	home-manager switch -b backup --flake .#cake
+	home-manager switch -b backup --flake .#khanixos
 
 # 更新 Flake 锁并应用 Home Manager 配置
 hm-update:
 	nix flake update
-	home-manager switch --flake .#cake
+	home-manager switch --flake .#khanixos
 
 # 查看 Home Manager 的新闻/更新内容
 hm-news:
-	home-manager news --flake .#cake
+	home-manager news --flake .#khanixos
 
 # =========================================================
 # NixOS (虚拟机/物理机系统级配置)

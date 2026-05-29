@@ -1,4 +1,4 @@
-# sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
+sudo mkdir -p /run/systemd/system/nix-daemon.service.d/
 sudo tee /run/systemd/system/nix-daemon.service.d/override.conf << EOF
 [Service]
 Environment="http_proxy=socks5h://localhost:7897"

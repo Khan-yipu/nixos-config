@@ -13,7 +13,7 @@
       # 禁用欢迎消息
       # set fish_greeting
       # set --global fish_greeting 日々私たちが過ごしている日常は、実は、奇跡の連続なのかもしれない。
-      fastfetch
+      # fastfetch
       set --global fish_greeting 质本洁来还洁去，强于污淖陷渠沟
       
       # 在交互式 shell 启动时显示 fastfetch（只在登录时显示一次）
@@ -71,6 +71,9 @@
       cat = "bat";
       find = "fd";
       grep = "rg";
+      vi = "vim";
+      nv = "nvim";
+      hx = "helix";
     };
     
     # Fish 插件配置
@@ -89,6 +92,16 @@
     
     # Fish 函数
     functions = {
+      # yazi 集成
+      y = ''
+        set tmp (mktemp -t "yazi-cwd.XXXXXX")
+          yazi $argv --cwd-file="$tmp"
+          if read -z cwd <"$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+            builtin cd -- "$cwd"
+          end
+        rm -f -- "$tmp"
+      '';
+
       # 快速创建并进入目录
       mkcd = ''
         mkdir -p $argv[1]
