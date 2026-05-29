@@ -1,0 +1,101 @@
+snippet jly "jiangly cpp algorithm competitions template"
+#include <bits/stdc++.h>
+
+using i64 = long long;
+using u64 = unsigned long long;
+using u32 = unsigned;
+
+using u128 = unsigned __int128;
+using i128 = __int128;
+
+int main(){
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(nullptr);
+	
+	${0}
+	return 0;
+}
+endsnippet
+
+snippet nos "NotOnlySuccess cpp algorithm competitions template"
+/*
+ * File Name: `!p snip.rv = fn`
+ * Author: kharch
+ * Created Time: `!p snip.rv = __import__('datetime').datetime.now().strftime("%Y-%m-%d<=>%H:%M:%S")`
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+using i64 = int64_t;
+
+#ifndef DEBUG
+struct __X {
+  __X& operator<<(const auto& str) { return *this; }
+  void sp(const string& str = "") {}
+} dout;
+#define debug(x)
+#endif
+
+void solve(){
+	${0}
+}
+
+int main(){
+	cin.tie(0)->sync_with_stdio(0);
+
+	return 0;
+}
+endsnippet
+
+snippet main "the most simple main function"
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+int main(){
+	${0}
+	return 0;
+}
+endsnippet
+
+snippet for "for loop from 0 to n"
+for (int i = 0; i < n; i++){
+	${0}
+}
+endsnippet
+
+snippet digit "get every digit of a number"
+vector<int> digits;
+while (n){
+	digits.push_back(n % 10);
+	n /= 10;
+}
+${0}
+endsnippet
+
+snippet toBase "transfer a int to P base"
+string toBase(int x, int base){
+	string res;
+	while (x){
+		int mod = x % base;
+		res += (mod < 10 ? mod + '0' : mod - 10 + 'A');
+		x /= base;
+	}
+	reverse(res.begin(), res.end());
+	return res;
+}
+${0}
+endsnippet
+
+snippet benchmark "count the exectution time of a function"
+void benchmark(const string &name, const auto &func) {
+  auto start = chrono::high_resolution_clock::now();
+  func();
+  auto end = chrono::high_resolution_clock::now();
+  auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+  cout << format("{} execution time: {} ms\n", name, duration.count());
+}
+${0}
+endsnippet
+

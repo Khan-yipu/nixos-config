@@ -1,0 +1,275 @@
+" 这一行可以把系统剪贴板和 vim 剪贴板联系起来
+" 但是要保证 vim --version | grep clipboard 输出 + 
+set clipboard=unnamedplus
+
+set colorcolumn=64,65
+
+" 下面这一行意味着默认使用 vim 的剪贴板
+" set clipboard=unnamed 
+
+" make Y to copy till the end of the line
+nnoremap Y y$
+" visual mode Y copy to system clipboard
+" vnoremap Y "+y
+
+" 显示光标行横线
+set cursorline
+set cursorcolumn
+hi CursorLine term=underline cterm=underline gui=underline
+" hi CursorLine cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+
+set nocompatible
+set scrolloff=5
+set wrap 
+set wildmenu
+set showcmd
+
+set termguicolors
+" set t_Co=16
+let &t_ut=''
+set hlsearch
+exec "nohlsearch"
+set incsearch
+set mouse=a
+set number
+set relativenumber
+set ignorecase
+set smartcase
+set laststatus=2
+set autochdir
+
+noremap n nzz
+noremap N Nzz
+ 
+" 高亮打开
+syntax on
+
+" 打开文件检测
+filetype on
+
+" 设置 tab 键的宽度为 2 个空格
+set tabstop=2
+ 
+" 设置当输入 tab 时，实际插入的空格数为 2
+set shiftwidth=2
+
+" 将 tab 转换为空格
+set expandtab
+    
+" （可选）设置自动缩进时使用空格而不是 tab
+" set softtabstop=4
+ 
+" 设置自动缩进
+" set autoindent
+
+" 设置使用 c/c++ 语言的自动缩进方式
+set cindent
+
+" leader space
+let mapleader = " "
+
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" |   endif
+
+noremap <leader><CR> :nohlsearch<CR>
+noremap <leader>e :tabe<CR>:E<CR>
+
+"" fast move the cursor and view the file 
+" nnoremap J 6j
+" nnoremap K 6k
+inoremap jk <Esc>
+nnoremap <leader>j J
+
+" ===
+" Emacs 快捷键我再也不用了
+" Ctrl+B 左移字符
+" inoremap <C-b> <Left>
+" Ctrl+F 右移字符  
+" inoremap <C-f> <Right>
+" Ctrl+P 上移一行
+" inoremap <C-p> <Up>
+" Ctrl+N 下移一行
+" inoremap <C-n> <Down>
+
+" Ctrl+A 移动到行首
+" inoremap <C-a> <Esc>^i
+" Ctrl+E 移动到行尾
+" inoremap <C-e> <End>
+
+" Ctrl+I 移动到行首（注意：Tab键也是Ctrl+I，可能冲突）
+" inoremap <C-i> <Home>
+" ===
+
+"" Split window and move cursor
+map <leader>rc :tabe<CR>:e $MYVIMRC<CR>
+map <leader>vl :set splitright<CR>:vsplit<CR>
+map <leader>vh :set nosplitright<CR>:vsplit<CR>
+map <leader>hk :set nosplitbelow<CR>:split<CR>
+map <leader>hj :set splitbelow<CR>:split<CR>
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map tt :tabe<CR> 
+map H :-tabnext<CR>
+map L :+tabnext<CR>
+"map sj <C-w>t<C-w>K
+"map sl <C-w>t<C-w>H
+
+" 括号
+" inoremap < <><Esc>i
+""inoremap { {<CR>}<Esc>O
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+""inoremap ,[ {}<Esc>i
+inoremap { {}<Esc>i
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
+
+""save file using Ctrl-s
+""nnoremap <leader>s :w<CR>
+inoremap <C-s> <Esc>:w<CR>a
+
+"" c语言
+""===========================
+""
+autocmd Filetype c nnoremap mf :0r ~/.vim/Ctemplate.c<CR>5j:startinsert!<CR><CR>
+autocmd Filetype c inoremap { {<CR>}<Esc>O
+ 
+
+""" 光标
+""if has("autocmd")
+""  au VimEnter,InsertLeave * silent execute '!echo -ne "\e[2 q"' | redraw!
+""  au InsertEnter,InsertChange *
+""    \ if v:insertmode == 'i' |
+""    \   silent execute '!echo -ne "\e[6 q"' | redraw! |
+""    \ elseif v:insertmode == 'r' |
+""    \   silent execute '!echo -ne "\e[4 q"' | redraw! |
+""    \ endif
+""  au VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+""endif
+
+"" Markdown snippits
+source ~/.config/vim/snippits.vim
+nnoremap <leader>r :w <bar> :!cr %<CR>
+source ~/.config/vim/compile.vim
+
+"" Compile function
+" map <leader>r :call CompileRunGcc()<CR>
+" func! CompileRunGcc()
+"   exec "w"
+"   if &filetype == 'c'
+"     exec "!g++ % -o %<"
+"     exec "!time ./%<"
+"   elseif &filetype == 'cpp'
+"     exec "!g++ % -o %<"
+"     exec "!time ./%<"
+"   elseif &filetype == 'java'
+"     exec "!javac %"
+"     exec "!time java %<"
+"   elseif &filetype == 'sh'
+"     :!time bash %
+"   elseif &filetype == 'python'
+"     silent! exec "!clear"
+"     exec "!time python3 %"
+"   elseif &filetype == 'html'
+"     exec "!firefox % &"
+"   elseif &filetype == 'markdown'
+"     exec "MarkdownPreview"
+"   elseif &filetype == 'vimwiki'
+"     exec "MarkdownPreview"
+"   endif
+" endfunc
+
+"map R :call CompileBuildrrr()<CR>
+"func! CompileBuildrrr()
+"  exec "w"
+"  if &filetype == 'vim'
+"    exec "source $MYVIMRC"
+"  elseif &filetype == 'markdown'
+"    exec "echo"
+"  endif
+"endfunc
+
+" nnoremap <C-M-r> :source $MYVIMRC<CR>
+
+"" ===========================
+""coc
+"" ===========================
+""let g:coc_global_extensions = ['coc-json', 
+            \'coc-vimlsp']
+
+
+""""=========================================
+""""vim-plug
+""""=========================================
+""call plug#begin('~/.config/vim/plugged')
+""
+""Plug 'iamcco/mathjax-support-for-mkdp'
+""Plug 'iamcco/markdown-preview.vim'
+""Plug 'dhruvasagar/vim-table-mode'
+""Plug 'morhetz/gruvbox'
+""
+""Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+""Plug 'tpope/vim-surround'
+""Plug 'SirVer/ultisnips'
+""
+"""" wildfire 已经被归档了，不能使用，可以使用其他的方案 比如 vim-expand-region
+""""Plug 'gcmt/wildfire'
+""Plug 'terryma/vim-expand-region'
+""
+""""Plug 'neoclide/coc.nvim', {'branch': 'release'}
+""call plug#end()
+
+"" ================================
+" Gruvbox Scheme
+"" ================================
+let g:gruvbox_contrast_dark='hard'
+"colorscheme gruvbox
+colorscheme retrobox
+set bg=dark " set as dark mode
+
+" Completion
+" 1. 设置补全菜单行为
+set completeopt=menu,noselect
+
+" 2. 【触发补全】
+" 将 Ctrl+m 映射为触发补全菜单
+" 作用：在插入模式下按 Ctrl+m，强制弹出补全菜单
+" 不再使用 emacs 快捷键 不用重映射
+" inoremap <C-m> <C-n>
+
+" 3. 【菜单内导航】
+" 使用 Ctrl+j 和 Ctrl+k 在弹出的菜单中上下移动
+" 逻辑：如果菜单可见，就移动选择；否则保持原有功能（如换行）
+" inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+" inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+" =====================================
+" vim expand region
+map <CR> <Plug>(expand_region_expand)
+map - <Plug>(expand_region_shrink)
+" =====================================
+" Visual Multi Cursor
+" 在插件加载后配置映射
+" 直接映射到插件的内部函数
+let g:VM_maps = {}
+let g:VM_maps['Find Under'] = '<C-M-n>'
+let g:VM_maps['Find Subword Under'] = '<C-M-n>'
+nmap <C-M-i> <Plug>(VM-Add-Cursor-Down)
+nmap <C-M-u> <Plug>(VM-Add-Cursor-Up)
+
+" ===
+" === Ultisnips
+" ===
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+" // default is to use <tab> but i want to use <c-w>
+" let g:UltiSnipsExpandTrigger="<tab>" 
+let g:UltiSnipsExpandTrigger="<C-S-w>" 
+" // default is to use <c-b> but i want to use <c-w>
+let g:UltiSnipsJumpForwardTrigger="<C-S-w>"
+let g:UltiSnipsJumpBackwardTrigger="<C-S-z>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/vim/Ultisnips/', 'Ultisnips']
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

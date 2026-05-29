@@ -1,0 +1,26 @@
+snippet main "the most simple main function"
+#include <stdio.h>
+
+int main(){
+	${0}
+	return 0;
+}
+endsnippet
+
+snippet swap "swap 2 intergers function"
+void swap(int* x, int* y){
+	int temp = *x;
+	*x = temp;
+	temp = *y;
+}
+
+${0}
+endsnippet
+
+snippet digit "get every digit of a number"
+while (n != 0){
+	int cur = n % 10;
+	n /= 10;
+}
+${0}
+endsnippet
