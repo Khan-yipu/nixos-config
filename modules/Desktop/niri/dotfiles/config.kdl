@@ -1,4 +1,13 @@
-spawn-at-startup "waypaper" "--restore"
+// 自动启动设置
+// 桌面壁纸的守护进程
+spawn-at-startup "awww-daemon"
+// 总览界面背景壁纸的守护进程
+spawn-at-startup "awww-daemon" "-n" "overview"
+// 随机更换一张壁纸
+spawn-sh-at-startup "sleep 1 &&  waypaper --random"
+// 恢复壁纸
+// spawn-at-startup "waypaper" "--restore"
+
 spawn-at-startup "fcitx5" "-d"
 
 spawn-sh-at-startup "wl-paste --watch cliphist store &"
@@ -84,6 +93,37 @@ layer-rule {
     block-out-from "screencast"
 }
 
+overview {
+    zoom 0.5
+    workspace-shadow {
+	    //off
+	}
+    // 可以设为半透明的黑色，或者用 "transparent" 设置为全透明
+    // backdrop-color "#00000000"
+    // backdrop-color "transparent"
+}
+
+// 放进overview里的壁纸程序
+layer-rule{
+    // 匹配 swaybg 的命名空间
+    // match namespace="^wallpaper$"
+
+    // 匹配 dms 的命名空间
+    match namespace="dms:blurwallpaper"
+
+    match namespace="hyprpaper"
+    match namespace="wallpaper"
+
+    // awww-daemon 不应该写在这里，它不应该是在 Background Layer 的 Surface 
+    // match namespace="awww-daemon"
+
+    match namespace="swww-daemonoverview"
+    match namespace="awww-daemonoverview"
+    place-within-backdrop true
+    // 在截屏时排除它
+    block-out-from "screen-capture"
+}
+
 window-rule {
     draw-border-with-background false
     geometry-corner-radius 12
@@ -98,8 +138,6 @@ window-rule {
         color "#000000"
     }
 }
-
-
 
 window-rule {
     match app-id="com.network.manager"
@@ -366,7 +404,8 @@ binds {
     Mod+Shift+WheelScrollDown cooldown-ms=150 { focus-column-right; }
     Mod+Shift+WheelScrollUp   cooldown-ms=150 { focus-column-left; }
 
-    Mod+Return hotkey-overlay-title="打开终端" repeat=false { spawn "kitty"; }
+    // Mod+Return hotkey-overlay-title="打开终端" repeat=false { spawn "kitty"; }
+    Mod+Return hotkey-overlay-title="打开终端" repeat=false { spawn "foot"; }
 
     Mod+WheelScrollDown  cooldown-ms=150  { focus-workspace-down; }
     Mod+WheelScrollLeft  cooldown-ms=150  { focus-column-left; }

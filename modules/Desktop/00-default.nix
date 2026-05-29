@@ -5,18 +5,18 @@
 
 {
   imports = [
-    # ./dankMaterialShell/default.nix
+    ./dankMaterialShell/default.nix
     # ./linux-wallpaperengine/default.nix
     ./niri/default.nix
     # ./noctalia/default.nix
     ./rime/default.nix
     ./waybar/default.nix
+    ./waypaper/default.nix
 
     # ./fuzzel.nix
     ./mako.nix
     ./swayidle.nix
     ./vicinae.nix
-    ./waypaper.nix
   ];
 
   home.packages = with pkgs; [
@@ -29,6 +29,10 @@
 
     mpv
     nomacs
+
+    swaybg
+    imagemagick
+    libnotify
 
     labwc
   ];
