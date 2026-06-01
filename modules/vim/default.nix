@@ -1,6 +1,7 @@
 { config, pkgs, ... }: let
   # vim config directory
-  vimAutoloadPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/autoload";
+  # vimAutoloadPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/autoload";
+  vimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/";
   vimrcFile = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/vimrc";
 in
 {
@@ -10,7 +11,7 @@ in
   ];
 
   home.file.".vimrc".source = config.lib.file.mkOutOfStoreSymlink vimrcFile;
-  home.file.".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink vimAutoLoadPath;
+  home.file.".vim".source = config.lib.file.mkOutOfStoreSymlink vimPath;
 
   /*
   programs.vim = {
