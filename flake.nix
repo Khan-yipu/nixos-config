@@ -76,9 +76,19 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dwm.url = "github:yaocccc/dwm";
+    st.url = "github:yaocccc/st";
+
+    /*
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    */
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, dwm, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
@@ -202,6 +212,16 @@
 
               # 传递 inputs 给 home.nix
               home-manager.extraSpecialArgs = { inherit inputs self; };
+            }
+
+            {
+              nixpkgs.overlays = [ 
+                st.overlays.default
+                dwm.overlays.default 
+              ];
+
+              # st and tabbed Installation is put in the configuration.nix
+
             }
           ];
         };

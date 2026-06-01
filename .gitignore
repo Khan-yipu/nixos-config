@@ -35,3 +35,5 @@ flake.lock3.bak
 .git.bak-ZhaoCake/
 
 .claude/
+
+modules/vim/dotfiles/plugged

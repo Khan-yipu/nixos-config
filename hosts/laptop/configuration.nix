@@ -5,21 +5,27 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
-  nix.settings.trusted-users = ["root" "khanif"];
+  nix.settings.trusted-users = [
+    "root"
+    "khanif"
+  ];
   nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # 国内加速（永久生效）
   nix.settings = {
     substituters = [
       "https://mirror.sjtu.edu.cn/nix-channels/store"
-      "https://mirrors.ustc.edu.cn/nix-channels/store"     # 中科大（可优先）
-      "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"  # 清华
+      "https://mirrors.ustc.edu.cn/nix-channels/store" # 中科大（可优先）
+      # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" # 清华
       "https://cache.nixos.org/"
     ];
     trusted-public-keys = [
@@ -28,10 +34,10 @@
   };
 
   /*
-  home-manager.users.khanif = { pkgs, ... }: {
-    home.packages = [ pkgs.atool pkgs.httpie ];
-    home.stateVersion = "25.11";
-  };
+    home-manager.users.khanif = { pkgs, ... }: {
+      home.packages = [ pkgs.atool pkgs.httpie ];
+      home.stateVersion = "25.11";
+    };
   */
 
   # Bootloader.
@@ -39,12 +45,12 @@
   boot.loader.systemd-boot.configurationLimit = 7;
   boot.loader.efi.canTouchEfiVariables = true;
   /*
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-  };
+    boot.loader.grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      useOSProber = true;
+    };
   */
 
   networking.hostName = "khanixos"; # Define your hostname.
@@ -55,12 +61,12 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   # 系统级代理设置
   /*
-  networking.proxy = {
-    default = "http://127.0.0.1:7897";
-    httpProxy = "http://127.0.0.1:7897";
-    httpsProxy = "http://127.0.0.1:7897";
-    noProxy = "localhost,127.0.0.1,::1,*.local";
-  };
+    networking.proxy = {
+      default = "http://127.0.0.1:7897";
+      httpProxy = "http://127.0.0.1:7897";
+      httpsProxy = "http://127.0.0.1:7897";
+      noProxy = "localhost,127.0.0.1,::1,*.local";
+    };
   */
 
   # Enable networking
@@ -90,9 +96,9 @@
     QT5_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
     /*
-    http_proxy = "http://127.0.0.1:7897";
-    https_proxy = "http://127.0.0.1:7897";
-    no_proxy = "localhost,127.0.0.1,::1,*.local";
+      http_proxy = "http://127.0.0.1:7897";
+      https_proxy = "http://127.0.0.1:7897";
+      no_proxy = "localhost,127.0.0.1,::1,*.local";
     */
   };
 
@@ -109,32 +115,39 @@
   };
 
   /*
-  console = {
-    font = "Lat2-Terminus16";
-    keyMap = lib.mkDefault "us";
-    useXkbConfig = true; # use xkb.options in tty.
-  };
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = lib.mkDefault "us";
+      useXkbConfig = true; # use xkb.options in tty.
+    };
   */
 
-	fonts.packages = with pkgs; [
-		noto-fonts
-		noto-fonts-cjk-sans
-		noto-fonts-color-emoji
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-color-emoji
 
-		dejavu_fonts
-		iosevka	
-		nerd-fonts.fira-code
-		nerd-fonts.jetbrains-mono
-	];
+    dejavu_fonts
+    # sarasa-gothic
+    iosevka
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
+  ];
 
   fonts = {
     enableDefaultPackages = true;
     fontconfig = {
       enable = true;
       defaultFonts = {
-        serif = ["Noto Sans" "Noto Sans CJK SC"];
-        sansSerif = ["Noto Serif" "Noto Serif CJK SC"];
-        monospace = ["Fira Code"];
+        serif = [
+          "Noto Sans"
+          "Noto Sans CJK SC"
+        ];
+        sansSerif = [
+          "Noto Serif"
+          "Noto Serif CJK SC"
+        ];
+        monospace = [ "Fira Code" ];
       };
     };
   };
@@ -144,12 +157,17 @@
   # enable wayland
   programs.xwayland.enable = true;
 
-  # Niri 
-  programs.niri.enable = true;
+  # Use SDDM as Display Manager (Wayland compatible)
+  services.displayManager.sddm = {
+    enable = true;
+    # wayland.enable = true;
+  };
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.displayManager.gdm.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  # services.displayManager.gdm.enable = true;
   # services.desktopManager.gnome.enable = true;
+
   security.pam.services = {
     gtklock.enable = true;
   };
@@ -157,17 +175,17 @@
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
 
-  # Use SDDM as Display Manager (Wayland compatible)
-  services.displayManager.sddm = {
-    enable = true;
-    # wayland.enable = true;
-  };
-
-  # Disable XFCE
-  # services.xserver.displayManager.lightdm.enable = true;
+  # XFCE
   # services.xserver.desktopManager.xfce.enable = true;
 
-  # KDE Plasma (conflict with xfce, disabled to use xfce only)
+  # Niri
+  programs.niri.enable = true;
+  # 也可以使用 flake 安装 Niri
+
+  # LXQT(lxqt)
+  services.xserver.desktopManager.lxqt.enable = true;
+
+  # KDE Plasma 
   services.desktopManager.plasma6.enable = true;
 
   # Configure keymap in X11
@@ -205,12 +223,18 @@
   users.users.khanif = {
     isNormalUser = true;
     description = "khanif";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [
-    #  thunderbirsshd
+      #  thunderbirsshd
     ];
     shell = pkgs.fish;
-    openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSIrmA5gpjJ5aMqMPevdr53qcMZt7rVp7gI5BvoBQ9R2AU8tzKIWMPGfPVEjcwEUILIZHmlKZ0BXtfQh1UY912FoVFcSaohZQdTN8IbR6Y3QbjMDs+RuA10y9Ajjn4s1hWE9ZwbHk1zSRXm6Z83zW2ZmLXDUnLKIQengiblQh0NUYCcqI5JaO2X9kSQ0r6i77nv86HPAI/DgPe6HvBoLg8E+U5bsgdeqxLxTRavmectvAItoynzVzT7SpkPLqMP/kooUoGsDQjbmwGNIjUnEEZifzIPfkua1avzOdaQJzKQHkl4L/mOZWPBMBXx4oVJiuKmYyWP9Pw93mOvX20PhWqCacpZg3aXAwonRVN0leaUfoa4gVc4a8j4UOOZmEi0n08SFwboSsjjI/KTioEY24GAQUyFwVoUBYZVGEK35U/6ep8PgEVzLSR0ieF8hiGWB52tfF2WJ3tUBfg0o83L0Ve88Kzb+7HIu6FoF3dNytVGNdbPMFfRjkU7gpU06oU2r0= khwin@www" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSIrmA5gpjJ5aMqMPevdr53qcMZt7rVp7gI5BvoBQ9R2AU8tzKIWMPGfPVEjcwEUILIZHmlKZ0BXtfQh1UY912FoVFcSaohZQdTN8IbR6Y3QbjMDs+RuA10y9Ajjn4s1hWE9ZwbHk1zSRXm6Z83zW2ZmLXDUnLKIQengiblQh0NUYCcqI5JaO2X9kSQ0r6i77nv86HPAI/DgPe6HvBoLg8E+U5bsgdeqxLxTRavmectvAItoynzVzT7SpkPLqMP/kooUoGsDQjbmwGNIjUnEEZifzIPfkua1avzOdaQJzKQHkl4L/mOZWPBMBXx4oVJiuKmYyWP9Pw93mOvX20PhWqCacpZg3aXAwonRVN0leaUfoa4gVc4a8j4UOOZmEi0n08SFwboSsjjI/KTioEY24GAQUyFwVoUBYZVGEK35U/6ep8PgEVzLSR0ieF8hiGWB52tfF2WJ3tUBfg0o83L0Ve88Kzb+7HIu6FoF3dNytVGNdbPMFfRjkU7gpU06oU2r0= khwin@www"
+    ];
   };
 
   # Allow unfree packages
@@ -232,7 +256,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    flclash 
+    # flclash
     qq
     qqmusic
     xwayland
@@ -242,6 +266,7 @@
     firefox
 
     yazi
+    file
     wget
     curl
     fastfetch
@@ -255,30 +280,32 @@
     pulseaudio
     pciutils
 
-    git 
+    git
     vim
     micro
     vscode
 
     python3
-    uv 
+    uv
     nodejs
     claude-code
     mcp-nixos
 
-
     # Sublime Merge and Sublime Text
     # sublime4
-    sublime-merge 
+    sublime-merge
+
+    st
+    tabbed
   ];
 
   programs.clash-verge = {
-		enable = true;
-		# package = pkgs-unstable.clash-verge-rev;
-		# autostart = true;
-		tunMode = true;
-		serviceMode = true;
-	};
+    enable = true;
+    # package = pkgs-unstable.clash-verge-rev;
+    # autostart = true;
+    tunMode = true;
+    serviceMode = true;
+  };
 
   # services.vscode-server.enable = true;
   programs.nix-ld.enable = true;
@@ -309,12 +336,12 @@
   services.udisks2.enable = true;
 
   /*
-  # garbage collection
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 21d";
-  };
+    # garbage collection
+    nix.gc = {
+      automatic = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      options = lib.mkDefault "--delete-older-than 21d";
+    };
   */
 
   hardware.bluetooth.enable = true;
@@ -341,9 +368,7 @@
     ];
   };
 
-  /* 
-  =========================================================================
-  */
+  # =========================================================================
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

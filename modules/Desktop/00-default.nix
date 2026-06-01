@@ -17,6 +17,9 @@
     ./mako.nix
     ./swayidle.nix
     ./vicinae.nix
+    # ./stylix.nix
+
+    ./dwm-yaocccc.nix
   ];
 
   home.packages = with pkgs; [

@@ -6,7 +6,7 @@
 {
   imports = [
     ./lutris.nix
-    # ./prismlauncher.nix  # prismlauncher home-manager option doesn't exist
+    # ./prismlauncher.nix  
   ];
 
   home.packages = with pkgs; [

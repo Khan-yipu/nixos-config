@@ -29,11 +29,11 @@ hm-news:
 # =========================================================
 
 # 应用 NixOS 系统配置
-os-switch host="nixos":
+os-switch host="khanixos":
 	sudo nixos-rebuild switch --flake .#{{host}}
 
 # 更新 Flake 锁并应用 NixOS 系统配置
-os-update host="nixos":
+os-update host="khanixos":
 	nix flake update
 	sudo nixos-rebuild switch --flake .#{{host}}
 

@@ -11,6 +11,7 @@
     enable = true;
     settings = {
       # theme = lib.mkDefault "transparent";
+      theme = "autumn_night_transparent";
       editor.cursor-shape = {
         normal = "block";
         insert = "bar";

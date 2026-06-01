@@ -23,8 +23,8 @@
       
       # 为 nix-init 添加自动补全
       function __fish_nix_init_completer
-        if test -d "$HOME/.nixconfigs/devShells"
-          for d in "$HOME/.nixconfigs/devShells"/*
+        if test -d "$HOME/nix-setup/nixconfigs/devShells"
+          for d in "$HOME/nix-setup/nixconfigs/devShells"/*
             if test -d "$d"
               basename "$d"
             end
@@ -73,7 +73,8 @@
       grep = "rg";
       vi = "vim";
       nv = "nvim";
-      hx = "helix";
+      ya = "yazi";
+      # hx = "helix";
     };
     
     # Fish 插件配置
@@ -110,7 +111,7 @@
       
       # 包装 Just 命令以用于 Nix 配置
       nix-just = ''
-        just --justfile ~/.nixconfigs/Justfile --working-directory ~/.nixconfigs $argv
+        just --justfile ~/nix-setup/nixconfigs/Justfile --working-directory ~/nix-setup/nixconfigs $argv
       '';
       
       # Nix 相关函数 (使用 Justfile)
@@ -152,7 +153,7 @@
       
       # 创建开发环境项目（支持所有 devShells 模板）
       nix-init = ''
-        set -l DEVSHELLS_DIR "$HOME/.nixconfigs/devShells"
+        set -l DEVSHELLS_DIR "$HOME/nix-setup/nixconfigs/devShells"
         
         # 获取所有可用的环境类型（即 devShells 子目录名）
         # 排除以 . 开头的隐藏文件和非目录

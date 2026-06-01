@@ -22,7 +22,7 @@
     ./modules/uv.nix # uv 配置 (Python)
     ./modules/aiassistant.nix # AI 助手统一配置（Claude Code/Codex/OpenCode）
     # ./modules/fvim-ZhaoCake.nix # 独立 Fennel/Hotpot Neovim
-    ./modules/helix.nix # 独立 Fennel/Hotpot Neovim
+    # ./modules/helix.nix # 独立 Fennel/Hotpot Neovim
     ./modules/zed.nix
     ./modules/nvim/default.nix
     ./modules/vim/default.nix
