@@ -149,9 +149,9 @@ autocmd Filetype c inoremap { {<CR>}<Esc>O
 ""endif
 
 "" Markdown snippits
-source ~/.config/vim/snippits.vim
+source ~/.vim/snippits.vim
 nnoremap <leader>r :w <bar> :!cr %<CR>
-source ~/.config/vim/compile.vim
+source ~/.vim/compile.vim
 
 "" Compile function
 " map <leader>r :call CompileRunGcc()<CR>
@@ -199,33 +199,34 @@ source ~/.config/vim/compile.vim
             \'coc-vimlsp']
 
 
-""""=========================================
-""""vim-plug
-""""=========================================
-""call plug#begin('~/.config/vim/plugged')
-""
-""Plug 'iamcco/mathjax-support-for-mkdp'
-""Plug 'iamcco/markdown-preview.vim'
-""Plug 'dhruvasagar/vim-table-mode'
-""Plug 'morhetz/gruvbox'
-""
-""Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-""Plug 'tpope/vim-surround'
-""Plug 'SirVer/ultisnips'
-""
-"""" wildfire 已经被归档了，不能使用，可以使用其他的方案 比如 vim-expand-region
-""""Plug 'gcmt/wildfire'
-""Plug 'terryma/vim-expand-region'
-""
-""""Plug 'neoclide/coc.nvim', {'branch': 'release'}
-""call plug#end()
+""=========================================
+""vim-plug
+""=========================================
+call plug#begin('~/.vim/plugged')
+
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'morhetz/gruvbox'
+
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'SirVer/ultisnips'
+
+"" wildfire 已经被归档了，不能使用，可以使用其他的方案 比如 vim-expand-region
+""Plug 'gcmt/wildfire'
+Plug 'terryma/vim-expand-region'
+
+""Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
 
 "" ================================
 " Gruvbox Scheme
 "" ================================
 let g:gruvbox_contrast_dark='hard'
-"colorscheme gruvbox
-colorscheme retrobox
+colorscheme gruvbox
+"colorscheme retrobox
 set bg=dark " set as dark mode
 
 " Completion
@@ -266,10 +267,10 @@ nmap <C-M-u> <Plug>(VM-Add-Cursor-Up)
 " - https://github.com/nvim-lua/completion-nvim
 " // default is to use <tab> but i want to use <c-w>
 " let g:UltiSnipsExpandTrigger="<tab>" 
-let g:UltiSnipsExpandTrigger="<C-S-w>" 
+let g:UltiSnipsExpandTrigger="<C-w>" 
 " // default is to use <c-b> but i want to use <c-w>
-let g:UltiSnipsJumpForwardTrigger="<C-S-w>"
-let g:UltiSnipsJumpBackwardTrigger="<C-S-z>"
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/vim/Ultisnips/', 'Ultisnips']
+let g:UltiSnipsJumpForwardTrigger="<C-w>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/Ultisnips/', 'Ultisnips']
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"

@@ -1,13 +1,18 @@
 { config, pkgs, ... }: let
   # vim config directory
-  vimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles";
+  vimAutoloadPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/autoload";
+  vimrcFile = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/vimrc";
 in
 {
   home.packages = with pkgs; [
     vim-full
-    vimPlugins.vim-plug
+    # vimPlugins.vim-plug
   ];
 
+  home.file.".vimrc".source = config.lib.file.mkOutOfStoreSymlink vimrcFile;
+  home.file.".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink vimAutoLoadPath;
+
+  /*
   programs.vim = {
     plugins = with pkgs.vimPlugins; [
       vim-addon-nix
@@ -25,4 +30,5 @@ in
     "vim".source = config.lib.file.mkOutOfStoreSymlink vimPath;
     # "vim".force = true;
   };
+  */
 }
