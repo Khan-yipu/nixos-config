@@ -1,4 +1,6 @@
 // 自动启动设置
+spawn-sh-at-startup "dms restart"
+spawn-at-startup "waybar"
 // 桌面壁纸的守护进程
 spawn-at-startup "awww-daemon"
 // 总览界面背景壁纸的守护进程
@@ -156,10 +158,18 @@ window-rule {
 
 window-rule {
     match app-id="labwc"
-    match app-id="kitty"
-    match app-id="foot"
+    // match app-id="kitty"
+    // match app-id="foot"
 
     open-maximized true
+}
+
+window-rule {
+    match app-id="kitty"
+    match app-id="foot"
+    match title="Varia"
+
+    default-column-width { proportion 0.5; }
 }
 
 window-rule {
@@ -169,13 +179,6 @@ window-rule {
     match app-id=".gamescope-wrapped"
 
     open-fullscreen true
-}
-
-window-rule {
-    match app-id="kitty"
-    match title="Varia"
-
-    default-column-width { proportion 0.5; }
 }
 
 window-rule {
@@ -337,7 +340,7 @@ binds {
     Mod+Shift+U         { move-workspace-down; }
     Mod+Shift+I         { move-workspace-up; }
 
-    Mod+O repeat=false { toggle-overview; }
+    Mod+O hotkey-overlay-title="总览"      repeat=false        { toggle-overview; }
     Mod+F hotkey-overlay-title="窗口最大化"                      { maximize-column; }
     Mod+Q hotkey-overlay-title="关闭窗口"        repeat=false    { close-window; }
     Mod+R hotkey-overlay-title="更改窗口大小"                    { switch-preset-column-width; }
@@ -354,15 +357,14 @@ binds {
 
 
     Mod+End    hotkey-overlay-title="切换到该工作区的最后一个窗口"  { focus-column-last; }
-    Mod+Equal  hotkey-overlay-title="增大窗口宽度"                  { set-column-width "+5%"; }
-    Mod+Escape hotkey-overlay-title="总览"      repeat=false        { toggle-overview; }
     Mod+Home   hotkey-overlay-title="切换到该工作区的第一个窗口"    { focus-column-first; }
+    Mod+Equal  hotkey-overlay-title="增大窗口宽度"                  { set-column-width "+5%"; }
     Mod+Minus  hotkey-overlay-title="减小窗口宽度"                  { set-column-width "-5%"; }
 
     Mod+Page_Up   hotkey-overlay-title="切换到上一个工作区"    { focus-workspace-up; }
     Mod+Page_Down hotkey-overlay-title="切换到下一个工作区"    { focus-workspace-down; }
 
-    Mod+Alt+Space hotkey-overlay-title="显示提示" { show-hotkey-overlay; }
+    // Mod+Alt+Space hotkey-overlay-title="显示提示" { show-hotkey-overlay; }
 
     Mod+Shift+0 { move-column-to-workspace 0; }
     Mod+Shift+1 { move-column-to-workspace 1; }
@@ -389,7 +391,7 @@ binds {
     Mod+Shift+K { focus-monitor-up; }
     Mod+Shift+L { focus-monitor-right; }
 
-    Mod+Shift+E hotkey-overlay-title="退出"     { quit; }
+    Mod+Shift+E hotkey-overlay-title="退出 niri"     { quit; }
     Mod+Shift+F hotkey-overlay-title="窗口全屏" { fullscreen-window; }
     Mod+Shift+S hotkey-overlay-title="截图"     { screenshot; }
 

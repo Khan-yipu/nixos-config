@@ -20,7 +20,7 @@
       faviconService = "twenty";
 
       font = {
-        size = 10.5;
+        size = 16;
       };
 
       keybinding = "default";

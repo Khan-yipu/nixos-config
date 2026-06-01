@@ -12,8 +12,10 @@
     ./kdeconnect.nix
     ./keepass.nix
     */
+
     ./obs-studio.nix
-    ./virt-manager.nix
+
+    # ./virt-manager.nix
   ];
 
   /*

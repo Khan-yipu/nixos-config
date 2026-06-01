@@ -2,7 +2,7 @@
 
 # ================= 默认配置 =================
 API_URL="https://t.alcy.cc/pc/"
-SAVE_DIR="$HOME/Pictures/Wallpapers/api-random-download"
+SAVE_DIR="$HOME/Pictures/wallpapers/api-random-download"
 
 # [新增配置] 自动清理时保留最近多少张图片？
 KEEP_COUNT=40
@@ -67,7 +67,7 @@ else
     NOTIFY_PID=""
 fi
 
-send_notify "Wallpaper" "Downloading from Alcy..." "--expire-time=5000"
+send_notify "Wallpaper" "Downloading from Alcy..." "--expire-time=60"
 
 USER_AGENT="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
@@ -142,11 +142,12 @@ awww img "$FINAL_PATH" --transition-duration 2 --transition-type center --transi
 # --- 4. 钩子与清理 ---
 (
     # 钩子脚本屏蔽标准输出，保留报错
-    [ -x "$HOME/.config/scripts/matugen-update.sh" ] && "$HOME/.config/scripts/matugen-update.sh" "$FINAL_PATH" > /dev/null
+    # [ -x "$HOME/.config/scripts/matugen-update.sh" ] && "$HOME/.config/scripts/matugen-update.sh" "$FINAL_PATH" > /dev/null
     
-    sleep 0.5
+    # sleep 0.5
     
-    [ -x "$HOME/.config/scripts/niri_set_overview_blur_dark_bg.sh" ] && "$HOME/.config/scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
+    # [ -x "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
+    [ -f "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && bash "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
     
     # [修改] 动态清理逻辑
     if [ "$ENABLE_CLEANUP" = true ]; then

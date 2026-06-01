@@ -3,7 +3,8 @@
 {
   imports = [
     inputs.dms.homeModules.dank-material-shell
-    # inputs.dms.homeModules.niri  # 由 modules/Desktop/dankMaterialShell/niri.nix 单独管理
+    # 如果是使用 flake 安装的 niri, 可以导入下面一行使得 dms 与 Niri 集成
+    # inputs.dms.homeModules.niri
   ];
 
   home.packages = with pkgs; [
@@ -12,7 +13,7 @@
 
   programs.dank-material-shell = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
 
     enableSystemMonitoring = true;
     enableVPN = true;
@@ -22,7 +23,7 @@
     enableClipboardPaste = true;
   };
 
-  /*
+  /* 如果是使用 flake 安装的 niri, 可以有以下的选项。
   programs.dank-material-shell.niri = {
     enableSpawn = true;
     enableKeybinds = false;
