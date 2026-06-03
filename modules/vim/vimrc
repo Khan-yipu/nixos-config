@@ -1,6 +1,6 @@
 " 这一行可以把系统剪贴板和 vim 剪贴板联系起来
 " 但是要保证 vim --version | grep clipboard 输出 + 
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 
 set colorcolumn=64,65
 

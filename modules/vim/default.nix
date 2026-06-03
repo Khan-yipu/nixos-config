@@ -1,8 +1,22 @@
-{ config, pkgs, ... }: let
+{ config, pkgs, lib, ... }: let
   # vim config directory
-  # vimAutoloadPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/autoload";
-  vimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles/";
+  vimPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/dotfiles";
   vimrcFile = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/vim/vimrc";
+
+  # 需要忽略的文件/目录列表
+  ignoreList = [
+    "plugged"
+    ".netrwhist"
+  ];
+
+  # dotfiles 目录下的文件列表（排除 ignoreList）
+  dotfiles = [
+    "autoload"
+    "compile.vim"
+    "Ctemplate.c"
+    "snippits.vim"
+    "Ultisnips"
+  ];
 in
 {
   home.packages = with pkgs; [
@@ -11,7 +25,13 @@ in
   ];
 
   home.file.".vimrc".source = config.lib.file.mkOutOfStoreSymlink vimrcFile;
-  home.file.".vim".source = config.lib.file.mkOutOfStoreSymlink vimPath;
+
+  # 手动 symlink 每个需要管理的文件
+  home.file.".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/autoload";
+  home.file.".vim/compile.vim".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/compile.vim";
+  home.file.".vim/Ctemplate.c".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/Ctemplate.c";
+  home.file.".vim/snippits.vim".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/snippits.vim";
+  home.file.".vim/Ultisnips".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/Ultisnips";
 
   /*
   programs.vim = {
