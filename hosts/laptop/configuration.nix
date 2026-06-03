@@ -160,7 +160,7 @@
   # Use SDDM as Display Manager (Wayland compatible)
   services.displayManager.sddm = {
     enable = true;
-    # wayland.enable = true;
+    wayland.enable = false;
   };
   # services.xserver.displayManager.lightdm.enable = true;
   # services.displayManager.gdm.enable = true;
@@ -170,6 +170,8 @@
 
   security.pam.services = {
     gtklock.enable = true;
+    i3lock.enable = true;
+    xss-lock.enable = true;
   };
 
   services.gnome.gnome-keyring.enable = true;
@@ -183,10 +185,17 @@
   # 也可以使用 flake 安装 Niri
 
   # LXQT(lxqt)
-  services.xserver.desktopManager.lxqt.enable = true;
+  services.xserver.desktopManager.lxqt.enable = false;
 
   # KDE Plasma 
   services.desktopManager.plasma6.enable = true;
+
+  services.xserver.windowManager.dwm = {
+    enable = true;
+    package = pkgs.dwm.overrideAttrs {
+      src = ../../modules/Desktop/dwm;
+    };
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {

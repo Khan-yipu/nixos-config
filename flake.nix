@@ -26,10 +26,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    /*
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    */
 
     winapps = {
       url = "github:winapps-org/winapps";
@@ -77,8 +79,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dwm.url = "github:yaocccc/dwm";
-    st.url = "github:yaocccc/st";
+    # dwm.url = "github:yaocccc/dwm";
+    st.url = "github:Khan-yipu/st?ref=kif-remote";
 
     /*
     niri = {
@@ -88,7 +90,8 @@
     */
   };
 
-  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, dwm, ... }@inputs:
+  # 如果通过 flake 安装 dwm, 在下面的 outputs 加上 dwm
+  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
@@ -217,11 +220,10 @@
             {
               nixpkgs.overlays = [ 
                 st.overlays.default
-                dwm.overlays.default 
+                # dwm.overlays.default 
               ];
 
               # st and tabbed Installation is put in the configuration.nix
-
             }
           ];
         };
