@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ================= 默认配置 =================
 API_URL="https://t.alcy.cc/pc/"

@@ -1,5 +1,5 @@
 // 自动启动设置
-spawn-sh-at-startup "dms restart"
+// spawn-sh-at-startup "dms restart"
 spawn-at-startup "waybar"
 // 桌面壁纸的守护进程
 spawn-at-startup "awww-daemon"

@@ -1,7 +1,8 @@
 { config, ... }: let 
   # niri config directory
-  niri-config = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/niri/dotfiles/config.kdl";
-  niri-custom = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/niri/dotfiles/custom.kdl";
+  NIRI = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/niri/dotfiles";
+  niri-config = "${NIRI}/config.kdl";
+  niri-custom = "${NIRI}/custom.kdl";
 in
 {
   xdg.configFile = {
