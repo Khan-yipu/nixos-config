@@ -9,18 +9,20 @@ settings() {
     [ $1 ] && sleep $1
     xset -b                                   # 关闭蜂鸣器
     syndaemon -i 1 -t -K -R -d                # 设置使用键盘时触控板短暂失效
-    $DWM/scripts/set_screen.sh two               # 设置显示器
+    $DWM/scripts/set_screen.sh one               # 设置显示器
+    echo "Xft.dpi: 160" | xrdb -merge
 }
 
 daemons() {
     [ $1 ] && sleep $1
     $_thisdir/statusbar/statusbar.sh cron &   # 开启状态栏定时更新
     xss-lock -- $DWM/scripts/blurlock.sh &       # 开启自动锁屏程序
-    fcitx5 &                                  # 开启输入法
+    # fcitx5 &                                  # 开启输入法
     lemonade server &                         # 开启lemonade 远程剪切板支持
-    flameshot &                               # 截图要跑一个程序在后台 不然无法将截图保存到剪贴板
+    # flameshot &                               # 截图要跑一个程序在后台 不然无法将截图保存到剪贴板
     dunst -conf $DWM/scripts/config/dunst.conf & # 开启通知server
     picom --config $DWM/scripts/config/picom.conf >> /dev/null 2>&1 & # 开启picom
+    clouddrive &
 }
 
 cron() {

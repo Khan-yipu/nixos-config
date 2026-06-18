@@ -10,6 +10,7 @@
 
     ./wps-office/default.nix
     # ./fcitx5.nix
+    # ./clouddrive2.nix # 建议将 clouddrive2 作为 system package 安装
   ];
   home.packages = with pkgs; [
     /*
@@ -31,6 +32,7 @@
     })
     */
 
+    # todesk
     obsidian
     # gimp3-with-plugins
 

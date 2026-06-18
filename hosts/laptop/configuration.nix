@@ -261,13 +261,23 @@
 
   environment.variables = {
     EDITOR = "vim";
-    VISUAL = "zed";
+    VISUAL = "vim";
+  };
+
+  programs.fuse = {
+    enable = true;
+    userAllowOther = true;
   };
 
   environment.systemPackages = with pkgs; [
     # flclash
     qq
     qqmusic
+
+    # CloudDrive:默认地址 http://127.0.0.1:19798/
+    clouddrive2
+    fuse3 
+
     xwayland
     xwayland-satellite
 

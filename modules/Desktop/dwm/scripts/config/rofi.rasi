@@ -19,7 +19,7 @@ configuration {
 }
 
 * {
-  font: "JetBrainsMono Nerd Font Mono 12.5";
+  font: "JetBrainsMono Nerd Font Mono 25";
   background-color: transparent;
   text-color: #f1f1f1;
   width: 680px;

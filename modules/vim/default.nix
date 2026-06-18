@@ -26,6 +26,8 @@ in
 
   home.file.".vimrc".source = config.lib.file.mkOutOfStoreSymlink vimrcFile;
 
+  # 创建空的 .vim 目录
+
   # 手动 symlink 每个需要管理的文件
   home.file.".vim/autoload".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/autoload";
   home.file.".vim/compile.vim".source = config.lib.file.mkOutOfStoreSymlink "${vimPath}/compile.vim";

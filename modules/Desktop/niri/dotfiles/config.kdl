@@ -49,7 +49,7 @@ input {
         tap
         // dwt
         // dwtp
-        natural-scroll
+        // natural-scroll
         // disabled-on-external-mouse
     }
 
@@ -122,8 +122,9 @@ layer-rule{
     match namespace="swww-daemonoverview"
     match namespace="awww-daemonoverview"
     place-within-backdrop true
+
     // 在截屏时排除它
-    block-out-from "screen-capture"
+    // block-out-from "screen-capture"
 }
 
 window-rule {

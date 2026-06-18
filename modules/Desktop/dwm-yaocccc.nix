@@ -16,6 +16,8 @@ in
     lemonade
     flameshot
     upower
+
+    xmodmap
   ];
 
   # services.picom.enable = true; 
@@ -31,7 +33,7 @@ in
         # nitrogen --restore &
         export DWM=~/nix-setup/nixconfigs/modules/Desktop/dwm
 
-        feh --bg-fill ~/Pictures/wallpapers/hope.png
+        # feh --bg-fill ~/Pictures/wallpapers/hope.png
         fcitx5 &
         flameshot &
     '';
@@ -40,5 +42,6 @@ in
   # Home Manager 也可以管理 X resources 等相关配置
   xresources.extraConfig = ''
     ! 这里可以写 Xresources 配置
+    Xft.dpi: 160
   '';
 }
