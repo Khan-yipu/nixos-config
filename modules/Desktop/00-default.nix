@@ -31,6 +31,7 @@
     lxqt.lxqt-archiver
 
     mpv
+    vlc
     nomacs
 
     swaybg

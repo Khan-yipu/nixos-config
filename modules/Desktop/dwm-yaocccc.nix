@@ -34,7 +34,7 @@ in
         export DWM=~/nix-setup/nixconfigs/modules/Desktop/dwm
 
         # feh --bg-fill ~/Pictures/wallpapers/hope.png
-        fcitx5 &
+        # fcitx5 &
         flameshot &
     '';
   };
