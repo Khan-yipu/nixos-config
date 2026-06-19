@@ -98,10 +98,6 @@ end
 -- 设置按键映射 (等价于原配置中的 :noremap f5)
 vim.keymap.set("n", "<f5>", compile_run_gcc, { noremap = true, silent = true })
 
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.smartindent = true
 -- vim.cmd("source ~/.config/nvim/auto_compile.vim")
 --
 -- vim.opts.rocks.hererocks = false

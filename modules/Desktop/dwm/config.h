@@ -21,7 +21,7 @@ static const unsigned int snap = 10;           /* 边缘依附宽度 */
 static const unsigned int baralpha = 0xc0;     /* 状态栏透明度 */
 static const unsigned int borderalpha = 0xdd;  /* 边框透明度 */
 // static const char *fonts[]               = { "JetBrainsMono Nerd Font Mono:style=medium:size=13", "monospace:size=13" };
-static const char *fonts[] = {"Iosevka:style=medium:size=16", "monospace:size=16"};
+static const char *fonts[] = {"Iosevka:style=medium:size=22", "monospace:size=22"};
 static const char *colors[][3] = {
     /* 颜色设置 ColFg, ColBg, ColBorder */
     [SchemeNorm] = {"#bbbbbb", "#333333", "#444444"},
@@ -222,7 +222,8 @@ static Key keys[] = {
     {MODKEY | ControlMask, XK_n, spawn, SHCMD("$DWM/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
     {MODKEY | ShiftMask, XK_Up, spawn, SHCMD("$DWM/set_vol.sh up")},                                /* super shift up   | 音量加                 */
     {MODKEY | ShiftMask, XK_Down, spawn, SHCMD("$DWM/set_vol.sh down")},                            /* super shift down | 音量减                 */
-    {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots")},             /* super shift a    | 截图                   */
+    // {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots")},             /* super shift a    | 截图                   */
+    {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c")},             /* super shift a    | 截图                   */
     {MODKEY | ShiftMask, XK_q, spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')")}, /* super shift q    | 选中某个窗口并强制kill */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */

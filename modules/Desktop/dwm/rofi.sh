@@ -2,32 +2,41 @@
 call_menu() {
     echo ' set wallpaper'
     echo '艹 update statusbar'
-    [ "$(ps aux | grep -v grep | grep daed)" ] && echo ' close daed' || echo ' open daed'
-    [ "$(ps aux | grep picom | grep -v 'grep\|rofi\|nvim')" ] && echo ' close picom' || echo ' open picom'
+    # [ "$(ps aux | grep -v grep | grep daed)" ] && echo ' close daed' || echo ' open daed'
+    # [ "$(ps aux | grep picom | grep -v 'grep\|rofi\|nvim')" ] && echo ' close picom' || echo ' open picom'
+    if pgrep -x daed >/dev/null; then
+        echo ' close daed'
+    else
+        echo ' open daed'
+    fi
+
+    if pgrep -x picom >/dev/null; then
+        echo 'close picom'
+    else
+        echo 'open picom'
+    fi
 }
 
 # 执行菜单
 execute_menu() {
-    case $1 in
+    echo "DEBUG: [$1]" >> ~/menu_debug.log
+    case "$1" in
         ' set wallpaper')
             feh --randomize --bg-fill ~/Pictures/wallpapers/*.png
             ;;
         '艹 update statusbar')
-            coproc ($DWM/statusbar/statusbar.sh updateall > /dev/null 2>&1)
+            "$DWM/statusbar/statusbar.sh" updateall >/dev/null 2>&1
             ;;
-        ' open daed')
-            coproc (sudo systemctl start daed > /dev/null && $DWM/statusbar/statusbar.sh updateall > /dev/null)
+        'open picom')
+            pkill -x picom
+            picom --config "$DWM/scripts/config/picom.conf" >/dev/null 2>&1 &
             ;;
-        ' close daed')
-            coproc (sudo systemctl stop daed > /dev/null && $DWM/statusbar/statusbar.sh updateall > /dev/null)
-            ;;
-        ' open picom')
-            coproc (picom --config $DWM/scripts/config/picom.conf > /dev/null 2>&1)
-            ;;
-        ' close picom')
-            killall picom
+        'close picom')
+            pkill -x picom
             ;;
     esac
 }
 
-execute_menu "$(call_menu | rofi -dmenu -p "")"
+choice="$(call_menu | rofi -dmenu -p "" | tr -d '\n')"
+[ -n "$choice" ] || exit
+execute_menu "$choice"
