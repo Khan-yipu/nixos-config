@@ -1,0 +1,22 @@
+! run `xmodmap $HOME/.Xmodmap`
+! or add to i3/dwm or other window managers' configuration file
+! run xev to find out keycodes
+
+! CapsLock Key to mode switch 
+keycode 66 = Mode_switch 
+! h key behaviors: h alone, H with Shift, Left Arrow with CapsLock 
+keycode 43 = h H Left
+keycode 44 = j J Down 
+keycode 45 = k K Up
+keycode 46 = l L Right
+keycode 30 = u U Home
+keycode 40 = d D End
+
+! PageUp and PageDown 
+keycode 57 = n N Next
+keycode 33 = p P Prior
+
+! e as ESC 
+keycode 26 = e E Escape
+! b as BackSpace 
+! keycode 56 = b B BackSpace

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -204,6 +204,39 @@
     # options = "eurosign:e,caps:escape";
   };
 
+  # keyboard remapping 
+  services.keyd.enable = true;
+  /*
+    意外情况
+    在某些时候，错误的配置可能导致严重后果（例如键盘无法正常使用，或无法恢复配置）。当然，这属于极端情况。正常来讲，错误的配置要么无效，要么不影响下次修改。但一旦真的出现了极端情况，停止 keyd 进程就是恢复键盘的后路。结束 keyd 方法如下：
+    同时按下 Backspace（空格）+ Enter + Esc 键，即可让 keyd 自动退出。一切配置都会失效。这时候你就可以轻易还原配置了。但有一个常见状况是：你无论如何发现 keyd 都结束不了（或结束后自动启动）。这往往是 init 程序的自动重启策略导致的。执行以下命令：
+    systemctl cat keyd.service | grep Restart
+    如果输出的 Restart 值为 always，那么我们就需要将其修改为 no。在 NixOS 中，添加如下配置：
+    {
+        # 紧急情况下允许 keyd 终止自身
+        systemd.services.keyd.serviceConfig = {
+            Restart = lib.mkForce "no"; 
+        };
+    }
+    其它发行版手动编辑相关的 service 文件即可。
+  */
+
+  /*
+  users.groups.keyd = {};
+  # 紧急情况下允许 keyd 终止自身
+  systemd.services.keyd.serviceConfig = {
+    Restart = lib.mkForce "no"; 
+  };
+  # Optional, but makes sure that when you type the make palm rejection work with keyd
+  # https://github.com/rvaiya/keyd/issues/723
+  environment.etc."libinput/local-overrides.quirks".text = ''
+    [Serial Keyboards]
+    MatchUdevType=keyboard
+    MatchName=keyd virtual keyboard
+    AttrKeyboardIntegration=internal
+  '';
+  */
+
   zramSwap.enable = true;
 
   # Enable CUPS to print documents.
@@ -316,6 +349,8 @@
 
     st
     tabbed
+
+    keyd 
   ];
 
   programs.clash-verge = {
