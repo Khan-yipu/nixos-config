@@ -29,7 +29,7 @@ execute_menu() {
             ;;
         '󰂒 open picom')
             pkill -x picom
-            picom --config "$DWM/scripts/config/picom.conf" >/dev/null 2>&1 &
+            picom --experimental-backends --config "$DWM/scripts/config/picom.conf" >/dev/null 2>&1 &
             ;;
         '󰂒 close picom')
             pkill -x picom

@@ -6,6 +6,7 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    picom.url = "github:yaocccc/picom";
 
     # nixpkgs.url = "git+https://mirrors.nju.edu.cn/git/nixpkgs.git?ref=nixpkgs-unstable&shallow=1";
     # nixpkgs-stable.url = "git+https://mirrors.nju.edu.cn/git/nixpkgs.git?ref=nixos-25.11&shallow=1";
@@ -100,7 +101,7 @@
   };
 
   # 如果通过 flake 安装 dwm, 在下面的 outputs 加上 dwm
-  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, picom, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
@@ -238,6 +239,7 @@
               nixpkgs.overlays = [ 
                 st.overlays.default
                 # dwm.overlays.default 
+                picom.overlays.default
               ];
 
               # st and tabbed Installation is put in the configuration.nix
