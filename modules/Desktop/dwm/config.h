@@ -69,15 +69,16 @@ static const char *tags[] = {
 };
 */
 static const char *tags[] = {
-    " ",   
-    " ",   
-    " ",   
-    "󰕧 ", 
-    " ",   
-    "道",  
-    "三",  
-    "󰄛 ",   
-    "",   
+    "",  //  0 1
+    " ", //   1 2
+    "",  //   2 3
+    "",  //   3 4
+    "潔", //   4 5
+    "空", //   5 6
+    "黛", //   6 7
+    "玉", //   7 8
+    "󰕧",  //   8 9
+    "󰄛",  //   9 0
 };
 
 /* 自定义窗口显示规则 */
@@ -98,11 +99,12 @@ static const Rule rules[] = {
     {NULL, NULL, "Media viewer", 0, 1, 0, 0, -1, 0}, // tg图片查看器        浮动
 
     /** 普通优先度 */
-    {"obs", NULL, NULL, 1 << 3, 0, 0, 0, -1, 0},                         // obs        tag -> 󰕧
-    {"chrome", NULL, NULL, 1 << 4, 0, 0, 0, -1, 0},                      // chrome     tag -> 
-    {"Chromium", NULL, NULL, 1 << 4, 0, 0, 0, -1, 0},                    // Chromium   tag -> 
+    // {"obs", NULL, NULL, 1 << 8, 0, 0, 0, -1, 0},                         // obs        tag -> 󰕧
+    {"chrome", NULL, NULL, 1 << 2, 0, 0, 0, -1, 0},                      // chrome     tag -> 
+    {"firefox", NULL, NULL, 1 << 2, 0, 0, 0, -1, 0},                      // firefox     tag -> 
+    {"Chromium", NULL, NULL, 1 << 2, 0, 0, 0, -1, 0},                    // Chromium   tag -> 
     {"music", NULL, NULL, 1 << 5, 1, 0, 1, -1, 0},                       // music      tag ->  浮动、无边框
-    {NULL, "qq", NULL, 1 << 6, 0, 0, 1, -1, 0},                          // qq         tag -> ﬄ 无边框
+    {NULL, "qq", NULL, 1 << 3, 0, 0, 1, -1, 0},                          // qq         tag -> ﬄ 无边框
     {NULL, "wechat.exe", NULL, 1 << 7, 0, 0, 1, -1, 0},                  // wechat     tag -> ﬐ 无边框
     {NULL, "wxwork.exe", NULL, 1 << 8, 0, 0, 1, -1, 0},                  // workwechat tag ->  无边框
     {"Vncviewer", NULL, NULL, 0, 1, 0, 1, -1, 2},                        // Vncviewer           浮动、无边框 屏幕顶部
@@ -219,7 +221,7 @@ static Key keys[] = {
     {MODKEY, XK_d, spawn, SHCMD("rofi -no-lazy-grab -show drun -modi drun -theme $DWM/scripts/config/rofi.rasi")}, /* super d          | rofi: 执行run          */
     {MODKEY, XK_p, spawn, SHCMD("$DWM/rofi.sh")},                                                   /* super p          | rofi: 执行自定义脚本   */
     // {MODKEY, XK_n, spawn, SHCMD("$DWM/DEF/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
-    {MODKEY | ControlMask, XK_n, spawn, SHCMD("$DWM/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
+    {MODKEY | ControlMask, XK_l, spawn, SHCMD("$DWM/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
     {MODKEY | ShiftMask, XK_Up, spawn, SHCMD("$DWM/set_vol.sh up")},                                /* super shift up   | 音量加                 */
     {MODKEY | ShiftMask, XK_Down, spawn, SHCMD("$DWM/set_vol.sh down")},                            /* super shift down | 音量减                 */
     // {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots")},             /* super shift a    | 截图                   */
@@ -238,6 +240,7 @@ static Key keys[] = {
     TAGKEYS(XK_7, 6, 0)
     TAGKEYS(XK_8, 7, 0)
     TAGKEYS(XK_9, 8, 0)
+    TAGKEYS(XK_0, 9, 0)
 
     /* yaocccc default
     TAGKEYS(XK_1, 0, 0)

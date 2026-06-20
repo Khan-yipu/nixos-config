@@ -108,7 +108,7 @@
       auto_update = false;
       autosave = "on_focus_change";
       base_keymap = "VSCode";
-      buffer_font_size = lib.mkForce 18;
+      buffer_font_size = lib.mkForce 22;
       font_family = "Iosevka";
       buffer_font_weight = 400.0;
       buffer_font_family = "Iosevka";

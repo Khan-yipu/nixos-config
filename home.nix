@@ -112,6 +112,10 @@
       # 命令运行器
       just
       devbox
+
+      # handwritten notes
+      rnote
+      wemeet
     ];
 
   # 启用用户级 Nix 垃圾回收

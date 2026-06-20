@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, pkgs-stable, ... }:
 
 {
   imports = [
@@ -42,7 +42,7 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
-  boot.loader.systemd-boot.configurationLimit = 7;
+  boot.loader.systemd-boot.configurationLimit = 12;
   boot.loader.efi.canTouchEfiVariables = true;
   /*
     boot.loader.grub = {
@@ -109,6 +109,7 @@
       fcitx5-rime
       qt6Packages.fcitx5-configtool
       qt6Packages.fcitx5-chinese-addons # 拼音、五笔等
+      catppuccin-fcitx5
       # fcitx5-configtool
       # fcitx5-chinese-addons
     ];
@@ -147,7 +148,10 @@
           "Noto Serif"
           "Noto Serif CJK SC"
         ];
-        monospace = [ "Fira Code" ];
+        monospace = [ 
+          "Fira Code"
+          "Iosevka" 
+        ];
       };
     };
   };
@@ -303,9 +307,9 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # flclash
+    flclash
     qq
-    qqmusic
+    # qqmusic
 
     # CloudDrive:默认地址 http://127.0.0.1:19798/
     clouddrive2
@@ -355,7 +359,9 @@
 
   programs.clash-verge = {
     enable = true;
+    package = pkgs-stable.clash-verge-rev;
     # package = pkgs-unstable.clash-verge-rev;
+    # package = pkgs.clash-verge-rev;
     # autostart = true;
     tunMode = true;
     serviceMode = true;
@@ -422,6 +428,10 @@
     ];
   };
 
+  hardware.opentabletdriver.enable = true;
+  hardware.uinput.enable = true;
+  boot.kernelModules = [ "uinput" ];
+
   # =========================================================================
 
   # Open ports in the firewall.
@@ -433,7 +443,8 @@
   networking.firewall = {
     enable = true;
     trustedInterfaces = [ "mihomo" ];
-    checkReversePath = "loose"; # or set to be false
+    # checkReversePath = "loose"; # or set to be false
+    checkReversePath = false; # or set to be false
   };
 
   # This value determines the NixOS release from which the default
