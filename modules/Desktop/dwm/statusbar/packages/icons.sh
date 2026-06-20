@@ -18,7 +18,7 @@ with_bluetooth() {
 }
 
 update() {
-    icons=("")
+    icons=("") # 
     with_daed
     # with_bluetooth
 
@@ -36,10 +36,10 @@ notify() {
 }
 
 call_menu() {
-    case $(echo -e ' 关机\n 重启\n 休眠\n 锁定' | rofi -dmenu -window-title power) in
+    case $(echo -e ' 关机\n 重启\n 休眠\n 锁定' | rofi -dmenu -window-title power -no-lazy-grab -show drun -modi drun -theme $DWM/scripts/config/rofi.rasi) in
         " 关机") poweroff ;;
         " 重启") reboot ;;
-        " 休眠") systemctl hibernate ;;
+        "󰒲 休眠") systemctl hibernate ;; # 
         " 锁定") $DWM/scripts/blurlock.sh ;;
     esac
 }

@@ -24,7 +24,7 @@ execute_menu() {
         ' set wallpaper')
             feh --randomize --bg-fill ~/Pictures/wallpapers/*.png
             ;;
-        '艹 update statusbar')
+        ' update statusbar')
             "$DWM/statusbar/statusbar.sh" updateall >/dev/null 2>&1
             ;;
         'open picom')
@@ -37,6 +37,6 @@ execute_menu() {
     esac
 }
 
-choice="$(call_menu | rofi -dmenu -p "" | tr -d '\n')"
+choice="$(call_menu | rofi -dmenu -p "" -no-lazy-grab -show drun -modi drun -theme $DWM/scripts/config/rofi.rasi | tr -d '\n')"
 [ -n "$choice" ] || exit
 execute_menu "$choice"

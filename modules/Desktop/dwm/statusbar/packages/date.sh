@@ -47,7 +47,7 @@ notify() {
     [ "$_todaytask" ] && _todaytext="<b><span color=\"#ff79c6\">\n\n$_todaytask</span></b>"
     [ ! "$_todaytask" ] && _todaytext="<b><span color=\"#ffe0c8dd\">\n\n$_alltask</span></b>"
     
-    notify-send "  Calendar" "\n$_cal\n\n$_todotext$_todaytext" -r 9527
+    notify-send "  Calendar" "\n$_cal\n\n$_todotext$_todaytext" -r 9527
 }
 
 call_todo() {
