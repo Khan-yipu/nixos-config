@@ -130,8 +130,8 @@ static const Rule rules[] = {
 
 /* 自定义布局 */
 static const Layout layouts[] = {
-    {"﬿", tile},      /* 主次栈 */
-    {"﩯", magicgrid}, /* 网格 */
+    {" ", tile},      /* 主次栈   */  
+    {"󰾍 ", magicgrid}, /* 网格 */
 };
 
 #define SHCMD(cmd)                                           \
@@ -170,11 +170,12 @@ static Key keys[] = {
 
     {MODKEY, XK_v, togglefloating, {0}},                /* super v            |  开启/关闭 聚焦目标的float模式 */
     {MODKEY | ShiftMask, XK_v, toggleallfloating, {0}}, /* super shift v      |  开启/关闭 全部目标的float模式 */
-    {MODKEY, XK_f, fullscreen, {0}},                    /* super f            |  开启/关闭 全屏 */
-    {MODKEY | ShiftMask, XK_f, togglebar, {0}},         /* super shift f      |  开启/关闭 状态栏 */
+    {MODKEY | ShiftMask, XK_f, fullscreen, {0}},        /* super f            |  开启/关闭 全屏 */
+    /// {MODKEY | ShiftMask, XK_f, togglebar, {0}},     /* super shift f      |  开启/关闭 状态栏 */
+    {MODKEY, XK_F1, togglebar, {0}},                    /* super f1      |  开启/关闭 状态栏 */
     {MODKEY, XK_g, toggleglobal, {0}},                  /* super g            |  开启/关闭 全局 */
     {MODKEY, XK_u, toggleborder, {0}},                  /* super u            |  开启/关闭 边框 */
-    // {MODKEY, XK_e, incnmaster, {.i = +1}},              /* super e            |  改变主工作区窗口数量 (1 2中切换) */ // yaocccc default XK_e
+    /// {MODKEY, XK_e, incnmaster, {.i = +1}},          /* super e            |  改变主工作区窗口数量 (1 2中切换) */ // yaocccc default XK_e
     {MODKEY, XK_m, incnmaster, {.i = +1}},              /* super m            |  改变主工作区窗口数量 (1 2中切换) */
 
     {MODKEY, XK_w, focusmon, {.i = +1}},           /* super w            |  光标移动到另一个显示器 */
@@ -185,7 +186,8 @@ static Key keys[] = {
     {MODKEY | ControlMask, XK_F12, quit, {0}},          /* super ctrl f12     |  退出dwm */
 
     {MODKEY | ShiftMask, XK_space, selectlayout, {.v = &layouts[1]}}, /* super shift space  |  切换到网格布局 */
-    {MODKEY, XK_o, showonlyorall, {0}},                               /* super o            |  切换 只显示一个窗口 / 全部显示 */
+    /// {MODKEY, XK_o, showonlyorall, {0}},                           /* super o            |  切换 只显示一个窗口 / 全部显示 */
+    {MODKEY, XK_f, showonlyorall, {0}},                               /* super f            |  切换 只显示一个窗口 / 全部显示 fullscreen but bar not hidden */
 
     {MODKEY | ControlMask, XK_equal, setgap, {.i = -6}}, /* super ctrl +       |  窗口增大 */
     {MODKEY | ControlMask, XK_minus, setgap, {.i = +6}}, /* super ctrl -       |  窗口减小 */
@@ -210,22 +212,23 @@ static Key keys[] = {
     {MODKEY | ShiftMask, XK_h, exchange_client, {.i = LEFT}},  /* super shift h      | 二维交换窗口 (仅平铺) */
     {MODKEY | ShiftMask, XK_l, exchange_client, {.i = RIGHT}}, /* super shift l      | 二维交换窗口 (仅平铺) */
 
-    /* spawn + SHCMD 执行对应命令(已下部分建议完全自己重新定义) */
-    {MODKEY, XK_s, togglescratch, SHCMD("st -t scratchpad -c float")},                                  /* super s          | 打开scratch终端        */
+    /* spawn + SHCMD 执行对应命令(以下部分建议完全自己重新定义) */
+    /// {MODKEY, XK_s, togglescratch, SHCMD("st -t scratchpad -c float")},                              /* super s          | 打开scratch终端        */
+    /// {MODKEY, XK_minus, spawn, SHCMD("st -c FG")},                                                   /* super +          | 打开全局st终端         */
     {MODKEY, XK_Return, spawn, SHCMD("st")},                                                            /* super enter      | 打开st终端             */
-    {MODKEY, XK_minus, spawn, SHCMD("st -c FG")},                                                       /* super +          | 打开全局st终端         */
     {MODKEY, XK_space, spawn, SHCMD("st -c float")},                                                    /* super space      | 打开浮动st终端         */
+    {MODKEY, XK_n, spawn, SHCMD("kitty --start-as=fullscreen -e nvim ~/nix-setup/nixconfigs/")},                                                    /* super space      | 打开浮动st终端         */
     {MODKEY, XK_b, spawn, SHCMD("firefox")},                                                            /* super b          | 打开firefox         */
-    {MODKEY, XK_F1, spawn, SHCMD("killall pcmanfm || pcmanfm")},                                        /* super F1         | 打开/关闭pcmanfm       */
+    /// {MODKEY, XK_F1, spawn, SHCMD("killall pcmanfm || pcmanfm")},                                    /* super F1         | 打开/关闭pcmanfm       */
     {MODKEY, XK_e, spawn, SHCMD("killall pcmanfm || pcmanfm")},                                         /* super e          | 打开/关闭pcmanfm       */
-    {MODKEY, XK_d, spawn, SHCMD("rofi -no-lazy-grab -show drun -modi drun -theme $DWM/scripts/config/rofi.rasi")}, /* super d          | rofi: 执行run          */
-    {MODKEY, XK_p, spawn, SHCMD("$DWM/rofi.sh")},                                                   /* super p          | rofi: 执行自定义脚本   */
-    // {MODKEY, XK_n, spawn, SHCMD("$DWM/DEF/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
-    {MODKEY | ControlMask, XK_l, spawn, SHCMD("$DWM/blurlock.sh")},                                               /* super n          | 锁定屏幕               */
+    {MODKEY, XK_d, spawn, SHCMD("rofi -no-lazy-grab -show drun -modi drun -theme $DWM/scripts/config/rofi.rasi")},      /* super d          | rofi: 执行run          */
+    {MODKEY, XK_p, spawn, SHCMD("$DWM/rofi.sh")},                                                                       /* super p          | rofi: 执行自定义脚本   */
+    /// {MODKEY, XK_n, spawn, SHCMD("$DWM/DEF/blurlock.sh")},                                                           /* super n          | 锁定屏幕               */
+    {MODKEY | ControlMask, XK_l, spawn, SHCMD("$DWM/blurlock.sh")},                                                     /* super shift l          | 锁定屏幕               */
     {MODKEY | ShiftMask, XK_Up, spawn, SHCMD("$DWM/set_vol.sh up")},                                /* super shift up   | 音量加                 */
     {MODKEY | ShiftMask, XK_Down, spawn, SHCMD("$DWM/set_vol.sh down")},                            /* super shift down | 音量减                 */
-    // {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots")},             /* super shift a    | 截图                   */
-    {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c")},             /* super shift a    | 截图                   */
+    /// {MODKEY | ShiftMask, XK_a, spawn, SHCMD("flameshot gui -c -p ~/Pictures/screenshots")},         /* super shift a    | 截图                   */
+    {MODKEY | ShiftMask, XK_s, spawn, SHCMD("flameshot gui -c")},                                       /* super shift a    | 截图                   */
     {MODKEY | ShiftMask, XK_q, spawn, SHCMD("kill -9 $(xprop | grep _NET_WM_PID | awk '{print $3}')")}, /* super shift q    | 选中某个窗口并强制kill */
 
     /* super key : 跳转到对应tag (可附加一条命令 若目标目录无窗口，则执行该命令) */

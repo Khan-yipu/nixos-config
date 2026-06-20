@@ -1,7 +1,7 @@
 # 打印菜单
 call_menu() {
     echo ' set wallpaper'
-    echo '艹 update statusbar'
+    echo ' update statusbar' # 艹
     # [ "$(ps aux | grep -v grep | grep daed)" ] && echo ' close daed' || echo ' open daed'
     # [ "$(ps aux | grep picom | grep -v 'grep\|rofi\|nvim')" ] && echo ' close picom' || echo ' open picom'
     if pgrep -x daed >/dev/null; then
@@ -11,9 +11,9 @@ call_menu() {
     fi
 
     if pgrep -x picom >/dev/null; then
-        echo 'close picom'
+        echo '󰂒 close picom'
     else
-        echo 'open picom'
+        echo '󰂒 open picom'
     fi
 }
 
@@ -27,11 +27,11 @@ execute_menu() {
         ' update statusbar')
             "$DWM/statusbar/statusbar.sh" updateall >/dev/null 2>&1
             ;;
-        'open picom')
+        '󰂒 open picom')
             pkill -x picom
             picom --config "$DWM/scripts/config/picom.conf" >/dev/null 2>&1 &
             ;;
-        'close picom')
+        '󰂒 close picom')
             pkill -x picom
             ;;
     esac
