@@ -116,6 +116,8 @@
       # handwritten notes
       rnote
       wemeet
+
+      variety
     ];
 
   # 启用用户级 Nix 垃圾回收

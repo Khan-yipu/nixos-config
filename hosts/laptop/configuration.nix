@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, pkgs-stable, ... }:
+{ config, pkgs, lib, pkgs-stable, inputs, ... }:
 
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.mangowm.nixosModules.mango
   ];
 
   nix.settings.trusted-users = [
@@ -32,13 +33,6 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
     ];
   };
-
-  /*
-    home-manager.users.khanif = { pkgs, ... }: {
-      home.packages = [ pkgs.atool pkgs.httpie ];
-      home.stateVersion = "25.11";
-    };
-  */
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -188,6 +182,8 @@
   programs.niri.enable = true;
   # 也可以使用 flake 安装 Niri
 
+  programs.mango.enable = true;
+
   # LXQT(lxqt)
   services.xserver.desktopManager.lxqt.enable = false;
 
@@ -306,13 +302,15 @@
     userAllowOther = true;
   };
 
+  virtualisation.docker.enable = true;
+
   environment.systemPackages = with pkgs; [
     flclash
     qq
     # qqmusic
 
     # CloudDrive:默认地址 http://127.0.0.1:19798/
-    clouddrive2
+    # clouddrive2
     fuse3 
 
     xwayland
@@ -430,12 +428,15 @@
 
   hardware.opentabletdriver.enable = true;
   hardware.uinput.enable = true;
-  boot.kernelModules = [ "uinput" ];
+  boot.kernelModules = [ 
+    "uinput" 
+    "fuse" 
+  ];
 
   # =========================================================================
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 19798 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

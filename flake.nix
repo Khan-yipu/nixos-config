@@ -28,6 +28,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     /*
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
@@ -90,7 +95,7 @@
     */
 
     # dwm.url = "github:yaocccc/dwm";
-    st.url = "github:Khan-yipu/st?ref=kif-remote";
+    st.url = "github:khanyipu/st?ref=kif-remote";
 
     /*
     niri = {
@@ -101,7 +106,7 @@
   };
 
   # 如果通过 flake 安装 dwm, 在下面的 outputs 加上 dwm
-  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, picom, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, picom, mangowm, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs

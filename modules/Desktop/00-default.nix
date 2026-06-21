@@ -20,6 +20,7 @@
     # ./stylix.nix
 
     ./dwm-yaocccc.nix
+    ./mangowc/default.nix
   ];
 
   home.packages = with pkgs; [

@@ -4,41 +4,42 @@
 # 部分配置文件在 ~/scripts/config -> $DWM/scripts 目录下
 
 _thisdir=$(
-    cd $(dirname $0)
-    pwd
+  cd $(dirname $0)
+  pwd
 )
 
 settings() {
-    [ $1 ] && sleep $1
-    xset -b                        # 关闭蜂鸣器
-    syndaemon -i 1 -t -K -R -d     # 设置使用键盘时触控板短暂失效
-    $DWM/scripts/set_screen.sh one # 设置显示器
-    echo "Xft.dpi: 160" | xrdb -merge
-    # xmodmap $DWM/.Xmodmap
+  [ $1 ] && sleep $1
+  xset -b                        # 关闭蜂鸣器
+  syndaemon -i 1 -t -K -R -d     # 设置使用键盘时触控板短暂失效
+  $DWM/scripts/set_screen.sh one # 设置显示器
+  [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
+  echo "Xft.dpi: 160" | xrdb -merge
+  # xmodmap $DWM/.Xmodmap
 }
 
 daemons() {
-    [ $1 ] && sleep $1
-    $_thisdir/statusbar/statusbar.sh cron & # 开启状态栏定时更新
-    xss-lock -- $DWM/scripts/blurlock.sh &  # 开启自动锁屏程序
-    # fcitx5 &                               # 开启输入法 使用 & 似乎有一些问题
-    fcitx5 -d         # 开启输入法
-    lemonade server & # 开启lemonade 远程剪切板支持
-    # flameshot &                               # 截图要跑一个程序在后台 不然无法将截图保存到剪贴板
-    dunst -conf $DWM/scripts/config/dunst.conf &                     # 开启通知server
-    picom --experimental-backends --config $DWM/scripts/config/picom.conf >>/dev/null 2>&1 & # 开启picom
-    clouddrive &
+  [ $1 ] && sleep $1
+  $_thisdir/statusbar/statusbar.sh cron & # 开启状态栏定时更新
+  xss-lock -- $DWM/scripts/blurlock.sh &  # 开启自动锁屏程序
+  # fcitx5 &                               # 开启输入法 使用 & 似乎有一些问题
+  fcitx5 -d         # 开启输入法
+  lemonade server & # 开启lemonade 远程剪切板支持
+  # flameshot &                               # 截图要跑一个程序在后台 不然无法将截图保存到剪贴板
+  dunst -conf $DWM/scripts/config/dunst.conf &                                             # 开启通知server
+  picom --experimental-backends --config $DWM/scripts/config/picom.conf >>/dev/null 2>&1 & # 开启picom
+  clouddrive &
 }
 
 cron() {
-    [ $1 ] && sleep $1
-    let i=10
-    while true; do
-        [ $((i % 10)) -eq 0 ] && $DWM/scripts/set_screen.sh check                       # 每10秒检查显示器状态 以此自动设置显示器
-        [ $((i % 300)) -eq 0 ] && feh --randomize --bg-fill ~/Pictures/wallpapers/*.png # 每300秒更新壁纸
-        sleep 10
-        let i+=10
-    done
+  [ $1 ] && sleep $1
+  let i=10
+  while true; do
+    [ $((i % 10)) -eq 0 ] && $DWM/scripts/set_screen.sh check                       # 每10秒检查显示器状态 以此自动设置显示器
+    [ $((i % 300)) -eq 0 ] && feh --randomize --bg-fill ~/Pictures/wallpapers/*.png # 每300秒更新壁纸
+    sleep 10
+    let i+=10
+  done
 }
 
 settings 1 & # 初始化设置项
