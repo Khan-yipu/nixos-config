@@ -73,7 +73,7 @@
       grep = "rg";
       vi = "vim";
       nv = "nvim";
-      ya = "yazi";
+      yy = "yazi";
       # hx = "helix";
     };
     

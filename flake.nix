@@ -18,10 +18,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    /*
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    */
 
     agenix = {
       url = "github:ryantm/agenix";
@@ -106,7 +108,9 @@
   };
 
   # 如果通过 flake 安装 dwm, 在下面的 outputs 加上 dwm
-  outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, picom, mangowm, ... }@inputs:
+  # 暂时没有使用 nixvim 和 agenix 的需求 
+  # outputs = { self, nixpkgs, home-manager, nixvim, agenix, st, nixpkgs-stable, picom, mangowm, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, st, nixpkgs-stable, picom, mangowm, ... }@inputs:
     let
       system = "x86_64-linux";
       # 辅助函数：构建 pkgs
@@ -125,9 +129,9 @@
           pkgs = mkPkgs system;
           
           modules = [
-            agenix.homeManagerModules.default
+            # agenix.homeManagerModules.default
             ./home.nix
-            nixvim.homeModules.nixvim
+            # nixvim.homeModules.nixvim
           ];
           
           extraSpecialArgs = { inherit inputs self; };
@@ -156,9 +160,9 @@
               # 复用根目录下的 home.nix
               home-manager.users.khanif = {
                 imports = [
-                  agenix.homeManagerModules.default
+                  # agenix.homeManagerModules.default
                   ./home.nix
-                  nixvim.homeModules.nixvim
+                  # nixvim.homeModules.nixvim
                 ];
               };
 
@@ -189,9 +193,9 @@
               # 复用根目录下的 home.nix
               home-manager.users.khanif = {
                 imports = [
-                  agenix.homeManagerModules.default
+                  # agenix.homeManagerModules.default
                   ./home.nix
-                  nixvim.homeModules.nixvim
+                  # nixvim.homeModules.nixvim
                 ];
               };
 
@@ -230,9 +234,9 @@
               # 复用根目录下的 home.nix
               home-manager.users.khanif = {
                 imports = [
-                  agenix.homeManagerModules.default
+                  # agenix.homeManagerModules.default
                   ./home.nix
-                  nixvim.homeModules.nixvim
+                  # nixvim.homeModules.nixvim
                 ];
               };
 

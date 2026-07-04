@@ -11,7 +11,7 @@
   # 导入模块化配置
   imports = [
     # ./modules/clash.nix
-    ./modules/secrets.nix
+    # ./modules/secrets.nix
     ./modules/fish.nix
     ./modules/starship.nix
     # ./modules/emacs.nix # Emacs + Org-mode 配置
@@ -26,9 +26,12 @@
     ./modules/zed.nix
     ./modules/nvim/default.nix
     ./modules/vim/default.nix
+    ./modules/yazi/default.nix
+    ./modules/alacritty.nix
     ./modules/kitty.nix
     ./modules/foot.nix
     # ./modules/niri-ZhaoCake.nix # Niri + Noctalia 配置
+    ./modules/xdg.nix
 
     # 模块化配置分类
     # ./modules/Entertain  # 暂时禁用
@@ -46,6 +49,7 @@
   home.packages =
     with pkgs;
     [
+      alacritty
       # 基础工具
       # git
       # curl
@@ -55,7 +59,7 @@
       btop
       unzip
       zip
-      fzf # 模糊查找工具
+      # fzf # 模糊查找工具
       # fastfetch # 系统信息显示工具
       openssh # SSH 客户端
       less # 分页器（git log 等命令需要）
@@ -118,6 +122,29 @@
       wemeet
 
       variety
+      # 比较有意思的小工具
+      nyancat
+      cmatrix
+      cbonsai
+      cool-retro-term
+      figlet
+      sl
+      hollywood
+      jp2a
+
+      pavucontrol
+      cava
+      hyprpicker
+      wf-recorder
+      blueman
+      wlogout
+      slurp
+      grim
+      # wmenu
+      # swaync
+      ironbar
+      ddcutil-service
+      cliphist-tui
     ];
 
   # 启用用户级 Nix 垃圾回收

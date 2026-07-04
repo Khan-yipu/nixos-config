@@ -37,3 +37,5 @@ flake.lock3.bak
 .claude/
 
 modules/vim/dotfiles/plugged
+
+modules/alacritty/alacritty_1.toml

@@ -213,11 +213,27 @@ window-rule {
     }
 }
 
-workspace "Browser"
-workspace "Chat"
-workspace "Code"
-workspace "Game"
-workspace "Work"
+// workspace "" // "Monitor"  1
+// workspace " " // "Code"   2
+// workspace "" // "Browser"  3
+// workspace "" // "Chat"     4
+// workspace "潔" // "潔"      5
+// workspace "空" // "空"      6
+// workspace "黛" // "黛"      7
+// workspace "玉" // "玉"      8
+// workspace "󰕧" // "Recording"9
+// workspace "󰄛" // "Clash"    0
+
+// workspace "0"
+// workspace "1"
+// workspace "2"
+// workspace "3"
+// workspace "4"
+// workspace "5"
+// workspace "6"
+// workspace "7"
+// workspace "8"
+// workspace "9"
 
 window-rule {
     match app-id="firefox"
@@ -226,7 +242,7 @@ window-rule {
     match app-id="io.github.ungoogled_software.ungoogled_chromium"
     match app-id="^zen*"
 
-    open-on-workspace "Browser"
+    open-on-workspace "3"
     open-maximized true
 }
 
@@ -238,7 +254,7 @@ window-rule {
     match app-id="dev.zed.Zed"
     match app-id="jetbrains-pycharm"
 
-    open-on-workspace "Code"
+    open-on-workspace "2"
     open-maximized true
 }
 
@@ -250,7 +266,7 @@ window-rule {
     match app-id="com.alibabainc.dingtalk"
     match app-id="wemeetapp"
 
-    open-on-workspace "Chat"
+    open-on-workspace "4"
 }
 
 window-rule {
@@ -262,7 +278,7 @@ window-rule {
     match app-id="org.prismlauncher.PrismLauncher"
     match app-id="org.jackhuang.hmcl.Launcher"
 
-    open-on-workspace "Game"
+    open-on-workspace "玉" // "玉"      8
 }
 
 window-rule {
@@ -277,7 +293,7 @@ window-rule {
     match app-id="org.inkscape.Inkscape"
     match app-id="resolve"
 
-    open-on-workspace "Work"
+    open-on-workspace "黛" // "黛"      7
     open-maximized true
 }
 
@@ -289,6 +305,7 @@ binds {
     Ctrl+Print  { screenshot-screen; }
     Print       { screenshot; }
 
+    // 原始方法
     Mod+0       { focus-workspace 0; }
     Mod+1       { focus-workspace 1; }
     Mod+2       { focus-workspace 2; }
@@ -300,7 +317,19 @@ binds {
     Mod+8       { focus-workspace 8; }
     Mod+9       { focus-workspace 9; }
 
-    Mod+E hotkey-overlay-title="file manager" {spawn "dolphin";}
+    // Mod+1       { focus-workspace ""; }
+    // Mod+2       { focus-workspace " "; }
+    // Mod+3       { focus-workspace ""; }
+    // Mod+4       { focus-workspace ""; }
+    // Mod+5       { focus-workspace "潔"; }
+    // Mod+6       { focus-workspace "空"; }
+    // Mod+7       { focus-workspace "黛"; }
+    // Mod+8       { focus-workspace "玉"; }
+    // Mod+9       { focus-workspace "󰕧"; }
+    // Mod+0       { focus-workspace "󰄛"; }
+
+    // Mod+E hotkey-overlay-title="file manager" {spawn "dolphin";}
+    Mod+E hotkey-overlay-title="file manager" {spawn "pcmanfm";}
     Mod+B hotkey-overlay-title="browser firefox"{spawn "firefox";}
 
     Mod+Ctrl+C  hotkey-overlay-title="将窗口移至中央"    { center-column; }
@@ -423,4 +452,32 @@ binds {
 switch-events {
     lid-close { spawn "niri msg action power-off-monitors"; }
     lid-open  { spawn "niri msg action power-on-monitors"; }
+}
+
+output "eDP-1" {
+    // off
+    mode "1920x1080@60"
+    scale 1.75
+    // transform "90" // angle 0 for horizontal and 90 for vertical
+    position x=1280 y=0
+    variable-refresh-rate // on-demand=true
+    focus-at-startup
+    backdrop-color "#001100"
+    // max-bpc 8
+
+    hot-corners {
+        // off
+        top-left
+        // top-right
+        // bottom-left
+        // bottom-right
+    }
+
+    layout {
+        // ...layout settings for eDP-1...
+    }
+
+    // Custom modes. Caution: may damage your display.
+    // mode custom=true "1920x1080@100"
+    // modeline 173.00  1920 2048 2248 2576  1080 1083 1088 1120 "-hsync" "+vsync"
 }

@@ -256,8 +256,8 @@ map - <Plug>(expand_region_shrink)
 let g:VM_maps = {}
 let g:VM_maps['Find Under'] = '<C-M-n>'
 let g:VM_maps['Find Subword Under'] = '<C-M-n>'
-nmap <C-M-i> <Plug>(VM-Add-Cursor-Down)
-nmap <C-M-u> <Plug>(VM-Add-Cursor-Up)
+nmap <C-m-i> <Plug>(VM-Add-Cursor-Down)
+nmap <C-m-u> <Plug>(VM-Add-Cursor-Up)
 
 " ===
 " === Ultisnips

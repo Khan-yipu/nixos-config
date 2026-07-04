@@ -24,6 +24,9 @@
       # set-option default-path "$PWD"
       # set-option -g default-command "zsh -c 'cd \"$PWD\" && exec zsh'"
 
+      set -g set-clipboard on
+      set -g allow-passthrough on
+
       setw -g xterm-keys on
       set -s escape-time 0
       set -sg repeat-time 300
@@ -167,11 +170,11 @@
       bind -n M-v copy-mode
 
       bind -T copy-mode-vi v send-keys -X begin-selection
-      bind -T copy-mode-vi v send-keys -X begin-selection
       # C-v 的键位似乎会和终端冲突
       bind -T copy-mode-vi C-M-v send-keys -X rectangle-toggle
       bind -T copy-mode-vi Y send-keys -X copy-end-of-line
-      bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      # bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -in -selection clipboard"
       bind -T copy-mode-vi = send-keys -X search-again
       bind -T copy-mode-vi = send-keys -X search-reverse
 

@@ -4,8 +4,8 @@ export DWM=~/nix-setup/nixconfigs/modules/Desktop/dwm
 export MANGOWM=~/.config/mango
 
 # some env can't auto run the portal, so need this
-# /usr/lib/xdg-desktop-portal-wlr  >/dev/null 2>&1 &
-/usr/lib/xdg-desktop-portal-gtk  >/dev/null 2>&1 &
+/usr/lib/xdg-desktop-portal-wlr  >/dev/null 2>&1 &
+# /usr/lib/xdg-desktop-portal-gtk  >/dev/null 2>&1 &
 
 # xwayland dpi scale
 # echo "Xft.dpi: 160" | xrdb -merge #dpi缩放
