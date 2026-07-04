@@ -5,7 +5,7 @@
 
 {
   imports = [
-    ./dankMaterialShell/default.nix
+    # ./dankMaterialShell/default.nix
     # ./linux-wallpaperengine/default.nix
     ./niri/default.nix
     # ./noctalia/default.nix
@@ -36,6 +36,7 @@
     nomacs
 
     swaybg
+    swaylock-effects
     imagemagick
     libnotify
 

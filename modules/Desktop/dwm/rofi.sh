@@ -1,6 +1,7 @@
 # 打印菜单
 call_menu() {
     echo ' set wallpaper'
+    echo '  random anime wallpaper'
     echo ' update statusbar' # 艹
     # [ "$(ps aux | grep -v grep | grep daed)" ] && echo ' close daed' || echo ' open daed'
     # [ "$(ps aux | grep picom | grep -v 'grep\|rofi\|nvim')" ] && echo ' close picom' || echo ' open picom'
@@ -23,6 +24,9 @@ execute_menu() {
     case "$1" in
         ' set wallpaper')
             feh --randomize --bg-fill ~/Pictures/wallpapers/*.png
+            ;;
+        '  random anime wallpaper')
+            bash ~/.config/def-scripts/random-anime-wallpaper_x11.sh
             ;;
         ' update statusbar')
             "$DWM/statusbar/statusbar.sh" updateall >/dev/null 2>&1

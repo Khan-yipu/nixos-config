@@ -22,7 +22,7 @@ with_bluetooth() {
 }
 
 update() {
-  icons=("") # 
+  icons=(" ") #      󰕈      󰣇   system info
   with_daed
   # with_bluetooth
 

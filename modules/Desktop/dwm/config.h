@@ -216,6 +216,7 @@ static Key keys[] = {
     /// {MODKEY, XK_s, togglescratch, SHCMD("st -t scratchpad -c float")},                              /* super s          | 打开scratch终端        */
     /// {MODKEY, XK_minus, spawn, SHCMD("st -c FG")},                                                   /* super +          | 打开全局st终端         */
     {MODKEY, XK_Return, spawn, SHCMD("st")},                                                            /* super enter      | 打开st终端             */
+    {MODKEY | ShiftMask, XK_Return, spawn, SHCMD("alacritty")},                                                            /* super enter      | 打开st终端             */
     {MODKEY, XK_space, spawn, SHCMD("st -c float")},                                                    /* super space      | 打开浮动st终端         */
     {MODKEY, XK_n, spawn, SHCMD("kitty --start-as=fullscreen -e nvim ~/nix-setup/nixconfigs/")},                                                    /* super space      | 打开浮动st终端         */
     {MODKEY, XK_b, spawn, SHCMD("firefox")},                                                            /* super b          | 打开firefox         */

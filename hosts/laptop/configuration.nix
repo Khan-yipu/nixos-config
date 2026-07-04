@@ -24,8 +24,8 @@
   # 国内加速（永久生效）
   nix.settings = {
     substituters = [
-      "https://mirror.sjtu.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store" # 中科大（可优先）
+      "https://mirror.sjtu.edu.cn/nix-channels/store"
       # "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" # 清华
       "https://cache.nixos.org/"
     ];
@@ -169,6 +169,7 @@
   security.pam.services = {
     gtklock.enable = true;
     i3lock.enable = true;
+    swaylock.enable = true;
     xss-lock.enable = true;
   };
 
@@ -237,6 +238,10 @@
   '';
   */
 
+  services.flatpak = {
+		enable = true;
+	};
+
   zramSwap.enable = true;
 
   # Enable CUPS to print documents.
@@ -269,6 +274,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "podman"
     ];
     packages = with pkgs; [
       #  thunderbirsshd
@@ -303,9 +309,22 @@
   };
 
   virtualisation.docker.enable = true;
+  virtualisation = {
+    containers.enable = true;
+      podman = {
+        enable = true;
+        # dockerCompat = true;
+        defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+      };
+  };
 
   environment.systemPackages = with pkgs; [
+    fzf
+
     flclash
+    dae 
+    daed 
+
     qq
     # qqmusic
 
@@ -338,6 +357,7 @@
     vim
     micro
     vscode
+    distrobox
 
     python3
     uv

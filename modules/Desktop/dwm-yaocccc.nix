@@ -76,12 +76,15 @@ in
     yaoc-picom
 
     rofi
+    chafa
+    ueberzugpp
     dunst
     pcmanfm
     i3lock-color
     xss-lock
     lemonade
     flameshot
+    xsel
     upower
 
     xmodmap
@@ -91,7 +94,7 @@ in
 
   xsession = {
     enable = true;
-    windowManager.command = "exec dwm";
+    # windowManager.command = "exec dwm";
 
     # 可选：在启动 dwm 前执行一些脚本，比如设置壁纸、启动状态栏
     initExtra = ''
