@@ -17,8 +17,9 @@ awww-daemon &
 sleep 1 && waypaper --random
 
 # waybar
-waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
-waybar >/dev/null 2>&1 &
+# waybar -c ~/.config/mango/waybar/config.jsonc -s ~/.config/mango/waybar/style.css >/dev/null 2>&1 &
+waybar -c ~/.config/waybar/config_mango.jsonc -s ~/.config/waybar/style.css >/dev/null 2>&1 &
+# waybar >/dev/null 2>&1 &
 
 # notify
 # swaync -c ~/.config/mango/dotfiles/waybar/swaync/config.jsonc -s ~/.config/mango/swaync/style.css >/dev/null 2>&1 &

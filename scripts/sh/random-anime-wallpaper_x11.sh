@@ -147,7 +147,7 @@ feh --randomize --bg-fill "$FINAL_PATH"
     # sleep 0.5
     
     # [ -x "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
-    [ -f "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && bash "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
+    # [ -f "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && bash "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
     
     # [修改] 动态清理逻辑
     if [ "$ENABLE_CLEANUP" = true ]; then

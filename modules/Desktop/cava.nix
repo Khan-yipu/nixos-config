@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: let 
+{ pkgs, lib, config, ... }: let 
   # cava config directory
   cavaPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/cava";
 in

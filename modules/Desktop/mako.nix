@@ -1,10 +1,17 @@
+{ config, ... }: let
+  # mako config directory
+  makoPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/mako/";
+in
 {
-  ...
-}:
+  xdg.configFile = {
+    "mako".source = config.lib.file.mkOutOfStoreSymlink makoPath;
+    "mako".force = true;
+  };
 
-{
   services.mako = {
     enable = true;
+
+    /*
     settings = {
       anchor = "top-right";
       sort = "-time";
@@ -34,5 +41,7 @@
         invisible = 1;
       };
     };
+    */
+
   };
 }

@@ -275,6 +275,7 @@
       "wheel"
       "docker"
       "podman"
+      "gamemode"
     ];
     packages = with pkgs; [
       #  thunderbirsshd
@@ -338,6 +339,7 @@
     google-chrome
     firefox
 
+    nushell
     yazi
     file
     wget
@@ -373,6 +375,9 @@
     tabbed
 
     keyd 
+
+    steamcmd
+    steam-run
   ];
 
   programs.clash-verge = {
@@ -441,7 +446,7 @@
       intel-vaapi-driver
     ];
     extraPackages32 = with pkgs.pkgsi686Linux; [
-      intel-media-driver
+      # intel-media-driver
       intel-vaapi-driver
     ];
   };
@@ -476,4 +481,51 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
 
+  programs.steam = {
+    enable = true;
+    /*
+    package = pkgs.steam.override {
+      extraArgs = "-system-composer";
+    };
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+    */
+
+    # gamescopeSession.enable = true;
+
+    /*
+    extraPackages = with pkgs; [
+      javaPackages.compiler.temurin-bin.jre-8
+    ];
+    */
+  };
+  programs.steam.fontPackages = with pkgs; [source-han-sans];
+
+  /*
+  programs.gamescope = {
+    enable = true;
+    args = [
+      "--borderless"
+      "--force-grab-cursor"
+      "-W 1920"
+      "-H 1080"
+    ];
+  };
+
+  programs.gamemode = {
+    enable = true;
+    settings = {
+      general = {
+        desiredgov = "performance";
+      };
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send '游戏模式已开启' && ${pkgs.mako}/bin/makoctl mode -a do-not-disturb";
+        end = "${pkgs.mako}/bin/makoctl mode -r do-not-disturb && ${pkgs.libnotify}/bin/notify-send '游戏模式已关闭'";
+      };
+    };
+  };
+  */
+
+  # hardware.steam-hardware.enable = true;
 }

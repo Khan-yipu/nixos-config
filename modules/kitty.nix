@@ -1,10 +1,18 @@
+{ config, pkgs, lib, ...  }: let
+  # kitty config directory
+  kittyPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/kitty/custom";
+  kittyConfig = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/kitty/kitty.conf";
+in
 {
-  pkgs,
-  lib,
-  ...
-}:
+  programs.kitty.enable = true;
+  xdg.configFile = {
+    "kitty/custom".source = config.lib.file.mkOutOfStoreSymlink kittyPath;
+    "kitty/custom".force = true;
+    "kitty/kitty.conf".source = config.lib.file.mkOutOfStoreSymlink kittyConfig;
+    "kitty/kitty.conf".force = true;
+  };
 
-{
+  /*
   dconf = {
     settings = {
       "org/gnome/desktop/applications/terminal" = {
@@ -23,7 +31,6 @@
       size = 22;
     };
 
-    enable = true;
     enableGitIntegration = true;
     shellIntegration = {
       enableBashIntegration = true;
@@ -38,5 +45,5 @@
       cursor_trail_start_threshold = 0;
     };
   };
-
+  */
 }

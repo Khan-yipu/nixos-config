@@ -34,7 +34,7 @@
     ./modules/xdg.nix
 
     # 模块化配置分类
-    # ./modules/Entertain  # 暂时禁用
+    ./modules/Entertain  # 暂时禁用
     ./modules/Essentials
     ./modules/Utility
     ./modules/Desktop
@@ -140,11 +140,16 @@
       wlogout
       slurp
       grim
-      # wmenu
-      # swaync
+      wmenu
+      swaynotificationcenter  #swaync
       ironbar
       ddcutil-service
-      cliphist-tui
+      # cliphist-tui
+      cliphist
+      fuzzel
+      matugen
+      bluetui
+      gnome-clocks
     ];
 
   # 启用用户级 Nix 垃圾回收

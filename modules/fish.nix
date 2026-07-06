@@ -68,9 +68,9 @@
       tree = "eza --tree --icons";
       
       # 其他工具
-      cat = "bat";
-      find = "fd";
-      grep = "rg";
+      # cat = "bat";
+      # find = "fd";
+      # grep = "rg";
       vi = "vim";
       nv = "nvim";
       yy = "yazi";

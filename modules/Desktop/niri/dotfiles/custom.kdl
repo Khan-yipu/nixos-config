@@ -7,7 +7,7 @@ binds {
     Mod+Shift+F10 hotkey-overlay-title="随机下载动漫壁纸 Random download anime wallpaper" { spawn-sh "bash ~/.config/def-scripts/random-anime-wallpaper.sh";}
     
     // Mod+C hotkey-overlay-title="打开剪切板"      repeat=false    { spawn "vicinae" "vicinae://extensions/vicinae/clipboard/history"; }
-    Mod+C hotkey-overlay-title="打开剪切板"      repeat=false    { spawn ""; }
+    Mod+C hotkey-overlay-title="打开剪切板"      repeat=false    { spawn-sh "bash ~/.config/def-scripts/clipboard.sh"; }
     Mod+D hotkey-overlay-title="打开搜索"        repeat=false    { spawn "vicinae" "toggle"; }
 
     Mod+Alt+L   hotkey-overlay-title="锁屏" repeat=false { spawn "gtklock"; }

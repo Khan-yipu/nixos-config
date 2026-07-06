@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }: let 
+{ pkgs, lib, config, ... }: let 
   # fuzzel config directory
   fuzzelPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/fuzzel";
 in

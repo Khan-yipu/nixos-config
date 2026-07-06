@@ -13,8 +13,10 @@
     ./waybar/default.nix
     ./waypaper/default.nix
 
-    # ./fuzzel.nix
+    ./fuzzel.nix
+    # ./cava.nix
     ./mako.nix
+    ./matugen.nix
     ./swayidle.nix
     ./vicinae.nix
     # ./stylix.nix

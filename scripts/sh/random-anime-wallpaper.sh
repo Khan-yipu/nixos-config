@@ -142,12 +142,12 @@ awww img "$FINAL_PATH" --transition-duration 2 --transition-type center --transi
 # --- 4. 钩子与清理 ---
 (
     # 钩子脚本屏蔽标准输出，保留报错
-    # [ -x "$HOME/.config/scripts/matugen-update.sh" ] && "$HOME/.config/scripts/matugen-update.sh" "$FINAL_PATH" > /dev/null
+    [ -x "$HOME/.config/def-scripts/matugen-update.sh" ] && "$HOME/.config/def-scripts/matugen-update.sh" "$FINAL_PATH" > /dev/null
     
-    # sleep 0.5
+    sleep 0.5
     
-    # [ -x "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
-    [ -f "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && bash "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
+    [ -x "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
+    # [ -f "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" ] && bash "$HOME/.config/def-scripts/niri_set_overview_blur_dark_bg.sh" > /dev/null
     
     # [修改] 动态清理逻辑
     if [ "$ENABLE_CLEANUP" = true ]; then
