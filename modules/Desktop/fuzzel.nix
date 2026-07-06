@@ -1,10 +1,13 @@
+{ pkgs, lib, ... }: let 
+  # fuzzel config directory
+  fuzzelPath = "${config.home.homeDirectory}/nix-setup/nixconfigs/modules/Desktop/fuzzel";
+in
 {
-  pkgs,
-  lib,
-  ...
-}:
-
-{
+  xdg.configFile = {
+    "fuzzel".source = config.lib.file.mkOutOfStoreSymlink fuzzelPath;
+    "fuzzel".force = true;
+  };
+  /*
   home.packages = with pkgs; [
     cliphist
   ];
@@ -25,4 +28,5 @@
       };
     };
   };
+  */
 }
